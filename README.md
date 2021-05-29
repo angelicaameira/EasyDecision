@@ -4,20 +4,13 @@ App to help people making decisions
 
 ## Padrão de nome das branches
 
-`motivo` `/` `sprint` `/` `ID-tarefa`
+`motivo` `/` `ID-tarefa`
 
 ### Motivos
 
 - feature
 - bug
 - improvement
-
-### Sprints
-
-- sprint1
-- sprint2
-- sprint3
-- sprint4
 
 ### ID-tarefa
 
@@ -26,10 +19,15 @@ App to help people making decisions
 
 Exemplos:
 
-- `feature/sprint1/2`
-- `feature/sprint2/6`
-- `bug/sprint2/9`
+- `feature/2`
+- `feature/6`
+- `bug/9`
 
 ### Merge
 
 Não pode fazer o merge direto na main quando terminar. Tem que abrir um **merge request** (chamado pelo GitHub de **pull request**) e marcar o cartão como Aguardando Revisão. Quem abre o merge request **não pode** concluir o merge, tem que passar por code review.
+
+Ao abrir o merge request é necessário informar, na descrição, a relação entre o pull request e qual tarefa que ele conclui.
+
+- Para features: `closes #17`
+- Para bugs: `fixes #14`
