@@ -6,3 +6,35 @@
 //
 
 import Foundation
+import UIKit
+
+class AdicionaDecisaoViewController: UIViewController {
+    
+    var tableViewController: DecisaoTableViewController?
+    
+   
+    
+    @IBOutlet weak var descricaoTextField: UITextField?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        descricaoTextField?.becomeFirstResponder()
+    }
+    
+    @IBAction func adicionaDecisao(_ sender: UIButton) {
+        guard let descricaoDecisao = descricaoTextField?.text else {
+            return
+        }
+        
+        if descricaoDecisao != ""{
+            let decisao = Decisao(descricao: descricaoDecisao)
+            tableViewController?.add(decisao: decisao)
+        }
+            navigationController?.popViewController(animated: true)
+            
+        }
+        
+    }
+
+    
+
