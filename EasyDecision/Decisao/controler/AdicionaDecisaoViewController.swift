@@ -9,11 +9,7 @@ import Foundation
 import UIKit
 
 class AdicionaDecisaoViewController: UIViewController {
-    
     var tableViewController: DecisaoTableViewController?
-    
-   
-    
     @IBOutlet weak var descricaoTextField: UITextField?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,11 +26,9 @@ class AdicionaDecisaoViewController: UIViewController {
             let decisao = Decisao(descricao: descricaoDecisao)
             tableViewController?.add(decisao: decisao)
         }
-            navigationController?.popViewController(animated: true)
-            
-        }
-        
+        navigationController?.popViewController(animated: true)
     }
+}
 
     
 
