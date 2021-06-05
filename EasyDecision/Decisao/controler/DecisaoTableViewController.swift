@@ -11,6 +11,7 @@ import Foundation
 class DecisaoTableViewController: UITableViewController {
     
     var decisoes: [String] = []
+    var alterna = true
     
     @IBAction func botaoAdd(_ sender: Any) {
         
@@ -20,9 +21,7 @@ class DecisaoTableViewController: UITableViewController {
         return decisoes.count
     }
     
-    var alterna = true
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celulaDeDecisao")
         let decisao = Decisao(descricao: decisoes[indexPath.row])
         celula.textLabel?.text = decisao.descricao

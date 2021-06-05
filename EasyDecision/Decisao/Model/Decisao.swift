@@ -14,5 +14,4 @@ class Decisao {
     init(descricao: String) {
         self.descricao = descricao
     }
-    
 }
