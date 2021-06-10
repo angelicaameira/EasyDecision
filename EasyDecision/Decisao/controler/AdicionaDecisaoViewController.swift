@@ -18,12 +18,16 @@ class AdicionaDecisaoViewController: UIViewController {
         descricaoTextField?.becomeFirstResponder()
     }
     
-    @IBAction func adicionaDecisao(_ sender: UIButton) {
+    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
+        adicionaDecisao(sender)
+    }
+    
+    @IBAction func adicionaDecisao(_ sender: Any) {
         guard let descricaoDecisao = descricaoTextField?.text else {
             return
         }
         
-        if descricaoDecisao != ""{
+        if descricaoDecisao != "" {
             let decisao = Decisao(descricao: descricaoDecisao)
             tableViewController?.add(decisao: decisao)
         }
