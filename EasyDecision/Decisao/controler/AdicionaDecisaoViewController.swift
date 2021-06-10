@@ -7,8 +7,16 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class AdicionaDecisaoViewController: UIViewController {
+    
+    var contexto:NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    var decisao:Decisao?
     
     var tableViewController: DecisaoTableViewController?
     @IBOutlet weak var descricaoTextField: UITextField?
@@ -18,22 +26,44 @@ class AdicionaDecisaoViewController: UIViewController {
         descricaoTextField?.becomeFirstResponder()
     }
     
-    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
-        adicionaDecisao(sender)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setup()
     }
     
-    @IBAction func adicionaDecisao(_ sender: Any) {
+    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
+        salvaDecisao(sender)
+    }
+    
+    @IBAction func salvaDecisao(_ sender: Any) {
         guard let descricaoDecisao = descricaoTextField?.text else {
             return
         }
-        
-        if descricaoDecisao != "" {
-            let decisao = Decisao(descricao: descricaoDecisao)
-            tableViewController?.add(decisao: decisao)
+        if decisao == nil {
+            decisao = Decisao(context: contexto)
         }
         navigationController?.popViewController(animated: true)
+        
+        decisao?.descricao = descricaoTextField?.text
+        
+        do {
+            try contexto.save()
+            navigationController?.popViewController(animated: true)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
     }
+    
+    func setup() {
+        guard let decisaoSelecionada = decisao else {
+            return
+        }
+        descricaoTextField?.text = decisaoSelecionada.descricao
+    }
+    
 }
 
-    
+
 

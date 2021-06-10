@@ -7,35 +7,101 @@
 
 import UIKit
 import Foundation
+import CoreData
 
-class DecisaoTableViewController: UITableViewController {
+class DecisaoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var decisoes: [String] = []
-    var alterna = true
+    var decisaoSelecionada: Decisao?
     
-    @IBAction func botaoAdd(_ sender: Any) {
+    var contexto:NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    var gerenciadorDeResultados:NSFetchedResultsController<Decisao>?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        recuperaDecisao()
+    }
+    
+    //MARK: metodos
+    
+    func recuperaDecisao() {
+        let pesquisaDecisao: NSFetchRequest<Decisao> = Decisao.fetchRequest()
+        let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
+        pesquisaDecisao.sortDescriptors = [ordenacao]
+        gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaDecisao, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
+        gerenciadorDeResultados?.delegate = self
+        
+        do {
+            try gerenciadorDeResultados?.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let contadorlistaDeDecisoe = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
+        return contadorlistaDeDecisoe
         
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return decisoes.count
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celula = UITableViewCell(style: .default, reuseIdentifier: "celulaDeDecisao")
-        let decisao = Decisao(descricao: decisoes[indexPath.row])
+        let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-decisao")
+        guard let decisao = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else {
+            return celula
+        }
+        
         celula.textLabel?.text = decisao.descricao
         return celula
     }
-     
-    func add(decisao: Decisao) {
-        decisoes.append(decisao.descricao)
-        tableView.reloadData()
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? AdicionaDecisaoViewController {
-            viewController.tableViewController = self
+        if let destinationViewController = segue.destination as? AdicionaDecisaoViewController {
+            if segue.identifier == "editar" {
+                destinationViewController.decisao = self.decisaoSelecionada
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+            contexto.delete(decisaoSelecionada)
+            do{
+                try contexto.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if editingStyle == .none {
+            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+            contexto.insert(decisaoSelecionada)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+        
+        self.decisaoSelecionada = decisaoSelecionada
+        self.performSegue(withIdentifier: "editar", sender: self)
+    }
+    
+    // MARK: - fetchedResultControllerDelegate
+    
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        guard let indexPath = indexPath else { return }
+        switch type {
+        case .delete:
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        case .update:
+            break
+        default:
+            tableView.reloadData()
         }
     }
 }

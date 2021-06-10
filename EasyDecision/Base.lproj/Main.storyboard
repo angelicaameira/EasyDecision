@@ -33,14 +33,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="3HQ-m0-6I4" style="IBUITableViewCellStyleDefault" id="nkE-Mr-7Jz">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cjdkd" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="celula-decisao" textLabel="3HQ-m0-6I4" style="IBUITableViewCellStyleDefault" id="nkE-Mr-7Jz">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="celulaDeDecisao" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nkE-Mr-7Jz" id="kKG-vk-1LI">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3HQ-m0-6I4">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3HQ-m0-6I4">
                                             <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -49,6 +49,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="3cn-Wx-e5s" kind="show" identifier="editar" id="7Hy-jr-Zn9"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -61,8 +64,7 @@
                     <navigationItem key="navigationItem" title="Easy Decision" id="7bB-zg-alC">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="DYG-Ws-0i8">
                             <connections>
-                                <action selector="botaoAdd:" destination="POA-XI-Xab" id="5eG-W2-UcQ"/>
-                                <segue destination="3cn-Wx-e5s" kind="show" id="iUA-ZI-XFQ"/>
+                                <segue destination="3cn-Wx-e5s" kind="show" identifier="adicionar" id="a9h-DS-bTW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -95,7 +97,7 @@
                                 </constraints>
                                 <state key="normal" title="ADD"/>
                                 <connections>
-                                    <action selector="adicionaDecisao:" destination="3cn-Wx-e5s" eventType="touchUpInside" id="kA4-cZ-1PF"/>
+                                    <action selector="salvaDecisao:" destination="3cn-Wx-e5s" eventType="touchUpInside" id="kA4-cZ-1PF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -121,6 +123,9 @@
             <point key="canvasLocation" x="669.56521739130437" y="-166.07142857142856"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7Hy-jr-Zn9"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

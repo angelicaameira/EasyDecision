@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF0DD6BC2662ADBD00DC7AB5 /* DecisaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */; };
-		BF0DD6C32662B62200DC7AB5 /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0DD6C22662B62200DC7AB5 /* Decisao.swift */; };
+		BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
 		BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
 		BFBBEC86265EFF7600C5FA10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */; };
 		BFBBEC88265EFF7600C5FA10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */; };
@@ -19,8 +19,8 @@
 
 /* Begin PBXFileReference section */
 		BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisaoTableViewController.swift; sourceTree = "<group>"; };
-		BF0DD6C22662B62200DC7AB5 /* Decisao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decisao.swift; sourceTree = "<group>"; };
 		BF0DD6C52662BA0100DC7AB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyDecision.xcdatamodel; sourceTree = "<group>"; };
 		BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaDecisaoViewController.swift; sourceTree = "<group>"; };
 		BFBBEC82265EFF7600C5FA10 /* EasyDecision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyDecision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +55,6 @@
 		BF0DD6B62662ACD000DC7AB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BF0DD6C22662B62200DC7AB5 /* Decisao.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +102,7 @@
 				BFBBEC8E265EFF7A00C5FA10 /* Assets.xcassets */,
 				BFBBEC90265EFF7A00C5FA10 /* LaunchScreen.storyboard */,
 				BFBBEC93265EFF7A00C5FA10 /* Info.plist */,
+				BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */,
 			);
 			path = EasyDecision;
 			sourceTree = "<group>";
@@ -178,10 +178,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF0DD6BC2662ADBD00DC7AB5 /* DecisaoTableViewController.swift in Sources */,
-				BF0DD6C32662B62200DC7AB5 /* Decisao.swift in Sources */,
 				BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */,
 				BFBBEC86265EFF7600C5FA10 /* AppDelegate.swift in Sources */,
 				BFBBEC88265EFF7600C5FA10 /* SceneDelegate.swift in Sources */,
+				BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +383,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */,
+			);
+			currentVersion = BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */;
+			path = EasyDecision.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFBBEC7A265EFF7600C5FA10 /* Project object */;
 }
