@@ -67,19 +67,35 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         }
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
-            contexto.delete(decisaoSelecionada)
-            do{
-                try contexto.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        } else if editingStyle == .none {
-            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
-            contexto.insert(decisaoSelecionada)
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+//            contexto.delete(decisaoSelecionada)
+//            do{
+//                try contexto.save()
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let acoes = [
+            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
+            self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects![indexPath.row]
+            self.performSegue(withIdentifier: "editar", sender: contextualAction)
+        }),
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
+                
+                contexto.delete(decisaoSelecionada!)
+        })]
+        
+        do {
+            try contexto.save()
+        } catch {
+            print(error.localizedDescription)
         }
+        return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -98,8 +114,6 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         switch type {
         case .delete:
             tableView.deleteRows(at: [indexPath], with: .fade)
-        case .update:
-            break
         default:
             tableView.reloadData()
         }
