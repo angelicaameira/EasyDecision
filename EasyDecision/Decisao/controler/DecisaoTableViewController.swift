@@ -4,7 +4,6 @@
 //
 //  Created by Angélica Andrade de Meira on 29/05/21.
 //
-
 import UIKit
 import Foundation
 import CoreData
@@ -41,23 +40,20 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let contadorlistaDeDecisoe = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
         return contadorlistaDeDecisoe
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-decisao")
-        guard let decisao = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else {
+        guard let decisao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
             return celula
         }
         
         celula.textLabel?.text = decisao.descricao
         return celula
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? AdicionaDecisaoViewController {
@@ -67,28 +63,13 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         }
     }
     
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
-//            contexto.delete(decisaoSelecionada)
-//            do{
-//                try contexto.save()
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
-            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
-            self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects![indexPath.row]
-            self.performSegue(withIdentifier: "editar", sender: contextualAction)
-        }),
-            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                
-                contexto.delete(decisaoSelecionada!)
-        })]
+            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects![indexPath.row]
+                self.performSegue(withIdentifier: "editar", sender: contextualAction)
+            }),
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in contexto.delete(decisaoSelecionada!)
+            })]
         
         do {
             try contexto.save()
@@ -99,14 +80,13 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+        guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
         
         self.decisaoSelecionada = decisaoSelecionada
         self.performSegue(withIdentifier: "editar", sender: self)
     }
     
     // MARK: - fetchedResultControllerDelegate
-    
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         

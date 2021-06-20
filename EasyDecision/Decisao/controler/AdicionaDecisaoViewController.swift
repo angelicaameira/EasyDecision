@@ -52,8 +52,6 @@ class AdicionaDecisaoViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
-        
-        
     }
     
     func setup() {
@@ -62,7 +60,6 @@ class AdicionaDecisaoViewController: UIViewController {
         }
         descricaoTextField?.text = decisaoSelecionada.descricao
     }
-    
 }
 
 

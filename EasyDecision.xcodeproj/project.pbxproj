@@ -47,16 +47,8 @@
 			children = (
 				BF0DD6BF2662AEE700DC7AB5 /* view */,
 				BF0DD6C02662AEF200DC7AB5 /* controler */,
-				BF0DD6B62662ACD000DC7AB5 /* Model */,
 			);
 			path = Decisao;
-			sourceTree = "<group>";
-		};
-		BF0DD6B62662ACD000DC7AB5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		BF0DD6BF2662AEE700DC7AB5 /* view */ = {
