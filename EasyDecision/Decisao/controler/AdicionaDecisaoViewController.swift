@@ -61,6 +61,3 @@ class AdicionaDecisaoViewController: UIViewController {
         descricaoTextField?.text = decisaoSelecionada.descricao
     }
 }
-
-
-

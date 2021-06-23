@@ -65,10 +65,12 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
-            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects![indexPath.row]
-                self.performSegue(withIdentifier: "editar", sender: contextualAction)
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
+                guard let decisao = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
+                contexto.delete(decisao)
             }),
-            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in contexto.delete(decisaoSelecionada!)
+            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
+                self.performSegue(withIdentifier: "editar", sender: contextualAction)
             })]
         
         do {

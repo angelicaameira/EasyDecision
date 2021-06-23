@@ -55,12 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                
-                
-                print(error.localizedDescription)
-                return
-                    
-                    
+                fatalError(error.localizedDescription)
             }
         })
         return container
@@ -81,10 +76,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
-
-
-
-
-
