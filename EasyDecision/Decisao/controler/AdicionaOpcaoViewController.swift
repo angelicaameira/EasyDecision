@@ -1,22 +1,22 @@
 //
-//  AdicionaDecisaoViewController.swift
+//  AdicionaOpcaoViewController.swift
 //  EasyDecision
 //
-//  Created by Angélica Andrade de Meira on 31/05/21.
+//  Created by Angélica Andrade de Meira on 25/06/21.
 //
 
 import Foundation
 import UIKit
 import CoreData
 
-class AdicionaDecisaoViewController: UIViewController {
+class AdicionaOpcaoViewController: UIViewController {
     
     var contexto:NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    
     var decisao: Decisao?
+    var opcao: Opcao?
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -31,17 +31,19 @@ class AdicionaDecisaoViewController: UIViewController {
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
-        salvaDecisao(sender)
+        salvaOpcao(sender)
     }
     
-    @IBAction func salvaDecisao(_ sender: Any) {
-        guard let descricaoDecisao = descricaoTextField?.text else {
+    @IBAction func salvaOpcao(_ sender: Any) {
+        guard let descricaoOpcao = descricaoTextField?.text else {
             return
         }
-        if decisao == nil {
-            decisao = Decisao(context: contexto)
+        if opcao == nil {
+            self.opcao = Opcao(context: contexto)
         }
-        decisao?.descricao = descricaoTextField?.text
+        
+        self.opcao?.descricao = descricaoTextField?.text
+        self.opcao?.decisao = self.decisao
         
         do {
             try contexto.save()
@@ -52,9 +54,10 @@ class AdicionaDecisaoViewController: UIViewController {
     }
     
     func setup() {
-        guard let decisaoSelecionada = decisao else {
+        guard let opcaoSendoEditada = self.opcao else {
             return
         }
-        descricaoTextField?.text = decisaoSelecionada.descricao
+        self.descricaoTextField?.text = opcaoSendoEditada.descricao
     }
 }
+

@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-1072" y="-166"/>
         </scene>
-        <!--Easy Decision-->
+        <!--Decisões-->
         <scene sceneID="bLf-EA-H2D">
             <objects>
                 <tableViewController id="POA-XI-Xab" customClass="DecisaoTableViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,7 +50,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="3cn-Wx-e5s" kind="show" identifier="editar" id="7Hy-jr-Zn9"/>
+                                    <segue destination="H4Y-Ky-0Pd" kind="show" identifier="mostraOpcoes" id="SYb-Ue-dnZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -61,14 +61,17 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Easy Decision" id="7bB-zg-alC">
+                    <navigationItem key="navigationItem" title="Decisões" id="7bB-zg-alC">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="DYG-Ws-0i8">
                             <connections>
-                                <segue destination="3cn-Wx-e5s" kind="show" identifier="adicionar" id="a9h-DS-bTW"/>
+                                <segue destination="3cn-Wx-e5s" kind="show" identifier="adicionarDecisao" id="a9h-DS-bTW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="3cn-Wx-e5s" kind="show" identifier="editarDecisao" id="SR4-18-hR3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBM-x0-JS2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,11 +123,108 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJe-lF-vgx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669.56521739130437" y="-166.07142857142856"/>
+            <point key="canvasLocation" x="535" y="-459"/>
+        </scene>
+        <!--Opcões-->
+        <scene sceneID="elD-c5-6CI">
+            <objects>
+                <tableViewController id="H4Y-Ky-0Pd" customClass="OpcoesTableViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="nh8-Qr-Cm3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-opcao" textLabel="Vxv-fA-1jx" style="IBUITableViewCellStyleDefault" id="ZfW-8q-atN">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZfW-8q-atN" id="R2E-Tx-e5X">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vxv-fA-1jx">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="H4Y-Ky-0Pd" id="HG1-GN-KDp"/>
+                            <outlet property="delegate" destination="H4Y-Ky-0Pd" id="LP2-8S-amE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Opcões" id="JMT-4E-UaE">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="8lH-A3-16i">
+                            <connections>
+                                <action selector="botaoMais:" destination="H4Y-Ky-0Pd" id="791-xb-KYP"/>
+                                <segue destination="QGY-Vy-wDl" kind="show" identifier="adicionarOpcao" id="IrR-qI-6F7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="QGY-Vy-wDl" kind="show" identifier="editarOpcao" id="Ssp-hA-KOZ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WCY-0B-pie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="536" y="210"/>
+        </scene>
+        <!--Adiciona Opcao View Controller-->
+        <scene sceneID="Ksh-pT-1sf">
+            <objects>
+                <viewController id="QGY-Vy-wDl" customClass="AdicionaOpcaoViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jbz-ec-37P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ly-uH-PC9">
+                                <rect key="frame" x="20" y="20" width="304" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="clicaBotaoDoneTeclado:" destination="QGY-Vy-wDl" eventType="editingDidEndOnExit" id="WjI-4u-Wva"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-Tu-Zoy">
+                                <rect key="frame" x="344" y="22" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="coh-9J-BPI"/>
+                                </constraints>
+                                <state key="normal" title="ADD"/>
+                                <connections>
+                                    <action selector="salvaOpcao:" destination="QGY-Vy-wDl" eventType="touchUpInside" id="NGS-e6-Z9n"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QXz-pz-PQZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5ih-Tu-Zoy" firstAttribute="centerY" secondItem="2Ly-uH-PC9" secondAttribute="centerY" id="1Dt-m3-5ib"/>
+                            <constraint firstItem="2Ly-uH-PC9" firstAttribute="top" secondItem="QXz-pz-PQZ" secondAttribute="top" constant="20" id="Gph-8q-NRs"/>
+                            <constraint firstItem="QXz-pz-PQZ" firstAttribute="trailing" secondItem="5ih-Tu-Zoy" secondAttribute="trailing" constant="20" id="TEv-Sf-f8h"/>
+                            <constraint firstItem="2Ly-uH-PC9" firstAttribute="leading" secondItem="QXz-pz-PQZ" secondAttribute="leading" constant="20" id="i6B-X2-Xfw"/>
+                            <constraint firstItem="5ih-Tu-Zoy" firstAttribute="leading" secondItem="2Ly-uH-PC9" secondAttribute="trailing" constant="20" id="xRY-cg-zYG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZDS-5A-nO3">
+                        <barButtonItem key="backBarButtonItem" systemItem="undo" id="9uL-Vz-I7C"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descricaoTextField" destination="2Ly-uH-PC9" id="Amn-lh-wte"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iWk-Ss-aWp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1306" y="-80"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7Hy-jr-Zn9"/>
+        <segue reference="Ssp-hA-KOZ"/>
+        <segue reference="a9h-DS-bTW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
