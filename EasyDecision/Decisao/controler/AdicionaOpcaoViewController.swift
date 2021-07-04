@@ -27,7 +27,7 @@ class AdicionaOpcaoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
+        self.setupView()
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -53,7 +53,7 @@ class AdicionaOpcaoViewController: UIViewController {
         }
     }
     
-    func setup() {
+    func setupView() {
         guard let opcaoSendoEditada = self.opcao else {
             return
         }

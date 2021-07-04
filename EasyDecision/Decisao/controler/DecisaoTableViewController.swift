@@ -11,14 +11,14 @@ import CoreData
 class DecisaoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var decisaoSelecionada: Decisao?
-    var gerenciadorDeResultados:NSFetchedResultsController<Decisao>?
-    var contexto:NSManagedObjectContext {
+    var gerenciadorDeResultados: NSFetchedResultsController<Decisao>?
+    var contexto: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(false)
         recuperaDecisao()
     }
     
@@ -34,11 +34,11 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         do {
             try gerenciadorDeResultados?.performFetch()
             tableView.reloadData()
-            
         } catch {
             print(error.localizedDescription)
         }
     }
+    
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

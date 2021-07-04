@@ -27,7 +27,7 @@ class AdicionaDecisaoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
+        self.setupView()
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -51,7 +51,7 @@ class AdicionaDecisaoViewController: UIViewController {
         }
     }
     
-    func setup() {
+    func setupView() {
         guard let decisaoSelecionada = decisao else {
             return
         }

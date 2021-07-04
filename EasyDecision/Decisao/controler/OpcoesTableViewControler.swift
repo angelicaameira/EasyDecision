@@ -12,24 +12,25 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     
     var opcaoSendoEditada: Opcao?
     var decisao: Decisao?
-    var gerenciadorDeResultados:NSFetchedResultsController<Opcao>?
-    var contexto:NSManagedObjectContext {
+    var gerenciadorDeResultados: NSFetchedResultsController<Opcao>?
+    var contexto: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(false)
         recuperaOpcao()
     }
     
-    // MARK: metodos
+    // MARK: metodos que não são da table view
     
     func recuperaOpcao() {
         let pesquisaOpcao: NSFetchRequest<Opcao> = Opcao.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaOpcao.sortDescriptors = [ordenacao]
-        pesquisaOpcao.predicate = NSPredicate(format: "decisao = %@", self.decisao!)
+        guard let decision = self.decisao else { return }
+        pesquisaOpcao.predicate = NSPredicate(format: "decisao = %@", decision)
         gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaOpcao, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
         gerenciadorDeResultados?.delegate = self
         
@@ -37,7 +38,7 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
             try gerenciadorDeResultados?.performFetch()
             tableView.reloadData()
         } catch {
-            print(error.localizedDescription)
+            fatalError(error.localizedDescription)
         }
     }
     
@@ -62,8 +63,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
             if segue.identifier == "editarOpcao" {
                 destinationViewController.opcao = self.opcaoSendoEditada
             }
-        }
-        if let destinationViewController = segue.destination as? AdicionaOpcaoViewController {
             if segue.identifier == "adicionarOpcao" {
                 destinationViewController.decisao = self.decisao
             }
@@ -84,7 +83,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
             try contexto.save()
         } catch {
             print(error.localizedDescription)
-            
         }
         return UISwipeActionsConfiguration(actions: acoes)
     }
