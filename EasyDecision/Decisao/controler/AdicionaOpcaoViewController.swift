@@ -17,6 +17,7 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     var decisao: Decisao?
     var opcao: Opcao?
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -49,7 +50,8 @@ class AdicionaOpcaoViewController: UIViewController {
             try contexto.save()
             navigationController?.popViewController(animated: true)
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

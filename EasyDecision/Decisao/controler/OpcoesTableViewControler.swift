@@ -17,9 +17,10 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewWillAppear(animated)
         recuperaOpcao()
     }
     
@@ -37,8 +38,10 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         do {
             try gerenciadorDeResultados?.performFetch()
             tableView.reloadData()
+            
         } catch {
-            fatalError(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -82,7 +85,8 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         do {
             try contexto.save()
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         return UISwipeActionsConfiguration(actions: acoes)
     }
