@@ -16,9 +16,8 @@ class AdicionaDecisaoViewController: UIViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    var decisao:Decisao?
+    var decisao: Decisao?
     
-    var tableViewController: DecisaoTableViewController?
     @IBOutlet weak var descricaoTextField: UITextField?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,7 +27,7 @@ class AdicionaDecisaoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
+        self.setupView()
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -42,8 +41,6 @@ class AdicionaDecisaoViewController: UIViewController {
         if decisao == nil {
             decisao = Decisao(context: contexto)
         }
-        navigationController?.popViewController(animated: true)
-        
         decisao?.descricao = descricaoTextField?.text
         
         do {
@@ -54,7 +51,7 @@ class AdicionaDecisaoViewController: UIViewController {
         }
     }
     
-    func setup() {
+    func setupView() {
         guard let decisaoSelecionada = decisao else {
             return
         }
