@@ -11,7 +11,7 @@ import CoreData
 
 class AdicionaOpcaoViewController: UIViewController {
     
-    var contexto:NSManagedObjectContext {
+    var contexto: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
@@ -50,8 +50,9 @@ class AdicionaOpcaoViewController: UIViewController {
             try contexto.save()
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     

@@ -40,8 +40,9 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
             tableView.reloadData()
             
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     
@@ -85,8 +86,9 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         do {
             try contexto.save()
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "teste"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
         return UISwipeActionsConfiguration(actions: acoes)
     }

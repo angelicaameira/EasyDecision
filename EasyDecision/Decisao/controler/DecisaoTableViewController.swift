@@ -42,8 +42,8 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorlistaDeDecisoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
-        return contadorlistaDeDecisoes
+        guard let contadorListaDeDecisoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
+        return contadorListaDeDecisoes
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
