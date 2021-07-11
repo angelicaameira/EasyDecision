@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Criterio" representedClassName="Criterio" syncable="YES" codeGenerationType="class">
+        <attribute name="descricao" attributeType="String"/>
+        <attribute name="peso" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="Decisao" inverseName="criterios" inverseEntity="Decisao"/>
+    </entity>
     <entity name="Decisao" representedClassName="Decisao" syncable="YES" codeGenerationType="class">
-        <attribute name="descricao" optional="YES" attributeType="String"/>
+        <attribute name="descricao" attributeType="String"/>
+        <relationship name="criterios" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Criterio" inverseName="decisao" inverseEntity="Criterio"/>
         <relationship name="opcoes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Opcao" inverseName="decisao" inverseEntity="Opcao"/>
     </entity>
     <entity name="Opcao" representedClassName="Opcao" syncable="YES" codeGenerationType="class">
-        <attribute name="descricao" optional="YES" attributeType="String"/>
+        <attribute name="descricao" attributeType="String"/>
         <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="Decisao" inverseName="opcoes" inverseEntity="Decisao"/>
     </entity>
     <elements>
-        <element name="Decisao" positionX="-54" positionY="-9" width="128" height="73"/>
-        <element name="Opcao" positionX="-289.5" positionY="-38.5" width="128" height="73"/>
+        <element name="Criterio" positionX="113.36328125" positionY="-322.12109375" width="128" height="88"/>
+        <element name="Decisao" positionX="-63.5" positionY="-435.5" width="128" height="88"/>
+        <element name="Opcao" positionX="-236.5" positionY="-231" width="128" height="73"/>
     </elements>
 </model>

@@ -22,6 +22,11 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         recuperaDecisao()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        gerenciadorDeResultados?.delegate = nil
+    }
+    
     //MARK: metodos
     
     func recuperaDecisao() {
