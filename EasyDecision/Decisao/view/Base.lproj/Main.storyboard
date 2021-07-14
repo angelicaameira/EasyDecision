@@ -267,6 +267,7 @@
                                 <connections>
                                     <outlet property="peso" destination="BGC-Ie-xnI" id="U3o-XW-vUz"/>
                                     <outlet property="title" destination="FqS-ZB-4Oz" id="27Q-1C-2QU"/>
+                                    <segue destination="Mb6-yC-9MD" kind="show" identifier="mostraAvaliacao" id="jcu-kL-jwT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -291,7 +292,121 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u8R-Ia-YrZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1305.7971014492755" y="583.92857142857144"/>
+            <point key="canvasLocation" x="1306" y="623"/>
+        </scene>
+        <!--Avaliação-->
+        <scene sceneID="KOo-JM-nXk">
+            <objects>
+                <tableViewController id="Mb6-yC-9MD" customClass="AvaliacaoTableViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="JeH-vY-vd7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-avaliacao" id="vs3-3Y-IS6" customClass="CriterioTableViewCell" customModule="EasyDecision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vs3-3Y-IS6" id="9rx-cJ-7yC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição do critério" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQf-a1-V2u">
+                                            <rect key="frame" x="25" y="21" width="158" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aW-g4-emU">
+                                            <rect key="frame" x="343" y="21" width="61" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="4aW-g4-emU" secondAttribute="trailing" constant="10" id="G2H-b4-2GX"/>
+                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="leading" secondItem="9rx-cJ-7yC" secondAttribute="leadingMargin" constant="5" id="jOi-Lv-zfG"/>
+                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="10" id="siK-32-ZCV"/>
+                                        <constraint firstItem="4aW-g4-emU" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="10" id="ysz-jA-X1I"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="peso" destination="4aW-g4-emU" id="c5v-w9-SHx"/>
+                                    <outlet property="title" destination="AQf-a1-V2u" id="9aB-6f-OJw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mb6-yC-9MD" id="cUY-kB-ry9"/>
+                            <outlet property="delegate" destination="Mb6-yC-9MD" id="1Ll-bI-dWX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Avaliação" id="zRH-Wa-1jM">
+                        <barButtonItem key="rightBarButtonItem" title="Continuar" id="kOC-TW-aXT">
+                            <connections>
+                                <segue destination="dT3-tS-XeZ" kind="show" id="4F3-eh-0md"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oaw-pa-3B6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2075" y="940"/>
+        </scene>
+        <!--Resultados-->
+        <scene sceneID="dNN-BD-1GY">
+            <objects>
+                <tableViewController id="dT3-tS-XeZ" customClass="AvaliacaoTableViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="6yJ-Oo-unj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-avaliacao" id="SyN-As-ZsJ" customClass="CriterioTableViewCell" customModule="EasyDecision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SyN-As-ZsJ" id="kRf-M3-aPr">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição do critério" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLC-GI-4DZ">
+                                            <rect key="frame" x="25" y="21" width="158" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Porcentagem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1X-LY-9th">
+                                            <rect key="frame" x="302" y="21" width="102" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="10" id="6R1-Pd-RP8"/>
+                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="leading" secondItem="kRf-M3-aPr" secondAttribute="leadingMargin" constant="5" id="6gS-FA-d0z"/>
+                                        <constraint firstItem="J1X-LY-9th" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="10" id="mN3-Ib-ssx"/>
+                                        <constraint firstAttribute="trailing" secondItem="J1X-LY-9th" secondAttribute="trailing" constant="10" id="zt7-up-QQW"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="peso" destination="J1X-LY-9th" id="svF-S1-JFi"/>
+                                    <outlet property="title" destination="fLC-GI-4DZ" id="4Na-8x-cfa"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dT3-tS-XeZ" id="2VA-MM-cfs"/>
+                            <outlet property="delegate" destination="dT3-tS-XeZ" id="y48-oW-NbB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Resultados" id="CAM-pC-NGF">
+                        <barButtonItem key="rightBarButtonItem" title="Concluir" id="tFb-1N-dUa"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17e-QV-LH3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2848" y="1288"/>
         </scene>
         <!--Adiciona Criterio View Controller-->
         <scene sceneID="hrg-GD-qUT">
