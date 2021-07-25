@@ -8,20 +8,18 @@ import Foundation
 import UIKit
 import CoreData
 
-class AdicionaCriterioViewController: UIViewController {
+class EditaAvaliacaoViewController: UIViewController {
     
-    var criterioCelula: TableViewCell?
+    var avaliacaoCelula: TableViewCell?
     
     var contexto:NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     var decisao: Decisao?
-    var criterio: Criterio?
+    var avaliacao: Avaliacao?
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    
-    @IBOutlet weak var descricaoTextField: UITextField?
     
     @IBOutlet weak var pesoTextField: UITextField!
     
@@ -30,7 +28,7 @@ class AdicionaCriterioViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        descricaoTextField?.becomeFirstResponder()
+        pesoTextField?.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
@@ -39,20 +37,19 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
-        salvaCriterio(sender)
+        salvaAvaliacao(sender)
     }
     
-    @IBAction func salvaCriterio(_ sender: Any) {
-        guard let descricaoCriterio = descricaoTextField?.text else {
+    @IBAction func salvaAvaliacao(_ sender: Any) {
+        guard let descricaoAvaliacao = pesoTextField?.text else {
             return
         }
-        if criterio == nil {
-            self.criterio = Criterio(context: contexto)
+        if avaliacao == nil {
+            self.avaliacao = Avaliacao(context: contexto)
         }
         
-        self.criterio?.descricao = descricaoTextField?.text
-        self.criterio?.peso = (pesoTextField.text! as NSString).doubleValue
-        self.criterio?.decisao = self.decisao
+        self.avaliacao?.criterio?.peso = (pesoTextField.text! as NSString).doubleValue
+        self.avaliacao?.decisao = self.decisao
         
         do {
             try contexto.save()
@@ -65,10 +62,9 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     func setupView() {
-        guard let criterioSendoEditado = self.criterio else {
+        guard let avaliacaoSendoEditada = self.avaliacao else {
             return
         }
-        self.descricaoTextField?.text = criterioSendoEditado.descricao
-        self.pesoTextField?.text = "\(criterioSendoEditado.peso)"
+        self.pesoTextField?.text = "\(avaliacaoSendoEditada.nota)"
     }
 }

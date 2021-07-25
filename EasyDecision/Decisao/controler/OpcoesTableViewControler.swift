@@ -19,13 +19,30 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     }
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(#function)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(#function)
         recuperaOpcao()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        print(#function)
         gerenciadorDeResultados = nil
     }
     
@@ -52,11 +69,13 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     
     // MARK: metodos table view
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(#function)
         guard let contadorlistaDeOpcoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
         return contadorlistaDeOpcoes
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(#function)
         
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-opcao")
         
@@ -69,6 +88,7 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(#function)
         if let destinationViewController = segue.destination as? AdicionaOpcaoViewController {
             if segue.identifier == "editarOpcao" {
                 destinationViewController.opcao = self.opcaoSendoEditada
@@ -105,15 +125,17 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
         guard let opcaoSendoEditada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
         
-        //self.opcaoSendoEditada = opcaoSendoEditada
-        //self.performSegue(withIdentifier: "mostraCriterios", sender: self)
+//        self.opcaoSendoEditada = opcaoSendoEditada
+//        self.performSegue(withIdentifier: "mostraCriterios", sender: self)
     }
     
     // MARK: - fetchedResultControllerDelegate
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print(#function)
         guard let indexPath = indexPath else { return }
         switch type {
         case .delete:

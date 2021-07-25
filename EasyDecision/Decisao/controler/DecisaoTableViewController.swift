@@ -17,9 +17,25 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         return appDelegate.persistentContainer.viewContext
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(#function)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         super.viewWillAppear(animated)
         recuperaDecisao()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,9 +60,15 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
         }
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        print(#function)
+        return 1
+    }
+    
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(#function)
         guard let contadorListaDeDecisoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
         return contadorListaDeDecisoes
     }

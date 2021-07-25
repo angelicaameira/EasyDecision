@@ -7,25 +7,21 @@
 
 import UIKit
 
-class CriterioTableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var peso: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
     
     var criterio: Criterio?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.title.text = criterio?.descricao
         self.peso.text = "\(String(describing: criterio?.peso))"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

@@ -58,7 +58,7 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as! CriterioTableViewCell
+        let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as! TableViewCell
         
         guard let criterio = gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
         else {
@@ -76,6 +76,11 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
                 destinationViewController.criterio = self.criterioSendoEditado
             }
             if segue.identifier == "adicionarCriterio" {
+                destinationViewController.decisao = self.decisao
+            }
+        }
+        if let destinationViewController = segue.destination as? AvaliacaoTableViewController {
+            if segue.identifier == "mostraAvaliacao" {
                 destinationViewController.decisao = self.decisao
             }
         }
