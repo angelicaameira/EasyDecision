@@ -16,8 +16,8 @@ class EditaAvaliacaoViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    var decisao: Decisao?
-    var avaliacao: Avaliacao?
+    var decisao: CDDecisao?
+    var avaliacao: CDAvaliacao?
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
@@ -45,7 +45,7 @@ class EditaAvaliacaoViewController: UIViewController {
             return
         }
         if avaliacao == nil {
-            self.avaliacao = Avaliacao(context: contexto)
+            self.avaliacao = CDAvaliacao(context: contexto)
         }
         
         self.avaliacao?.criterio?.peso = (pesoTextField.text! as NSString).doubleValue

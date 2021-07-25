@@ -6,76 +6,43 @@
 //
 import UIKit
 import Foundation
-import CoreData
+import SQLite
 
-class DecisaoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class DecisaoTableViewController: UITableViewController {
     
     var decisaoSelecionada: Decisao?
-    var gerenciadorDeResultados: NSFetchedResultsController<Decisao>?
-    var contexto: NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(#function)
-    }
+    var listaDecisoes: [Decisao]?
     
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
         super.viewWillAppear(animated)
         recuperaDecisao()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(#function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        gerenciadorDeResultados?.delegate = nil
+        tableView.reloadData()
     }
     
     //MARK: metodos
     
     func recuperaDecisao() {
-        let pesquisaDecisao: NSFetchRequest<Decisao> = Decisao.fetchRequest()
-        let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
-        pesquisaDecisao.sortDescriptors = [ordenacao]
-        gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaDecisao, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
-        gerenciadorDeResultados?.delegate = self
-        
         do {
-            try gerenciadorDeResultados?.performFetch()
-            tableView.reloadData()
+            self.listaDecisoes = try Decisao.listaDoBanco()
         } catch {
             print(error.localizedDescription)
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print(#function)
         return 1
     }
     
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(#function)
-        guard let contadorListaDeDecisoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
+        guard let contadorListaDeDecisoes = listaDecisoes?.count else { return 0 }
         return contadorListaDeDecisoes
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-decisao")
-        guard let decisao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
+        guard let decisao = self.listaDecisoes?[indexPath.row] else {
             return celula
         }
         
@@ -86,7 +53,7 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? OpcoesTableViewController {
             if segue.identifier == "mostraOpcoes" {
-                destinationViewController.decisao = self.decisaoSelecionada
+//                destinationViewController.decisao = self.decisaoSelecionada
             }
         }
         if let destinationViewController = segue.destination as? AdicionaDecisaoViewController {
@@ -99,24 +66,24 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in 
-                guard let decisao = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
-                contexto.delete(decisao)
+                guard let decisao = self.listaDecisoes?[indexPath.row] else { return }
+                do {
+                    try decisao.apagaNoBanco()
+                    self.recuperaDecisao()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
-                self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
+                self.decisaoSelecionada = self.listaDecisoes?[indexPath.row]
                 self.performSegue(withIdentifier: "editarDecisao", sender: contextualAction)
             })]
-        
-        do {
-            try contexto.save()
-        } catch {
-            print(error.localizedDescription)
-        }
         return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
+        guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row] else { return }
         
         self.decisaoSelecionada = decisaoSelecionada
         self.performSegue(withIdentifier: "mostraOpcoes", sender: self)
@@ -124,13 +91,13 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     
     // MARK: - fetchedResultControllerDelegate
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let indexPath = indexPath else { return }
-        switch type {
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        default:
-            tableView.reloadData()
-        }
-    }
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        guard let indexPath = indexPath else { return }
+//        switch type {
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        default:
+//            tableView.reloadData()
+//        }
+//    }
 }

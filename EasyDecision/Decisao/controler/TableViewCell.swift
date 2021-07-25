@@ -12,7 +12,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var peso: UILabel!
     
-    var criterio: Criterio?
+    var criterio: CDCriterio?
     
     override func awakeFromNib() {
         super.awakeFromNib()

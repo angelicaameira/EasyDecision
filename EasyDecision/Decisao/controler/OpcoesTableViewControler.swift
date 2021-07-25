@@ -10,46 +10,24 @@ import CoreData
 
 class OpcoesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var opcaoSendoEditada: Opcao?
-    var decisao: Decisao?
-    var gerenciadorDeResultados: NSFetchedResultsController<Opcao>?
+    var opcaoSendoEditada: CDOpcao?
+    var decisao: CDDecisao?
+    var gerenciadorDeResultados: NSFetchedResultsController<CDOpcao>?
     var contexto: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(#function)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
         recuperaOpcao()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(#function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print(#function)
-        gerenciadorDeResultados = nil
     }
     
     // MARK: metodos que não são da table view
     
     func recuperaOpcao() {
-        let pesquisaOpcao: NSFetchRequest<Opcao> = Opcao.fetchRequest()
+        let pesquisaOpcao: NSFetchRequest<CDOpcao> = CDOpcao.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaOpcao.sortDescriptors = [ordenacao]
         guard let decision = self.decisao else { return }

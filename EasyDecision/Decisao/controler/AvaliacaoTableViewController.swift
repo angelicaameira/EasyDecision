@@ -12,12 +12,12 @@ import CoreData
 class AvaliacaoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as avaliações", preferredStyle: .alert)
-    var decisao: Decisao?
-    var avaliacaoSendoEditada: Avaliacao?
-    var criterio: Criterio?
-    var gerenciadorDeResultadosOpcao: NSFetchedResultsController<Opcao>?
-    var gerenciadorDeResultadosCriterios: NSFetchedResultsController<Criterio>?
-    var listaAvaliacoes: [Avaliacao] = []
+    var decisao: CDDecisao?
+    var avaliacaoSendoEditada: CDAvaliacao?
+    var criterio: CDCriterio?
+    var gerenciadorDeResultadosOpcao: NSFetchedResultsController<CDOpcao>?
+    var gerenciadorDeResultadosCriterios: NSFetchedResultsController<CDCriterio>?
+    var listaAvaliacoes: [CDAvaliacao] = []
     var contexto: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
@@ -37,7 +37,7 @@ class AvaliacaoTableViewController: UITableViewController, NSFetchedResultsContr
         else { return }
         for opcao in listaOpcoes {
             for criterio in listaCriterios {
-                let avaliacao = Avaliacao(context: self.contexto)
+                let avaliacao = CDAvaliacao(context: self.contexto)
                 avaliacao.opcao = opcao
                 avaliacao.criterio = criterio
                 avaliacao.decisao = opcao.decisao
@@ -47,7 +47,7 @@ class AvaliacaoTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func recuperaOpcoes() {
-        let pesquisaOpcoes: NSFetchRequest<Opcao> = Opcao.fetchRequest()
+        let pesquisaOpcoes: NSFetchRequest<CDOpcao> = CDOpcao.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaOpcoes.sortDescriptors = [ordenacao]
         guard let decision = self.decisao else { return }
@@ -65,7 +65,7 @@ class AvaliacaoTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func recuperaCriterios() {
-        let pesquisaCriterios: NSFetchRequest<Criterio> = Criterio.fetchRequest()
+        let pesquisaCriterios: NSFetchRequest<CDCriterio> = CDCriterio.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaCriterios.sortDescriptors = [ordenacao]
         guard let decision = self.decisao else { return }
@@ -132,7 +132,7 @@ class AvaliacaoTableViewController: UITableViewController, NSFetchedResultsContr
         guard let indexPath = indexPath else { return }
         switch type {
         case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
             return
 //            tableView.reloadData()

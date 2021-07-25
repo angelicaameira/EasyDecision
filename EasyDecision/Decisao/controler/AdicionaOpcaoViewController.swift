@@ -15,8 +15,8 @@ class AdicionaOpcaoViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    var decisao: Decisao?
-    var opcao: Opcao?
+    var decisao: CDDecisao?
+    var opcao: CDOpcao?
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
@@ -40,7 +40,7 @@ class AdicionaOpcaoViewController: UIViewController {
             return
         }
         if opcao == nil {
-            self.opcao = Opcao(context: contexto)
+            self.opcao = CDOpcao(context: contexto)
         }
         
         self.opcao?.descricao = descricaoTextField?.text

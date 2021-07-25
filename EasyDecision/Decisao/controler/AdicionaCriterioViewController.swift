@@ -16,8 +16,8 @@ class AdicionaCriterioViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    var decisao: Decisao?
-    var criterio: Criterio?
+    var decisao: CDDecisao?
+    var criterio: CDCriterio?
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
@@ -47,7 +47,7 @@ class AdicionaCriterioViewController: UIViewController {
             return
         }
         if criterio == nil {
-            self.criterio = Criterio(context: contexto)
+            self.criterio = CDCriterio(context: contexto)
         }
         
         self.criterio?.descricao = descricaoTextField?.text

@@ -12,9 +12,9 @@ import CoreData
 class CriteriosTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    var criterioSendoEditado: Criterio?
-    var decisao: Decisao?
-    var gerenciadorDeResultados:NSFetchedResultsController<Criterio>?
+    var criterioSendoEditado: CDCriterio?
+    var decisao: CDDecisao?
+    var gerenciadorDeResultados:NSFetchedResultsController<CDCriterio>?
     var contexto:NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
@@ -32,7 +32,7 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
     // MARK: metodos
     
     func recuperaCriterio() {
-        let pesquisaCriterio: NSFetchRequest<Criterio> = Criterio.fetchRequest()
+        let pesquisaCriterio: NSFetchRequest<CDCriterio> = CDCriterio.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaCriterio.sortDescriptors = [ordenacao]
         guard let decision = self.decisao else { return }
@@ -76,7 +76,7 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
                 destinationViewController.criterio = self.criterioSendoEditado
             }
             if segue.identifier == "adicionarCriterio" {
-                destinationViewController.decisao = self.decisao
+//                destinationViewController.decisao = self.decisao
             }
         }
         if let destinationViewController = segue.destination as? AvaliacaoTableViewController {
@@ -118,7 +118,7 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
         guard let indexPath = indexPath else { return }
         switch type {
         case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
             tableView.reloadData()
         }

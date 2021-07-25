@@ -23,6 +23,8 @@
 		BFCD9C8926A0F02F0037C550 /* EditaAvaliacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */; };
 		BFE05E0D269210A500FE1DA1 /* CriteriosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */; };
 		BFFD5BC926AD9F90007D9786 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = BFFD5BC826AD9F90007D9786 /* SQLite */; };
+		BFFD5BCC26ADA3E0007D9786 /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */; };
+		BFFD5BCE26ADA6D5007D9786 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditaAvaliacaoViewController.swift; sourceTree = "<group>"; };
 		BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriteriosTableViewController.swift; sourceTree = "<group>"; };
 		BFFD5BC526AD9B97007D9786 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decisao.swift; sourceTree = "<group>"; };
+		BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,7 @@
 		BF0DD6B52662ACC200DC7AB5 /* Decisao */ = {
 			isa = PBXGroup;
 			children = (
+				BFFD5BCA26ADA2F3007D9786 /* model */,
 				BF0DD6BF2662AEE700DC7AB5 /* view */,
 				BF0DD6C02662AEF200DC7AB5 /* controler */,
 			);
@@ -132,6 +137,15 @@
 				BFFD5BC526AD9B97007D9786 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFFD5BCA26ADA2F3007D9786 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */,
+				BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,12 +230,14 @@
 				BFCD9C8926A0F02F0037C550 /* EditaAvaliacaoViewController.swift in Sources */,
 				BF0DD6BC2662ADBD00DC7AB5 /* DecisaoTableViewController.swift in Sources */,
 				BF15E1DC268534A8002DB26A /* OpcoesTableViewControler.swift in Sources */,
+				BFFD5BCE26ADA6D5007D9786 /* DatabaseManager.swift in Sources */,
 				BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */,
 				BFBBEC86265EFF7600C5FA10 /* AppDelegate.swift in Sources */,
 				BF15E1DF268633BD002DB26A /* AdicionaOpcaoViewController.swift in Sources */,
 				BFBBEC88265EFF7600C5FA10 /* SceneDelegate.swift in Sources */,
 				BF17A3DC269660DF0099CDA3 /* AdicionaCriterioViewController.swift in Sources */,
 				BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */,
+				BFFD5BCC26ADA3E0007D9786 /* Decisao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
