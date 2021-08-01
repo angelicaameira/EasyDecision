@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // cria as tabelas necessárias
         Decisao.criaTabela()
-//        Opcao.criaTabela()
-//        Criterio.criaTabela()
+        Opcao.criaTabela()
+        Criterio.criaTabela()
+        Avaliacao.criaTabela()
+        Resultado.criaTabela()
         
         return true
     }

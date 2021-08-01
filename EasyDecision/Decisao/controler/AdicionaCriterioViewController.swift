@@ -11,15 +11,8 @@ import CoreData
 class AdicionaCriterioViewController: UIViewController {
     
     var criterioCelula: TableViewCell?
-    
-    var contexto:NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    var decisao: CDDecisao?
-    var criterio: CDCriterio?
-    
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var decisao: Decisao?
+    var criterio: Criterio?
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -46,20 +39,29 @@ class AdicionaCriterioViewController: UIViewController {
         guard let descricaoCriterio = descricaoTextField?.text else {
             return
         }
+        let pesoCriterio = (pesoTextField.text! as NSString).integerValue 
+        
+        guard let decisao = decisao
+        else { return }
+        
+        var insert = false
         if criterio == nil {
-            self.criterio = CDCriterio(context: contexto)
+            self.criterio = Criterio(descricao: descricaoCriterio, peso: pesoCriterio , decisao: decisao)
+            insert = true
         }
         
-        self.criterio?.descricao = descricaoTextField?.text
-        self.criterio?.peso = (pesoTextField.text! as NSString).doubleValue
-        self.criterio?.decisao = self.decisao
+        criterio?.descricao = descricaoCriterio
+        criterio?.peso = pesoCriterio
+        criterio?.decisao = decisao
         
         do {
-            try contexto.save()
+            if insert {
+                try criterio?.insereNoBanco()
+            } else {
+                try criterio?.atualizaNoBanco()
+            }
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }

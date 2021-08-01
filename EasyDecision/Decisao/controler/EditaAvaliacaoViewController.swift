@@ -11,15 +11,7 @@ import CoreData
 class EditaAvaliacaoViewController: UIViewController {
     
     var avaliacaoCelula: TableViewCell?
-    
-    var contexto:NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    var decisao: CDDecisao?
-    var avaliacao: CDAvaliacao?
-    
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var avaliacao: Avaliacao?
     
     @IBOutlet weak var pesoTextField: UITextField!
     
@@ -41,22 +33,15 @@ class EditaAvaliacaoViewController: UIViewController {
     }
     
     @IBAction func salvaAvaliacao(_ sender: Any) {
-        guard let descricaoAvaliacao = pesoTextField?.text else {
-            return
-        }
-        if avaliacao == nil {
-            self.avaliacao = CDAvaliacao(context: contexto)
-        }
+        let nota = (pesoTextField.text! as NSString).integerValue
         
-        self.avaliacao?.criterio?.peso = (pesoTextField.text! as NSString).doubleValue
-        self.avaliacao?.decisao = self.decisao
+        avaliacao?.nota = Int(nota)
+
         
         do {
-            try contexto.save()
+            try avaliacao?.atualizaNoBanco()
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }

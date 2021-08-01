@@ -6,58 +6,44 @@
 //
 import Foundation
 import UIKit
-import CoreData
+import SQLite
 
-class OpcoesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class OpcoesTableViewController: UITableViewController {
     
-    var opcaoSendoEditada: CDOpcao?
-    var decisao: CDDecisao?
-    var gerenciadorDeResultados: NSFetchedResultsController<CDOpcao>?
-    var contexto: NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var opcaoSendoEditada: Opcao?
+    var decisao: Decisao?
+    var listaOpcoes: [Opcao]?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaOpcao()
+        tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
     
     func recuperaOpcao() {
-        let pesquisaOpcao: NSFetchRequest<CDOpcao> = CDOpcao.fetchRequest()
-        let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
-        pesquisaOpcao.sortDescriptors = [ordenacao]
-        guard let decision = self.decisao else { return }
-        pesquisaOpcao.predicate = NSPredicate(format: "decisao = %@", decision)
-        gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaOpcao, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
-        gerenciadorDeResultados?.delegate = self
-        
         do {
-            try gerenciadorDeResultados?.performFetch()
-            tableView.reloadData()
+            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao!)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }
     
     // MARK: metodos table view
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(#function)
-        guard let contadorlistaDeOpcoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
+        guard let contadorlistaDeOpcoes = listaOpcoes?.count else { return 0 }
         return contadorlistaDeOpcoes
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
-        
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-opcao")
-        
-        guard let opcao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
+        guard let opcao = self.listaOpcoes?[indexPath.row] else {
             return celula
         }
         
@@ -66,10 +52,10 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(#function)
         if let destinationViewController = segue.destination as? AdicionaOpcaoViewController {
             if segue.identifier == "editarOpcao" {
                 destinationViewController.opcao = self.opcaoSendoEditada
+                destinationViewController.decisao = self.decisao
             }
             if segue.identifier == "adicionarOpcao" {
                 destinationViewController.decisao = self.decisao
@@ -77,7 +63,7 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         }
         if let destinationViewController = segue.destination as? CriteriosTableViewController {
             if segue.identifier == "mostraCriterios" {
-                destinationViewController.decisao = self.decisao
+                destinationViewController.decisao = decisao
             }
         }
     }
@@ -85,41 +71,39 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                guard let opcao = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
-                contexto.delete(opcao)
+                guard let opcao = self.listaOpcoes?[indexPath.row] else { return }
+                do {
+                    try opcao.apagaNoBanco()
+                    self.recuperaOpcao()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
-                self.opcaoSendoEditada = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
+                self.opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
                 self.performSegue(withIdentifier: "editarOpcao", sender: contextualAction)
             })]
-        do {
-            try contexto.save()
-        } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            print(error.localizedDescription)
-        }
-        return UISwipeActionsConfiguration(actions: acoes)
+       return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function)
-        guard let opcaoSendoEditada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
+        guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row] else { return }
         
-//        self.opcaoSendoEditada = opcaoSendoEditada
-//        self.performSegue(withIdentifier: "mostraCriterios", sender: self)
+        //self.opcaoSendoEditada = opcaoSendoEditada
+       // self.performSegue(withIdentifier: "mostraCriterios", sender: self)
     }
     
     // MARK: - fetchedResultControllerDelegate
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        print(#function)
-        guard let indexPath = indexPath else { return }
-        switch type {
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        default:
-            tableView.reloadData()
-        }
-    }
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        print(#function)
+//        guard let indexPath = indexPath else { return }
+//        switch type {
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        default:
+//            tableView.reloadData()
+//        }
+//    }
 }

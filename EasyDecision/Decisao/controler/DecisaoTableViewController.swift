@@ -53,7 +53,7 @@ class DecisaoTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? OpcoesTableViewController {
             if segue.identifier == "mostraOpcoes" {
-//                destinationViewController.decisao = self.decisaoSelecionada
+                destinationViewController.decisao = self.decisaoSelecionada
             }
         }
         if let destinationViewController = segue.destination as? AdicionaDecisaoViewController {

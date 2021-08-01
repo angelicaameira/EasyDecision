@@ -23,6 +23,7 @@ class DatabaseManager: NSObject {
     static let applicationDocumentsDirectory = {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("db.sqlite3").absoluteString;
     }()
+    // EasyDecision/Documents/db.sqlite3
     
 //    static func applicationDataDirectory() -> URL {
 //        let fileManager = FileManager.default
@@ -66,6 +67,8 @@ class DatabaseManager: NSObject {
     
     static let db: Connection = {
         let connection = try! Connection(applicationDocumentsDirectory)
+        print("Arquivo do banco de dados:")
+        print(applicationDocumentsDirectory)
         return connection
     }()
 }
