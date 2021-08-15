@@ -44,7 +44,7 @@ class CriteriosTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as! TableViewCell
-//        let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-criterio")
+        
         guard let criterio = listaCriterios?[indexPath.row]
         else {
             return celula

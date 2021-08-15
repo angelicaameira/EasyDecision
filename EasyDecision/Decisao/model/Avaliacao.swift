@@ -11,6 +11,14 @@ import SQLite
 
 class Avaliacao: NSObject, Salvavel {
     
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Avaliacao else { return false }
+        
+        return self.opcao.id == object.opcao.id
+            && self.decisao.id == object.decisao.id
+            && self.criterio.id == object.criterio.id;
+    }
+    
     // MARK: propriedades do objeto
     var id: Int64
     var nota: Int
@@ -78,8 +86,8 @@ class Avaliacao: NSObject, Salvavel {
     func insereNoBanco() throws {
         let insert = Avaliacao.tabela.insert(Avaliacao.notaExpression <- self.nota,
                                              Avaliacao.idDecisaoExpression <- self.decisao.id,
-                                             Avaliacao.idOpcaoExpression <- self.decisao.id,
-                                             Avaliacao.idCriterioExpression <- self.decisao.id)
+                                             Avaliacao.idOpcaoExpression <- self.opcao.id,
+                                             Avaliacao.idCriterioExpression <- self.criterio.id)
         self.id = try DatabaseManager.db.run(insert)
     }
     
@@ -110,5 +118,7 @@ class Avaliacao: NSObject, Salvavel {
             print(error.localizedDescription)
         }
     }
+    
+    
     
 }
