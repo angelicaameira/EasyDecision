@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Opcao.criaTabela()
         Criterio.criaTabela()
         Avaliacao.criaTabela()
-        Resultado.criaTabela()
         
         return true
     }

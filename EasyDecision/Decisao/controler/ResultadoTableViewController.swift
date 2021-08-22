@@ -11,60 +11,75 @@ import SQLite
 
 class ResultadoTableViewController: UITableViewController {
     
-    var resultadoSendoEditado: Criterio?
     var decisao: Decisao?
-    var listaResultados: [Resultado]?
+    var listaAvaliacoes: [Avaliacao]?
+    var listaResultados: [Resultado] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        recuperaResultado()
-        tableView.reloadData()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        preencheListaAvaliacoes()
+        criaListaResultados()
+        ordenaListaResultadosPorPorcentagem()
     }
     
-    // MARK: metodos que não são da table view
+    func ordenaListaResultadosPorPorcentagem() {
+        listaResultados.sort(by: { resultadoEsquerda, resultadoDireita in
+            return resultadoEsquerda.porcentagem > resultadoDireita.porcentagem
+        })
+    }
     
-    func recuperaResultado() {
+    func preencheListaAvaliacoes() {
+        guard let decisao = decisao else { return }
         do {
-            self.listaResultados = try Resultado.listaDoBanco(decisao: decisao!)
+            self.listaAvaliacoes = try Avaliacao.listaDoBanco(decisao: decisao)
         } catch {
             print(error.localizedDescription)
         }
     }
     
-    // MARK: metodos table view
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeResultados = listaResultados?.count else { return 0 }
-        return contadorListaDeResultados
+    /// Calcula as porcentagens dos Resultados
+    ///
+    /// percentualDaOpção = (avaliação1.nota * critério1.peso + avaliaçãoN.nota * critérioN.peso) / (5 * critério1.peso + 5 * critérioN.peso)
+    func criaListaResultados() {
+        guard let listaAvaliacoes = self.listaAvaliacoes,
+              let decisao = self.decisao
+        else { return }
+        
+        do {
+            let listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
+            for opcao in listaOpcoes {
+                let avaliacoesDaOpcao = listaAvaliacoes.filter({ avaliacao in
+                    return avaliacao.opcao.id == opcao.id
+                })
+                var dividendo = 0.0
+                var divisor = 0.0
+                for avaliacao in avaliacoesDaOpcao {
+                    dividendo = dividendo + Double((avaliacao.nota * avaliacao.criterio.peso))
+                    divisor = divisor + Double((5 * avaliacao.criterio.peso))
+                }
+                let percentualDaOpcao = dividendo/divisor
+                listaResultados.append(
+                    Resultado(porcentagem: percentualDaOpcao,
+                              decisao: decisao,
+                              opcao: opcao))
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as! TableViewCell
-//        let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-criterio")
-        guard let resultado = listaResultados?[indexPath.row]
-        else {
-            return celula
-        }
         
-        celula.title?.text = resultado.decisao.descricao
-        celula.peso?.text = "\(resultado.criterio.peso)"
+        let resultado = self.listaResultados[indexPath.row]
+
+        celula.title?.text = resultado.opcao.descricao
+        celula.peso?.text = NumberFormatter.localizedString(from: NSNumber(value: resultado.porcentagem), number: .percent)
         return celula
     }
     
-    // MARK: - fetchedResultControllerDelegate
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        guard let indexPath = indexPath else { return }
-//        switch type {
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        default:
-//            tableView.reloadData()
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listaResultados.count
+    }
 }
 

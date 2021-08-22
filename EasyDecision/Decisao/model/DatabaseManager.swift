@@ -20,7 +20,7 @@ protocol Salvavel {
 
 class DatabaseManager: NSObject {
     
-    static let applicationDocumentsDirectory = {
+    static let databasePath = {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("db.sqlite3").absoluteString;
     }()
     // EasyDecision/Documents/db.sqlite3
@@ -66,9 +66,9 @@ class DatabaseManager: NSObject {
     
     
     static let db: Connection = {
-        let connection = try! Connection(applicationDocumentsDirectory)
+        let connection = try! Connection(databasePath)
         print("Arquivo do banco de dados:")
-        print(applicationDocumentsDirectory)
+        print(databasePath)
         return connection
     }()
 }
