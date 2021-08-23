@@ -57,7 +57,6 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as! CriterioTableViewCell
         
         guard let criterio = gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
@@ -95,7 +94,6 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
             try contexto.save()
         } catch {
             print(error.localizedDescription)
-            
         }
         return UISwipeActionsConfiguration(actions: acoes)
     }

@@ -46,12 +46,14 @@ class AdicionaCriterioViewController: UIViewController {
         guard let descricaoCriterio = descricaoTextField?.text else {
             return
         }
+        guard let peso = pesoTextField.text else {
+            return
+        }
         if criterio == nil {
             self.criterio = Criterio(context: contexto)
         }
-        
         self.criterio?.descricao = descricaoTextField?.text
-        self.criterio?.peso = (pesoTextField.text! as NSString).doubleValue
+        self.criterio?.peso = (peso as NSString).doubleValue
         self.criterio?.decisao = self.decisao
         
         do {

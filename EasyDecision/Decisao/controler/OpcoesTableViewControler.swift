@@ -57,7 +57,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-opcao")
         
         guard let opcao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
@@ -106,9 +105,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let opcaoSendoEditada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
-        
-        //self.opcaoSendoEditada = opcaoSendoEditada
-        //self.performSegue(withIdentifier: "mostraCriterios", sender: self)
     }
     
     // MARK: - fetchedResultControllerDelegate
