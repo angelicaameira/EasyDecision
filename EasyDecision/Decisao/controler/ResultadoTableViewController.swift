@@ -44,7 +44,6 @@ class ResultadoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as! TableViewCell
-//        let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-criterio")
         guard let resultado = listaResultados?[indexPath.row]
         else {
             return celula
@@ -54,17 +53,5 @@ class ResultadoTableViewController: UITableViewController {
         celula.peso?.text = "\(resultado.criterio.peso)"
         return celula
     }
-    
-    // MARK: - fetchedResultControllerDelegate
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        guard let indexPath = indexPath else { return }
-//        switch type {
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        default:
-//            tableView.reloadData()
-//        }
-//    }
 }
 

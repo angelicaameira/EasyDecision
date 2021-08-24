@@ -12,6 +12,7 @@ import CoreData
 class AdicionaDecisaoViewController: UIViewController {
     
     var decisao: Decisao?
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -49,7 +50,9 @@ class AdicionaDecisaoViewController: UIViewController {
             }
             navigationController?.popViewController(animated: true)
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        print(error.localizedDescription)
         }
     }
     

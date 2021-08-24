@@ -35,7 +35,6 @@ class Resultado: NSObject, Salvavel {
         self.opcao = opcao
         self.criterio = criterio
         self.avalicao = avaliacao
-        
     }
     
     private init(id: Int64, porcentagem: Double, decisao: Decisao, opcao: Opcao, criterio: Criterio, avaliacao: Avaliacao) {

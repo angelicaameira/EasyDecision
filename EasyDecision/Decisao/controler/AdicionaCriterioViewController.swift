@@ -10,6 +10,7 @@ import CoreData
 
 class AdicionaCriterioViewController: UIViewController {
     
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var criterioCelula: TableViewCell?
     var decisao: Decisao?
     var criterio: Criterio?
@@ -39,7 +40,10 @@ class AdicionaCriterioViewController: UIViewController {
         guard let descricaoCriterio = descricaoTextField?.text else {
             return
         }
-        let pesoCriterio = (pesoTextField.text! as NSString).integerValue 
+        guard let peso = pesoTextField.text else {
+            return
+        }
+        let pesoCriterio = (peso as NSString).integerValue
         
         guard let decisao = decisao
         else { return }

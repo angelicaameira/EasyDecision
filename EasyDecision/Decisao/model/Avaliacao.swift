@@ -118,7 +118,4 @@ class Avaliacao: NSObject, Salvavel {
             print(error.localizedDescription)
         }
     }
-    
-    
-    
 }

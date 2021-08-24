@@ -10,6 +10,7 @@ import SQLite
 
 class OpcoesTableViewController: UITableViewController {
     
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var opcaoSendoEditada: Opcao?
     var decisao: Decisao?
     var listaOpcoes: [Opcao]?
@@ -26,7 +27,9 @@ class OpcoesTableViewController: UITableViewController {
         do {
             self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao!)
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                       self.present(alert, animated: true, completion: nil)
+                       print(error.localizedDescription)
         }
     }
     
@@ -77,7 +80,9 @@ class OpcoesTableViewController: UITableViewController {
                     self.recuperaOpcao()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    print(error.localizedDescription)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                               self.present(alert, animated: true, completion: nil)
+                               print(error.localizedDescription)
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
@@ -89,21 +94,5 @@ class OpcoesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row] else { return }
-        
-        //self.opcaoSendoEditada = opcaoSendoEditada
-       // self.performSegue(withIdentifier: "mostraCriterios", sender: self)
     }
-    
-    // MARK: - fetchedResultControllerDelegate
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        print(#function)
-//        guard let indexPath = indexPath else { return }
-//        switch type {
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        default:
-//            tableView.reloadData()
-//        }
-//    }
 }
