@@ -24,6 +24,11 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         recuperaOpcao()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        gerenciadorDeResultados = nil
+    }
+    
     // MARK: metodos que não são da table view
     
     func recuperaOpcao() {
@@ -38,7 +43,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         do {
             try gerenciadorDeResultados?.performFetch()
             tableView.reloadData()
-            
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -54,6 +58,7 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-opcao")
+        
         guard let opcao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
             return celula
         }
@@ -68,6 +73,11 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
                 destinationViewController.opcao = self.opcaoSendoEditada
             }
             if segue.identifier == "adicionarOpcao" {
+                destinationViewController.decisao = self.decisao
+            }
+        }
+        if let destinationViewController = segue.destination as? CriteriosTableViewController {
+            if segue.identifier == "mostraCriterios" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -95,9 +105,6 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let opcaoSendoEditada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
-        //MARK: TO DO:
-        //      self.opcaoSendoEditada = opcaoSendoEditada
-        //      self.performSegue(withIdentifier: "proximoItem", sender: self)
     }
     
     // MARK: - fetchedResultControllerDelegate
@@ -106,7 +113,7 @@ class OpcoesTableViewController: UITableViewController, NSFetchedResultsControll
         guard let indexPath = indexPath else { return }
         switch type {
         case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
             tableView.reloadData()
         }
