@@ -32,10 +32,10 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
     // MARK: metodos
     
     func recuperaCriterio() {
+        guard let decision = self.decisao else { return }
         let pesquisaCriterio: NSFetchRequest<Criterio> = Criterio.fetchRequest()
         let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
         pesquisaCriterio.sortDescriptors = [ordenacao]
-        guard let decision = self.decisao else { return }
         pesquisaCriterio.predicate = NSPredicate(format: "decisao = %@", decision)
         gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaCriterio, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
         gerenciadorDeResultados?.delegate = self
@@ -57,7 +57,9 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as! CriterioTableViewCell
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? CriterioTableViewCell else {
+            return UITableViewCell()
+        }
         
         guard let criterio = gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
         else {

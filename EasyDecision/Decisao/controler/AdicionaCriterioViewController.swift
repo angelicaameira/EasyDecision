@@ -43,10 +43,9 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @IBAction func salvaCriterio(_ sender: Any) {
-        guard let descricaoCriterio = descricaoTextField?.text else {
-            return
-        }
-        guard let peso = pesoTextField.text else {
+        
+        guard let descricaoCriterio = descricaoTextField?.text,
+              let peso = pesoTextField.text else {
             return
         }
         if criterio == nil {
