@@ -8,7 +8,6 @@
 import Foundation
 import SQLite
 
-
 class Avaliacao: NSObject, Salvavel {
     
     override func isEqual(_ object: Any?) -> Bool {

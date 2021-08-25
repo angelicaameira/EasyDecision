@@ -8,7 +8,6 @@
 import Foundation
 import SQLite
 
-
 class Resultado: NSObject, Salvavel {
     
     // MARK: propriedades do objeto
@@ -55,8 +54,7 @@ class Resultado: NSObject, Salvavel {
                              decisao: try Decisao.comId(resultadoDoBanco[idDecisaoExpression]),
                              opcao: try Opcao.comId(resultadoDoBanco[idOpcaoExpression]),
                              criterio: try Criterio.comId(resultadoDoBanco[idCriterioExpression]),
-                             avaliacao: try
-                                Avaliacao.comId(resultadoDoBanco[idAvaliacaoExpression]))
+                             avaliacao: try Avaliacao.comId(resultadoDoBanco[idAvaliacaoExpression]))
         }
         throw NSError(domain: "Não encontrou os resultados", code: 404, userInfo: nil)
     }
@@ -72,8 +70,7 @@ class Resultado: NSObject, Salvavel {
                          decisao: try Decisao.comId(resultadoDoBanco[idDecisaoExpression]),
                          opcao: try Opcao.comId(resultadoDoBanco[idOpcaoExpression]),
                          criterio: try Criterio.comId(resultadoDoBanco[idCriterioExpression]),
-                         avaliacao: try
-                            Avaliacao.comId(resultadoDoBanco[idAvaliacaoExpression])))
+                         avaliacao: try Avaliacao.comId(resultadoDoBanco[idAvaliacaoExpression])))
         }
         return lista
     }
@@ -87,9 +84,7 @@ class Resultado: NSObject, Salvavel {
                                              Resultado.idDecisaoExpression <- self.decisao.id,
                                              Resultado.idOpcaoExpression <- self.decisao.id,
                                              Resultado.idCriterioExpression <- self.decisao.id,
-                                             Resultado
-                                              .idAvaliacaoExpression
-                                              <- self.avalicao.id)
+                                             Resultado.idAvaliacaoExpression <- self.avalicao.id)
         self.id = try DatabaseManager.db.run(insert)
     }
     

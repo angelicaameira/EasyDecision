@@ -30,13 +30,11 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     @IBAction func salvaOpcao(_ sender: Any) {
-        guard let descricaoOpcao = descricaoTextField?.text
+        guard let descricaoOpcao = descricaoTextField?.text,
+              let decisao = decisao
         else {
             return
         }
-        guard let decisao = decisao
-        else { return }
-        
         
         var insert = false
         if opcao == nil {

@@ -27,8 +27,8 @@ class DecisaoTableViewController: UITableViewController {
             self.listaDecisoes = try Decisao.listaDoBanco()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        print(error.localizedDescription)
+            self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     

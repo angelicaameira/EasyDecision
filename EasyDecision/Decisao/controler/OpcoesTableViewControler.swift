@@ -28,8 +28,8 @@ class OpcoesTableViewController: UITableViewController {
             self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao!)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                       self.present(alert, animated: true, completion: nil)
-                       print(error.localizedDescription)
+            self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     
@@ -81,15 +81,15 @@ class OpcoesTableViewController: UITableViewController {
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                               self.present(alert, animated: true, completion: nil)
-                               print(error.localizedDescription)
+                    self.present(alert, animated: true, completion: nil)
+                    print(error.localizedDescription)
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
                 self.opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
                 self.performSegue(withIdentifier: "editarOpcao", sender: contextualAction)
             })]
-       return UISwipeActionsConfiguration(actions: acoes)
+        return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

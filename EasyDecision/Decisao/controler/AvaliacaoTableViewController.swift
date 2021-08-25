@@ -63,16 +63,24 @@ class AvaliacaoTableViewController: UITableViewController {
     }
     
     func recuperaOpcoes() {
+        guard let decisao = decisao else {
+            return
+        }
+        
         do {
-            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao!)
+            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
         } catch {
             print(error.localizedDescription)
         }
     }
     
     func recuperaCriterios() {
+        guard let decisao = decisao else {
+            return
+        }
+        
         do {
-            self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao!)
+            self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao)
         } catch {
             print(error.localizedDescription)
         }
@@ -130,7 +138,6 @@ class AvaliacaoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let posicaoDaOpcaoNaTableView = indexPath.section
         let posicaoDaCriterioNaTableView = indexPath.row
         let opcao = listaOpcoes?[posicaoDaOpcaoNaTableView]

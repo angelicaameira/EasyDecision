@@ -40,31 +40,6 @@ for linha in qtdLinhas {
     
 decisaoTableViewController.viewDidAppear()
 
-
-
-
 // usuário apertou pra sair da tela
 decisaoTableViewController.viewWillDisappear()
 decisaoTableViewController.viewDidDisappear()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
