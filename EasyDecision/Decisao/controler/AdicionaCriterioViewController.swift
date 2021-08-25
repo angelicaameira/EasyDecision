@@ -16,12 +16,12 @@ class AdicionaCriterioViewController: UIViewController {
     var criterio: Criterio?
     
     @IBOutlet weak var descricaoTextField: UITextField?
-    
     @IBOutlet weak var pesoTextField: UITextField!
     
     @IBAction func stepper(_ sender: UIStepper) {
         self.pesoTextField.text = "\(sender.value)"
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         descricaoTextField?.becomeFirstResponder()
