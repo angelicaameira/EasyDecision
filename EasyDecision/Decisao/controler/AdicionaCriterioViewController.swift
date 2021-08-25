@@ -10,24 +10,21 @@ import CoreData
 
 class AdicionaCriterioViewController: UIViewController {
     
-    var criterioCelula: CriterioTableViewCell?
-    
     var contexto:NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     var decisao: Decisao?
     var criterio: Criterio?
-    
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
-    
     @IBOutlet weak var pesoTextField: UITextField!
     
     @IBAction func stepper(_ sender: UIStepper) {
         self.pesoTextField.text = "\(sender.value)"
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         descricaoTextField?.becomeFirstResponder()
@@ -43,7 +40,6 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @IBAction func salvaCriterio(_ sender: Any) {
-        
         guard let descricaoCriterio = descricaoTextField?.text,
               let peso = pesoTextField.text else {
             return

@@ -19,6 +19,7 @@ class CriteriosTableViewController: UITableViewController, NSFetchedResultsContr
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaCriterio()
