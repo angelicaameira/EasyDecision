@@ -29,14 +29,7 @@ class AvaliacaoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
-    func instancias() {
-        var avaliacao1 = Avaliacao(nota: 0, decisao: self.decisao!, opcao: Opcao, criterio: Criterio)
-        var avaliacao2 = Avaliacao(nota: 0, decisao: self.decisao!, opcao: Opcao, criterio: Criterio)
-        
-        
-    }
-    
+
     func criaAvaliacoes() {
         guard let listaOpcoes = listaOpcoes,
               let listaCriterios = listaCriterios,
