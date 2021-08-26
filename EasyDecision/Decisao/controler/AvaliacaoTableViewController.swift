@@ -30,6 +30,13 @@ class AvaliacaoTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func instancias() {
+        var avaliacao1 = Avaliacao(nota: 0, decisao: self.decisao!, opcao: Opcao, criterio: Criterio)
+        var avaliacao2 = Avaliacao(nota: 0, decisao: self.decisao!, opcao: Opcao, criterio: Criterio)
+        
+        
+    }
+    
     func criaAvaliacoes() {
         guard let listaOpcoes = listaOpcoes,
               let listaCriterios = listaCriterios,
@@ -89,8 +96,7 @@ class AvaliacaoTableViewController: UITableViewController {
     // MARK: metodos table view
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let contadorListaDeOpcoes = listaOpcoes?.count else { return 0 }
-        return contadorListaDeOpcoes
+        return listaOpcoes?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -98,8 +104,7 @@ class AvaliacaoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeCriterios = listaCriterios?.count else { return 0 }
-        return contadorListaDeCriterios
+        return listaCriterios?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -10,11 +10,8 @@ import CoreData
 
 class AdicionaCriterioViewController: UIViewController {
     
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    var criterioCelula: TableViewCell?
     var decisao: Decisao?
     var criterio: Criterio?
-    
     @IBOutlet weak var descricaoTextField: UITextField?
     @IBOutlet weak var pesoTextField: UITextField!
     
@@ -38,13 +35,12 @@ class AdicionaCriterioViewController: UIViewController {
     
     @IBAction func salvaCriterio(_ sender: Any) {
         guard let descricaoCriterio = descricaoTextField?.text,
-              let peso = pesoTextField.text else {
+              let peso = pesoTextField.text,
+              let decisao = decisao else {
             return
         }
         let pesoCriterio = (peso as NSString).integerValue
-        
-        guard let decisao = decisao
-        else { return }
+        let alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
         
         var insert = false
         if criterio == nil {
@@ -64,7 +60,9 @@ class AdicionaCriterioViewController: UIViewController {
             }
             navigationController?.popViewController(animated: true)
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        print(error.localizedDescription)
         }
     }
     

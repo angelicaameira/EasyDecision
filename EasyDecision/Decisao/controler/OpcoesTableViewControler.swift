@@ -25,7 +25,10 @@ class OpcoesTableViewController: UITableViewController {
     
     func recuperaOpcao() {
         do {
-            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao!)
+            guard let decisao = decisao else {
+                return
+            }
+            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -40,8 +43,7 @@ class OpcoesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorlistaDeOpcoes = listaOpcoes?.count else { return 0 }
-        return contadorlistaDeOpcoes
+        return listaOpcoes?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,7 +68,7 @@ class OpcoesTableViewController: UITableViewController {
         }
         if let destinationViewController = segue.destination as? CriteriosTableViewController {
             if segue.identifier == "mostraCriterios" {
-                destinationViewController.decisao = decisao
+                destinationViewController.decisao = self.decisao
             }
         }
     }

@@ -54,8 +54,8 @@ class AdicionaOpcaoViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        print(error.localizedDescription)
+            self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     

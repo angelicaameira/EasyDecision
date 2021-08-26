@@ -39,8 +39,7 @@ class DecisaoTableViewController: UITableViewController {
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeDecisoes = listaDecisoes?.count else { return 0 }
-        return contadorListaDeDecisoes
+        return listaDecisoes?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,8 +75,8 @@ class DecisaoTableViewController: UITableViewController {
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
-                                print(error.localizedDescription)
+                    self.present(alert, animated: true, completion: nil)
+                    print(error.localizedDescription)
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in

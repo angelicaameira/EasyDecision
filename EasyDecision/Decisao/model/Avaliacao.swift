@@ -10,15 +10,8 @@ import SQLite
 
 class Avaliacao: NSObject, Salvavel {
     
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? Avaliacao else { return false }
-        
-        return self.opcao.id == object.opcao.id
-            && self.decisao.id == object.decisao.id
-            && self.criterio.id == object.criterio.id;
-    }
-    
     // MARK: propriedades do objeto
+    
     var id: Int64
     var nota: Int
     var decisao: Decisao
@@ -26,6 +19,7 @@ class Avaliacao: NSObject, Salvavel {
     var criterio: Criterio
 
     // MARK: propriedades do banco
+    
     private static let tabela = Table("Avaliacao")
     private static let idExpression = Expression<Int64>("id")
     private static let notaExpression = Expression<Int>("nota")
@@ -49,7 +43,18 @@ class Avaliacao: NSObject, Salvavel {
         self.criterio = criterio
     }
     
+    // MARK: NSObject
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Avaliacao else { return false }
+        
+        return self.opcao.id == object.opcao.id
+            && self.decisao.id == object.decisao.id
+            && self.criterio.id == object.criterio.id;
+    }
+    
     // MARK: Salvavel e funções no banco
+    
     static func comId(_ id: Int64) throws -> Avaliacao {
         let filtrosAvaliacao = Avaliacao.tabela.filter(rowid == id)
         if let avaliacaoDoBanco = try DatabaseManager.db.pluck(filtrosAvaliacao) {
