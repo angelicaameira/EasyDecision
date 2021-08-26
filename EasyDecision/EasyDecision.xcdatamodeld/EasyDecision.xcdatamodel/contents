@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Criterio" representedClassName="Criterio" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDAvaliacao" representedClassName="CDAvaliacao" syncable="YES" codeGenerationType="class">
+        <attribute name="nota" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="criterio" maxCount="1" deletionRule="Cascade" destinationEntity="CDCriterio" inverseName="avaliacoes" inverseEntity="CDCriterio"/>
+        <relationship name="decisao" maxCount="1" deletionRule="Nullify" destinationEntity="CDDecisao" inverseName="avaliacoes" inverseEntity="CDDecisao"/>
+        <relationship name="opcao" maxCount="1" deletionRule="Cascade" destinationEntity="CDOpcao" inverseName="avaliacoes" inverseEntity="CDOpcao"/>
+    </entity>
+    <entity name="CDCriterio" representedClassName="CDCriterio" syncable="YES" codeGenerationType="class">
         <attribute name="descricao" attributeType="String"/>
         <attribute name="peso" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="Decisao" inverseName="criterios" inverseEntity="Decisao"/>
+        <relationship name="avaliacoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAvaliacao" inverseName="criterio" inverseEntity="CDAvaliacao"/>
+        <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="CDDecisao" inverseName="criterios" inverseEntity="CDDecisao"/>
     </entity>
-    <entity name="Decisao" representedClassName="Decisao" syncable="YES" codeGenerationType="class">
+    <entity name="CDDecisao" representedClassName="CDDecisao" syncable="YES" codeGenerationType="class">
         <attribute name="descricao" attributeType="String"/>
-        <relationship name="criterios" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Criterio" inverseName="decisao" inverseEntity="Criterio"/>
-        <relationship name="opcoes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Opcao" inverseName="decisao" inverseEntity="Opcao"/>
+        <relationship name="avaliacoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAvaliacao" inverseName="decisao" inverseEntity="CDAvaliacao"/>
+        <relationship name="criterios" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CDCriterio" inverseName="decisao" inverseEntity="CDCriterio"/>
+        <relationship name="opcoes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CDOpcao" inverseName="decisao" inverseEntity="CDOpcao"/>
     </entity>
-    <entity name="Opcao" representedClassName="Opcao" syncable="YES" codeGenerationType="class">
+    <entity name="CDOpcao" representedClassName="CDOpcao" syncable="YES" codeGenerationType="class">
         <attribute name="descricao" attributeType="String"/>
-        <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="Decisao" inverseName="opcoes" inverseEntity="Decisao"/>
+        <relationship name="avaliacoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAvaliacao" inverseName="opcao" inverseEntity="CDAvaliacao"/>
+        <relationship name="decisao" maxCount="1" deletionRule="Cascade" destinationEntity="CDDecisao" inverseName="opcoes" inverseEntity="CDDecisao"/>
     </entity>
     <elements>
-        <element name="Criterio" positionX="113.36328125" positionY="-322.12109375" width="128" height="88"/>
-        <element name="Decisao" positionX="-63.5" positionY="-435.5" width="128" height="88"/>
-        <element name="Opcao" positionX="-236.5" positionY="-231" width="128" height="73"/>
+        <element name="CDAvaliacao" positionX="-43.16015625" positionY="-336.79296875" width="128" height="103"/>
+        <element name="CDCriterio" positionX="290.58203125" positionY="-351.05859375" width="128" height="103"/>
+        <element name="CDDecisao" positionX="116.6484375" positionY="-187.765625" width="128" height="103"/>
+        <element name="CDOpcao" positionX="-236.1640625" positionY="-173.15625" width="128" height="88"/>
     </elements>
 </model>

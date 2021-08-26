@@ -13,6 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // cria as tabelas necessárias
+        Decisao.criaTabela()
+        Opcao.criaTabela()
+        Criterio.criaTabela()
+        Avaliacao.criaTabela()
+        Resultado.criaTabela()
+        
         return true
     }
 

@@ -10,14 +10,8 @@ import CoreData
 
 class AdicionaCriterioViewController: UIViewController {
     
-    var contexto:NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
     var decisao: Decisao?
     var criterio: Criterio?
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    
     @IBOutlet weak var descricaoTextField: UITextField?
     @IBOutlet weak var pesoTextField: UITextField!
     
@@ -41,23 +35,34 @@ class AdicionaCriterioViewController: UIViewController {
     
     @IBAction func salvaCriterio(_ sender: Any) {
         guard let descricaoCriterio = descricaoTextField?.text,
-              let peso = pesoTextField.text else {
+              let peso = pesoTextField.text,
+              let decisao = decisao else {
             return
         }
+        let pesoCriterio = (peso as NSString).integerValue
+        let alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+        
+        var insert = false
         if criterio == nil {
-            self.criterio = Criterio(context: contexto)
+            self.criterio = Criterio(descricao: descricaoCriterio, peso: pesoCriterio , decisao: decisao)
+            insert = true
         }
-        self.criterio?.descricao = descricaoTextField?.text
-        self.criterio?.peso = (peso as NSString).doubleValue
-        self.criterio?.decisao = self.decisao
+        
+        criterio?.descricao = descricaoCriterio
+        criterio?.peso = pesoCriterio
+        criterio?.decisao = decisao
         
         do {
-            try contexto.save()
+            if insert {
+                try criterio?.insereNoBanco()
+            } else {
+                try criterio?.atualizaNoBanco()
+            }
             navigationController?.popViewController(animated: true)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            print(error.localizedDescription)
+                        self.present(alert, animated: true, completion: nil)
+                        print(error.localizedDescription)
         }
     }
     

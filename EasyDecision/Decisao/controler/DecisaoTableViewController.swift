@@ -6,54 +6,45 @@
 //
 import UIKit
 import Foundation
-import CoreData
+import SQLite
 
-class DecisaoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class DecisaoTableViewController: UITableViewController {
     
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
-    var gerenciadorDeResultados: NSFetchedResultsController<Decisao>?
-    var contexto: NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
+    var listaDecisoes: [Decisao]?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaDecisao()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        gerenciadorDeResultados?.delegate = nil
+        tableView.reloadData()
     }
     
     //MARK: metodos
     
     func recuperaDecisao() {
-        let pesquisaDecisao: NSFetchRequest<Decisao> = Decisao.fetchRequest()
-        let ordenacao = NSSortDescriptor(key: "descricao", ascending: true)
-        pesquisaDecisao.sortDescriptors = [ordenacao]
-        gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaDecisao, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
-        gerenciadorDeResultados?.delegate = self
-        
         do {
-            try gerenciadorDeResultados?.performFetch()
-            tableView.reloadData()
+            self.listaDecisoes = try Decisao.listaDoBanco()
         } catch {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeDecisoes = gerenciadorDeResultados?.fetchedObjects?.count else { return 0 }
-        return contadorListaDeDecisoes
+        return listaDecisoes?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-decisao")
-        guard let decisao = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else {
+        guard let decisao = self.listaDecisoes?[indexPath.row] else {
             return celula
         }
         
@@ -77,38 +68,28 @@ class DecisaoTableViewController: UITableViewController, NSFetchedResultsControl
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in 
-                guard let decisao = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
-                contexto.delete(decisao)
+                guard let decisao = self.listaDecisoes?[indexPath.row] else { return }
+                do {
+                    try decisao.apagaNoBanco()
+                    self.recuperaDecisao()
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } catch {
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(error.localizedDescription)
+                }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
-                self.decisaoSelecionada = self.gerenciadorDeResultados?.fetchedObjects?[indexPath.row]
+                self.decisaoSelecionada = self.listaDecisoes?[indexPath.row]
                 self.performSegue(withIdentifier: "editarDecisao", sender: contextualAction)
             })]
-        
-        do {
-            try contexto.save()
-        } catch {
-            print(error.localizedDescription)
-        }
         return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let decisaoSelecionada = gerenciadorDeResultados?.fetchedObjects?[indexPath.row] else { return }
+        guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row] else { return }
         
         self.decisaoSelecionada = decisaoSelecionada
         self.performSegue(withIdentifier: "mostraOpcoes", sender: self)
-    }
-    
-    // MARK: - fetchedResultControllerDelegate
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        guard let indexPath = indexPath else { return }
-        switch type {
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        default:
-            tableView.reloadData()
-        }
     }
 }

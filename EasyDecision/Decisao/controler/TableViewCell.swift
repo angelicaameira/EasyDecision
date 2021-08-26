@@ -7,17 +7,15 @@
 
 import UIKit
 
-class CriterioTableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var peso: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
     
-    var criterio: Criterio?
+    var criterio: CDCriterio?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.title.text = criterio?.descricao
         self.peso.text = "\(String(describing: criterio?.peso))"
     }

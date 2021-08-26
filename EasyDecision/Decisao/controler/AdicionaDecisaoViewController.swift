@@ -11,12 +11,8 @@ import CoreData
 
 class AdicionaDecisaoViewController: UIViewController {
     
-    var contexto:NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    
     var decisao: Decisao?
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -38,16 +34,25 @@ class AdicionaDecisaoViewController: UIViewController {
         guard let descricaoDecisao = descricaoTextField?.text else {
             return
         }
+        
+        var insert = false
         if decisao == nil {
-            decisao = Decisao(context: contexto)
+            decisao = Decisao(descricao: descricaoDecisao)
+            insert = true
         }
-        decisao?.descricao = descricaoTextField?.text
+        decisao?.descricao = descricaoDecisao
         
         do {
-            try contexto.save()
+            if insert {
+                try decisao?.insereNoBanco()
+            } else {
+                try decisao?.atualizaNoBanco()
+            }
             navigationController?.popViewController(animated: true)
         } catch {
-            print(error.localizedDescription)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        print(error.localizedDescription)
         }
     }
     

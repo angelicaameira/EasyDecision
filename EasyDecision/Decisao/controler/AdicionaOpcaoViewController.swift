@@ -4,20 +4,14 @@
 //
 //  Created by Angélica Andrade de Meira on 25/06/21.
 //
-
 import Foundation
 import UIKit
 import CoreData
 
 class AdicionaOpcaoViewController: UIViewController {
-    
-    var contexto: NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisao: Decisao?
     var opcao: Opcao?
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -36,18 +30,27 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     @IBAction func salvaOpcao(_ sender: Any) {
-        guard let descricaoOpcao = descricaoTextField?.text else {
+        guard let descricaoOpcao = descricaoTextField?.text,
+              let decisao = decisao
+        else {
             return
         }
+        
+        var insert = false
         if opcao == nil {
-            self.opcao = Opcao(context: contexto)
+            self.opcao = Opcao(descricao: descricaoOpcao, decisao: decisao)
+            insert = true
         }
         
-        self.opcao?.descricao = descricaoTextField?.text
-        self.opcao?.decisao = self.decisao
+        opcao?.descricao = descricaoOpcao
+        opcao?.decisao = decisao
         
         do {
-            try contexto.save()
+            if insert {
+                try opcao?.insereNoBanco()
+            } else {
+                try opcao?.atualizaNoBanco()
+            }
             navigationController?.popViewController(animated: true)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
@@ -57,10 +60,10 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     func setupView() {
-        guard let opcaoSendoEditada = self.opcao else {
+        guard let opcaoSendoEditada = opcao else {
             return
         }
-        self.descricaoTextField?.text = opcaoSendoEditada.descricao
+        descricaoTextField?.text = opcaoSendoEditada.descricao
     }
 }
 
