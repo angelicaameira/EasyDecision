@@ -52,7 +52,7 @@ class AvaliacaoTableViewController: UITableViewController {
                         try avaliacao.insereNoBanco()
                         self.listaAvaliacoes.append(avaliacao)
                     } else {
-                        guard let indiceDaAvaliacaoExistente = listaAvaliacoesQueJaExistem.index(of: avaliacao) else { continue }
+                        guard let indiceDaAvaliacaoExistente = listaAvaliacoesQueJaExistem.firstIndex(of: avaliacao) else { continue }
                         self.listaAvaliacoes.append(listaAvaliacoesQueJaExistem[indiceDaAvaliacaoExistente])
                     }
                 } catch {

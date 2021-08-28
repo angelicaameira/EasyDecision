@@ -48,7 +48,7 @@ class Criterio: NSObject, Salvavel {
     
     static func listaDoBanco(decisao: Decisao) throws -> [Criterio] {
         var lista = [Criterio]()
-        var filtro = Criterio.tabela.filter(Criterio.idDecisaoExpression == decisao.id)
+        let filtro = Criterio.tabela.filter(Criterio.idDecisaoExpression == decisao.id)
         for criterioDoBanco in try DatabaseManager.db.prepare(filtro) {
             print("id: \(criterioDoBanco[idExpression]), name: \(criterioDoBanco[descricaoExpression]), peso:\(criterioDoBanco[pesoExpression])")
             lista.append(Criterio(id: criterioDoBanco[Criterio.idExpression], descricao: criterioDoBanco[Criterio.descricaoExpression], peso: criterioDoBanco[Criterio.pesoExpression], decisao: try Decisao.comId(criterioDoBanco[idDecisaoExpression])))
