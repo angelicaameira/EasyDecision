@@ -8,7 +8,6 @@
 import Foundation
 import SQLite
 
-
 class Resultado: NSObject {
     
     // MARK: propriedades do objeto

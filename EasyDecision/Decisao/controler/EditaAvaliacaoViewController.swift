@@ -9,7 +9,8 @@ import UIKit
 import CoreData
 
 class EditaAvaliacaoViewController: UIViewController {
-    
+   
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var avaliacaoCelula: TableViewCell?
     var avaliacao: Avaliacao?
     
@@ -33,15 +34,19 @@ class EditaAvaliacaoViewController: UIViewController {
     }
     
     @IBAction func salvaAvaliacao(_ sender: Any) {
-        let nota = (pesoTextField.text! as NSString).integerValue
+        guard let peso = pesoTextField.text else {
+            return
+        }
+        let nota = (peso as NSString).integerValue
         
         avaliacao?.nota = Int(nota)
 
-        
         do {
             try avaliacao?.atualizaNoBanco()
             navigationController?.popViewController(animated: true)
         } catch {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }

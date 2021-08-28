@@ -13,10 +13,7 @@ class Decisao: NSObject, Salvavel {
     // MARK: propriedades do objeto
     var id: Int64
     var descricao: String
-    //    let idsCriterios: [String]?
-    //    let idsAvaliacoes: [String]?
-    //    let idsOpcoes: [String]?
-
+    
     // MARK: propriedades do banco
     private static let tabela = Table("decisao")
     private static let idExpression = Expression<Int64>("id")

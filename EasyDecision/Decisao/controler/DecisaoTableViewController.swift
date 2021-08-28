@@ -10,6 +10,7 @@ import SQLite
 
 class DecisaoTableViewController: UITableViewController {
     
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
     
@@ -25,6 +26,8 @@ class DecisaoTableViewController: UITableViewController {
         do {
             self.listaDecisoes = try Decisao.listaDoBanco()
         } catch {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }
@@ -36,8 +39,7 @@ class DecisaoTableViewController: UITableViewController {
     // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeDecisoes = listaDecisoes?.count else { return 0 }
-        return contadorListaDeDecisoes
+        return listaDecisoes?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,6 +74,8 @@ class DecisaoTableViewController: UITableViewController {
                     self.recuperaDecisao()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }
             }),
@@ -88,16 +92,4 @@ class DecisaoTableViewController: UITableViewController {
         self.decisaoSelecionada = decisaoSelecionada
         self.performSegue(withIdentifier: "mostraOpcoes", sender: self)
     }
-    
-    // MARK: - fetchedResultControllerDelegate
-    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        guard let indexPath = indexPath else { return }
-//        switch type {
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        default:
-//            tableView.reloadData()
-//        }
-//    }
 }
