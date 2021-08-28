@@ -14,6 +14,7 @@ class ResultadoTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaAvaliacoes: [Avaliacao]?
     var listaResultados: [Resultado] = []
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,8 @@ class ResultadoTableViewController: UITableViewController {
         do {
             self.listaAvaliacoes = try Avaliacao.listaDoBanco(decisao: decisao)
         } catch {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }
@@ -72,7 +75,7 @@ class ResultadoTableViewController: UITableViewController {
         let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as! TableViewCell
         
         let resultado = self.listaResultados[indexPath.row]
-
+        
         celula.title?.text = resultado.opcao.descricao
         celula.peso?.text = NumberFormatter.localizedString(from: NSNumber(value: resultado.porcentagem), number: .percent)
         return celula

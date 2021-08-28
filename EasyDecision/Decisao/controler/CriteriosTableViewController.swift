@@ -28,8 +28,8 @@ class CriteriosTableViewController: UITableViewController {
             self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao!)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                        print(error.localizedDescription)
+            self.present(alert, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     
@@ -86,21 +86,21 @@ class CriteriosTableViewController: UITableViewController {
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
-                                print(error.localizedDescription)
+                    self.present(alert, animated: true, completion: nil)
+                    print(error.localizedDescription)
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
                 self.criterioSendoEditado = self.listaCriterios?[indexPath.row]
                 self.performSegue(withIdentifier: "editarCriterio", sender: contextualAction)
             })]
-       
+        
         return UISwipeActionsConfiguration(actions: acoes)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let criterioSendoEditado = listaCriterios?[indexPath.row] else { return }
-
+        
         self.criterioSendoEditado = criterioSendoEditado
         self.performSegue(withIdentifier: "editarCriterio", sender: self)
     }
