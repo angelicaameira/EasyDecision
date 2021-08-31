@@ -16,6 +16,10 @@ class ResultadoTableViewController: UITableViewController {
     var listaResultados: [Resultado] = []
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
+    @IBAction func botaoConcluir(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         preencheListaAvaliacoes()
