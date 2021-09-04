@@ -12,6 +12,7 @@
         <scene sceneID="3WZ-He-82Q">
             <objects>
                 <navigationController toolbarHidden="NO" id="mAg-dp-pCL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Rd3-7Q-SXf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="pcd-7m-PfT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -409,7 +410,7 @@
                     <navigationItem key="navigationItem" title="Resultados" id="CAM-pC-NGF">
                         <barButtonItem key="rightBarButtonItem" title="Concluir" id="tFb-1N-dUa">
                             <connections>
-                                <segue destination="POA-XI-Xab" kind="show" identifier="mostraDecisao" id="Jj6-Hw-dPv"/>
+                                <action selector="botaoConcluir:" destination="dT3-tS-XeZ" id="pke-sR-HFW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -542,7 +543,6 @@
         <segue reference="5RR-sd-ALL"/>
         <segue reference="Ssp-hA-KOZ"/>
         <segue reference="SR4-18-hR3"/>
-        <segue reference="Jj6-Hw-dPv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
