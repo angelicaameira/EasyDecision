@@ -14,6 +14,7 @@ class AdicionaCriterioViewController: UIViewController {
     var criterio: Criterio?
     @IBOutlet weak var descricaoTextField: UITextField?
     @IBOutlet weak var pesoTextField: UITextField!
+    @IBOutlet weak var stepper: UIStepper!
     
     @IBAction func stepper(_ sender: UIStepper) {
         self.pesoTextField.text = "\(sender.value)"
@@ -72,5 +73,7 @@ class AdicionaCriterioViewController: UIViewController {
         }
         self.descricaoTextField?.text = criterioSendoEditado.descricao
         self.pesoTextField?.text = "\(criterioSendoEditado.peso)"
+        stepper.value = Double(criterioSendoEditado.peso)
+        
     }
 }
