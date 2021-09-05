@@ -41,16 +41,23 @@ class AdicionaCriterioViewController: UIViewController {
             return
         }
         var pesoCriterio = (peso as NSString).integerValue
-        let alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+        let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
+        
+        if descricaoCriterio == "" {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if pesoCriterio == 0 {
+            pesoCriterio = 1
+        }
         
         var insert = false
         if criterio == nil {
             self.criterio = Criterio(descricao: descricaoCriterio, peso: pesoCriterio , decisao: decisao)
             insert = true
-        }
-        
-        if pesoCriterio == 0 {
-            pesoCriterio = 1
         }
         
         criterio?.descricao = descricaoCriterio
@@ -65,8 +72,8 @@ class AdicionaCriterioViewController: UIViewController {
             }
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alertError, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }
