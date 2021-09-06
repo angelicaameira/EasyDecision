@@ -12,7 +12,7 @@ import CoreData
 class AdicionaDecisaoViewController: UIViewController {
     
     var decisao: Decisao?
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
     @IBOutlet weak var descricaoTextField: UITextField?
     
@@ -35,6 +35,14 @@ class AdicionaDecisaoViewController: UIViewController {
             return
         }
         
+        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da decissão para continuar", preferredStyle: .alert)
+        
+        if descricaoDecisao == "" {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         var insert = false
         if decisao == nil {
             decisao = Decisao(descricao: descricaoDecisao)
@@ -50,8 +58,8 @@ class AdicionaDecisaoViewController: UIViewController {
             }
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                        self.present(alertError, animated: true, completion: nil)
                         print(error.localizedDescription)
         }
     }
