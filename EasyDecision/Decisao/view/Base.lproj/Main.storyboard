@@ -86,7 +86,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVM-rW-86Q">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição da decisão" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVM-rW-86Q">
                                 <rect key="frame" x="20" y="20" width="265" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -189,7 +189,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ly-uH-PC9">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição da opção" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ly-uH-PC9">
                                 <rect key="frame" x="20" y="20" width="265" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -246,23 +246,24 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição do critério" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqS-ZB-4Oz">
-                                            <rect key="frame" x="21" y="21" width="158" height="21"/>
+                                            <rect key="frame" x="16" y="12" width="158" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <size key="shadowOffset" width="0.0" height="10"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="peso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGC-Ie-xnI">
-                                            <rect key="frame" x="327.5" y="21" width="37.5" height="21"/>
+                                            <rect key="frame" x="317.5" y="12" width="37.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="BGC-Ie-xnI" firstAttribute="top" secondItem="w5D-bd-V0Q" secondAttribute="topMargin" constant="10" id="WRO-m8-u75"/>
-                                        <constraint firstItem="FqS-ZB-4Oz" firstAttribute="leading" secondItem="w5D-bd-V0Q" secondAttribute="leadingMargin" constant="5" id="bVo-6t-1Jx"/>
-                                        <constraint firstAttribute="trailing" secondItem="BGC-Ie-xnI" secondAttribute="trailing" constant="10" id="jIE-24-n8E"/>
-                                        <constraint firstItem="FqS-ZB-4Oz" firstAttribute="top" secondItem="w5D-bd-V0Q" secondAttribute="topMargin" constant="10" id="uoQ-9I-Mgu"/>
+                                        <constraint firstItem="BGC-Ie-xnI" firstAttribute="top" secondItem="w5D-bd-V0Q" secondAttribute="topMargin" constant="1" id="WRO-m8-u75"/>
+                                        <constraint firstItem="FqS-ZB-4Oz" firstAttribute="leading" secondItem="w5D-bd-V0Q" secondAttribute="leadingMargin" id="bVo-6t-1Jx"/>
+                                        <constraint firstAttribute="trailing" secondItem="BGC-Ie-xnI" secondAttribute="trailing" constant="20" id="jIE-24-n8E"/>
+                                        <constraint firstItem="FqS-ZB-4Oz" firstAttribute="top" secondItem="w5D-bd-V0Q" secondAttribute="topMargin" constant="1" id="uoQ-9I-Mgu"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -315,23 +316,23 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição do critério" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQf-a1-V2u">
-                                            <rect key="frame" x="21" y="21" width="158" height="21"/>
+                                            <rect key="frame" x="16" y="12" width="158" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aW-g4-emU">
-                                            <rect key="frame" x="328.5" y="21" width="36.5" height="21"/>
+                                            <rect key="frame" x="318.5" y="12" width="36.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="4aW-g4-emU" secondAttribute="trailing" constant="10" id="G2H-b4-2GX"/>
-                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="leading" secondItem="9rx-cJ-7yC" secondAttribute="leadingMargin" constant="5" id="jOi-Lv-zfG"/>
-                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="10" id="siK-32-ZCV"/>
-                                        <constraint firstItem="4aW-g4-emU" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="10" id="ysz-jA-X1I"/>
+                                        <constraint firstAttribute="trailing" secondItem="4aW-g4-emU" secondAttribute="trailing" constant="20" id="G2H-b4-2GX"/>
+                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="leading" secondItem="9rx-cJ-7yC" secondAttribute="leadingMargin" id="jOi-Lv-zfG"/>
+                                        <constraint firstItem="AQf-a1-V2u" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="1" id="siK-32-ZCV"/>
+                                        <constraint firstItem="4aW-g4-emU" firstAttribute="top" secondItem="9rx-cJ-7yC" secondAttribute="topMargin" constant="1" id="ysz-jA-X1I"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -377,23 +378,23 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição da decisao" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLC-GI-4DZ">
-                                            <rect key="frame" x="21" y="21" width="163.5" height="21"/>
+                                            <rect key="frame" x="16" y="12" width="163.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Porcentagem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1X-LY-9th">
-                                            <rect key="frame" x="263" y="21" width="102" height="21"/>
+                                            <rect key="frame" x="253" y="12" width="102" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="10" id="6R1-Pd-RP8"/>
-                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="leading" secondItem="kRf-M3-aPr" secondAttribute="leadingMargin" constant="5" id="6gS-FA-d0z"/>
-                                        <constraint firstItem="J1X-LY-9th" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="10" id="mN3-Ib-ssx"/>
-                                        <constraint firstAttribute="trailing" secondItem="J1X-LY-9th" secondAttribute="trailing" constant="10" id="zt7-up-QQW"/>
+                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="1" id="6R1-Pd-RP8"/>
+                                        <constraint firstItem="fLC-GI-4DZ" firstAttribute="leading" secondItem="kRf-M3-aPr" secondAttribute="leadingMargin" id="6gS-FA-d0z"/>
+                                        <constraint firstItem="J1X-LY-9th" firstAttribute="top" secondItem="kRf-M3-aPr" secondAttribute="topMargin" constant="1" id="mN3-Ib-ssx"/>
+                                        <constraint firstAttribute="trailing" secondItem="J1X-LY-9th" secondAttribute="trailing" constant="20" id="zt7-up-QQW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -419,7 +420,7 @@
             </objects>
             <point key="canvasLocation" x="2846.25" y="1287.5"/>
         </scene>
-        <!--Adiciona Criterio View Controller-->
+        <!--Adicionar ou editar critério-->
         <scene sceneID="hrg-GD-qUT">
             <objects>
                 <viewController id="CAw-aj-1X9" customClass="AdicionaCriterioViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
@@ -427,7 +428,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Ea-5W-5Bs">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição do critério" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Ea-5W-5Bs">
                                 <rect key="frame" x="20" y="20" width="265" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -445,7 +446,7 @@
                                     <action selector="salvaCriterio:" destination="CAw-aj-1X9" eventType="touchUpInside" id="Gqu-hT-rgf"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="quH-RT-h6T">
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira o peso do critério" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="quH-RT-h6T">
                                 <rect key="frame" x="20" y="74" width="215" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -475,7 +476,7 @@
                             <constraint firstItem="5Ea-5W-5Bs" firstAttribute="leading" secondItem="mOj-PX-OrU" secondAttribute="leading" constant="20" id="yUH-wQ-jB5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gsj-X3-Nfq">
+                    <navigationItem key="navigationItem" title="Adicionar ou editar critério" id="gsj-X3-Nfq">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="Ir3-2J-ZvD"/>
                     </navigationItem>
                     <connections>
@@ -488,7 +489,7 @@
             </objects>
             <point key="canvasLocation" x="2074" y="265"/>
         </scene>
-        <!--Edita Avaliacao View Controller-->
+        <!--Editar avaliação-->
         <scene sceneID="M6Y-Jz-hE6">
             <objects>
                 <viewController id="e1y-cs-cT1" customClass="EditaAvaliacaoViewController" customModule="EasyDecision" customModuleProvider="target" sceneMemberID="viewController">
@@ -496,7 +497,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-p9-lGg">
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a nota da avaliação" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-p9-lGg">
                                 <rect key="frame" x="20" y="20" width="221" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -527,7 +528,7 @@
                             <constraint firstItem="TXr-p9-lGg" firstAttribute="top" secondItem="AOK-UH-IIJ" secondAttribute="top" constant="20" id="wOj-K1-KVJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ts8-Ib-jgC">
+                    <navigationItem key="navigationItem" title="Editar avaliação" id="Ts8-Ib-jgC">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="D6o-xG-oOL"/>
                     </navigationItem>
                     <connections>
