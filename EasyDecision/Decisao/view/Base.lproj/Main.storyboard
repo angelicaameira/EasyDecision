@@ -11,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="3WZ-He-82Q">
             <objects>
-                <navigationController toolbarHidden="NO" id="mAg-dp-pCL" sceneMemberID="viewController">
+                <navigationController id="mAg-dp-pCL" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Rd3-7Q-SXf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="pcd-7m-PfT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
