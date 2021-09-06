@@ -99,7 +99,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="mDq-NG-Md4"/>
                                 </constraints>
-                                <state key="normal" title="ADD"/>
+                                <state key="normal" title="feito"/>
                                 <connections>
                                     <action selector="salvaDecisao:" destination="3cn-Wx-e5s" eventType="touchUpInside" id="kA4-cZ-1PF"/>
                                 </connections>
@@ -202,7 +202,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="coh-9J-BPI"/>
                                 </constraints>
-                                <state key="normal" title="ADD"/>
+                                <state key="normal" title="feito"/>
                                 <connections>
                                     <action selector="salvaOpcao:" destination="QGY-Vy-wDl" eventType="touchUpInside" id="NGS-e6-Z9n"/>
                                 </connections>
@@ -441,7 +441,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="jO3-zo-K17"/>
                                 </constraints>
-                                <state key="normal" title="ADD"/>
+                                <state key="normal" title="feito"/>
                                 <connections>
                                     <action selector="salvaCriterio:" destination="CAw-aj-1X9" eventType="touchUpInside" id="Gqu-hT-rgf"/>
                                 </connections>
@@ -509,8 +509,8 @@
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ag8-bz-X8S">
-                                <rect key="frame" x="171.5" y="74" width="32" height="30"/>
-                                <state key="normal" title="ADD"/>
+                                <rect key="frame" x="172" y="74" width="31" height="30"/>
+                                <state key="normal" title="feito"/>
                                 <connections>
                                     <action selector="salvaAvaliacao:" destination="e1y-cs-cT1" eventType="touchUpInside" id="YhO-rp-6mB"/>
                                 </connections>
