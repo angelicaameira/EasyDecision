@@ -10,10 +10,9 @@ import UIKit
 import CoreData
 
 class AdicionaDecisaoViewController: UIViewController {
-    
+
     var decisao: Decisao?
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    
     @IBOutlet weak var descricaoTextField: UITextField?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -24,6 +23,11 @@ class AdicionaDecisaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        if decisao == nil {
+            self.title = "Adicionar decisão"
+        }else {
+            self.title = "Editar decisão"
+        }
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -62,4 +66,5 @@ class AdicionaDecisaoViewController: UIViewController {
         }
         descricaoTextField?.text = decisaoSelecionada.descricao
     }
+    
 }

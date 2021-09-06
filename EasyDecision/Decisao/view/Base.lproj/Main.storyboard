@@ -69,7 +69,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="3cn-Wx-e5s" kind="show" identifier="editarDecisao" id="SR4-18-hR3"/>
                     </connections>

@@ -23,6 +23,11 @@ class AdicionaOpcaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        if opcao == nil {
+            self.title = "Adicionar opção"
+        }else {
+            self.title = "Editar opção"
+        }
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {

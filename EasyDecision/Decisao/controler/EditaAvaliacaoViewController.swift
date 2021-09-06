@@ -27,6 +27,7 @@ class EditaAvaliacaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.title = "Editar avaliação"
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
