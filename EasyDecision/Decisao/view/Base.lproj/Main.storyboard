@@ -87,36 +87,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição da decisão" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nVM-rW-86Q">
-                                <rect key="frame" x="20" y="20" width="265" height="34"/>
+                                <rect key="frame" x="20" y="20" width="335" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="clicaBotaoDoneTeclado:" destination="3cn-Wx-e5s" eventType="editingDidEndOnExit" id="JyL-2v-Ozb"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfD-9Q-5Vj">
-                                <rect key="frame" x="305" y="22" width="50" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="mDq-NG-Md4"/>
-                                </constraints>
-                                <state key="normal" title="feito"/>
-                                <connections>
-                                    <action selector="salvaDecisao:" destination="3cn-Wx-e5s" eventType="touchUpInside" id="kA4-cZ-1PF"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7ks-Os-rNq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ZfD-9Q-5Vj" firstAttribute="centerY" secondItem="nVM-rW-86Q" secondAttribute="centerY" id="8ef-y7-1wq"/>
-                            <constraint firstItem="ZfD-9Q-5Vj" firstAttribute="leading" secondItem="nVM-rW-86Q" secondAttribute="trailing" constant="20" id="AWE-Bf-Ixn"/>
+                            <constraint firstItem="7ks-Os-rNq" firstAttribute="trailing" secondItem="nVM-rW-86Q" secondAttribute="trailing" constant="20" id="CKY-cT-JpJ"/>
                             <constraint firstItem="nVM-rW-86Q" firstAttribute="leading" secondItem="7ks-Os-rNq" secondAttribute="leading" constant="20" id="Srw-KD-OGJ"/>
-                            <constraint firstItem="7ks-Os-rNq" firstAttribute="trailing" secondItem="ZfD-9Q-5Vj" secondAttribute="trailing" constant="20" id="fbb-P1-NgR"/>
                             <constraint firstItem="nVM-rW-86Q" firstAttribute="top" secondItem="7ks-Os-rNq" secondAttribute="top" constant="20" id="nTa-Fa-BWE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OQX-x6-Gas">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="ihi-uU-jvA"/>
+                        <barButtonItem key="rightBarButtonItem" title="feito" id="dAW-MB-bgT">
+                            <connections>
+                                <action selector="salvaDecisao:" destination="3cn-Wx-e5s" id="06C-Qd-gdE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descricaoTextField" destination="nVM-rW-86Q" id="op3-cs-HES"/>
@@ -190,36 +183,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição da opção" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ly-uH-PC9">
-                                <rect key="frame" x="20" y="20" width="265" height="34"/>
+                                <rect key="frame" x="20" y="20" width="335" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="clicaBotaoDoneTeclado:" destination="QGY-Vy-wDl" eventType="editingDidEndOnExit" id="WjI-4u-Wva"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-Tu-Zoy">
-                                <rect key="frame" x="305" y="22" width="50" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="coh-9J-BPI"/>
-                                </constraints>
-                                <state key="normal" title="feito"/>
-                                <connections>
-                                    <action selector="salvaOpcao:" destination="QGY-Vy-wDl" eventType="touchUpInside" id="NGS-e6-Z9n"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QXz-pz-PQZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="5ih-Tu-Zoy" firstAttribute="centerY" secondItem="2Ly-uH-PC9" secondAttribute="centerY" id="1Dt-m3-5ib"/>
                             <constraint firstItem="2Ly-uH-PC9" firstAttribute="top" secondItem="QXz-pz-PQZ" secondAttribute="top" constant="20" id="Gph-8q-NRs"/>
-                            <constraint firstItem="QXz-pz-PQZ" firstAttribute="trailing" secondItem="5ih-Tu-Zoy" secondAttribute="trailing" constant="20" id="TEv-Sf-f8h"/>
                             <constraint firstItem="2Ly-uH-PC9" firstAttribute="leading" secondItem="QXz-pz-PQZ" secondAttribute="leading" constant="20" id="i6B-X2-Xfw"/>
-                            <constraint firstItem="5ih-Tu-Zoy" firstAttribute="leading" secondItem="2Ly-uH-PC9" secondAttribute="trailing" constant="20" id="xRY-cg-zYG"/>
+                            <constraint firstItem="QXz-pz-PQZ" firstAttribute="trailing" secondItem="2Ly-uH-PC9" secondAttribute="trailing" constant="20" id="qRC-2W-O2R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZDS-5A-nO3">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="9uL-Vz-I7C"/>
+                        <barButtonItem key="rightBarButtonItem" title="feito" id="Nvx-Dq-tjr">
+                            <connections>
+                                <action selector="salvaOpcao:" destination="QGY-Vy-wDl" id="HDE-gW-Mlu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descricaoTextField" destination="2Ly-uH-PC9" id="Amn-lh-wte"/>
@@ -429,23 +415,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira a descrição do critério" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Ea-5W-5Bs">
-                                <rect key="frame" x="20" y="20" width="265" height="34"/>
+                                <rect key="frame" x="20" y="20" width="335" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="clicaBotaoDoneTeclado:" destination="CAw-aj-1X9" eventType="editingDidEndOnExit" id="a2z-8l-i89"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0U-Dv-XcS">
-                                <rect key="frame" x="305" y="22" width="50" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="jO3-zo-K17"/>
-                                </constraints>
-                                <state key="normal" title="feito"/>
-                                <connections>
-                                    <action selector="salvaCriterio:" destination="CAw-aj-1X9" eventType="touchUpInside" id="Gqu-hT-rgf"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insira o peso do critério" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="quH-RT-h6T">
                                 <rect key="frame" x="20" y="74" width="215" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -466,10 +442,8 @@
                         <constraints>
                             <constraint firstItem="5Ea-5W-5Bs" firstAttribute="top" secondItem="mOj-PX-OrU" secondAttribute="top" constant="20" id="7Od-5o-Wkk"/>
                             <constraint firstItem="aKC-SC-oqN" firstAttribute="top" secondItem="5Ea-5W-5Bs" secondAttribute="bottom" constant="20" id="JDD-vh-Ls0"/>
-                            <constraint firstItem="o0U-Dv-XcS" firstAttribute="leading" secondItem="5Ea-5W-5Bs" secondAttribute="trailing" constant="20" id="N2H-NK-U1S"/>
-                            <constraint firstItem="o0U-Dv-XcS" firstAttribute="centerY" secondItem="5Ea-5W-5Bs" secondAttribute="centerY" id="WJH-Mb-xEb"/>
+                            <constraint firstItem="mOj-PX-OrU" firstAttribute="trailing" secondItem="5Ea-5W-5Bs" secondAttribute="trailing" constant="20" id="Vac-VR-vST"/>
                             <constraint firstItem="aKC-SC-oqN" firstAttribute="leading" secondItem="quH-RT-h6T" secondAttribute="trailing" constant="20" id="dBo-Hg-4id"/>
-                            <constraint firstItem="mOj-PX-OrU" firstAttribute="trailing" secondItem="o0U-Dv-XcS" secondAttribute="trailing" constant="20" id="f1G-Mh-6TL"/>
                             <constraint firstItem="quH-RT-h6T" firstAttribute="top" secondItem="5Ea-5W-5Bs" secondAttribute="bottom" constant="20" id="iAh-yN-uyg"/>
                             <constraint firstItem="quH-RT-h6T" firstAttribute="leading" secondItem="mOj-PX-OrU" secondAttribute="leading" constant="20" id="kXp-rO-CaE"/>
                             <constraint firstItem="mOj-PX-OrU" firstAttribute="trailing" secondItem="aKC-SC-oqN" secondAttribute="trailing" constant="20" id="oAT-n3-Uf8"/>
@@ -478,6 +452,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Adicionar ou editar critério" id="gsj-X3-Nfq">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="Ir3-2J-ZvD"/>
+                        <barButtonItem key="rightBarButtonItem" title="feito" id="aDa-bQ-csa">
+                            <connections>
+                                <action selector="salvaCriterio:" destination="CAw-aj-1X9" id="W4w-D7-1r6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descricaoTextField" destination="5Ea-5W-5Bs" id="JvH-Vs-4Z3"/>
@@ -508,19 +487,10 @@
                                     <action selector="stepper:" destination="e1y-cs-cT1" eventType="valueChanged" id="0yz-vB-fVg"/>
                                 </connections>
                             </stepper>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ag8-bz-X8S">
-                                <rect key="frame" x="172" y="74" width="31" height="30"/>
-                                <state key="normal" title="feito"/>
-                                <connections>
-                                    <action selector="salvaAvaliacao:" destination="e1y-cs-cT1" eventType="touchUpInside" id="YhO-rp-6mB"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AOK-UH-IIJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ag8-bz-X8S" firstAttribute="centerX" secondItem="AOK-UH-IIJ" secondAttribute="centerX" id="3yQ-ql-Cwd"/>
-                            <constraint firstItem="Ag8-bz-X8S" firstAttribute="top" secondItem="TXr-p9-lGg" secondAttribute="bottom" constant="20" id="C1K-Hp-5ma"/>
                             <constraint firstItem="JK4-KR-fcp" firstAttribute="top" secondItem="AOK-UH-IIJ" secondAttribute="top" constant="20" id="WtZ-W8-XFW"/>
                             <constraint firstItem="AOK-UH-IIJ" firstAttribute="trailing" secondItem="JK4-KR-fcp" secondAttribute="trailing" constant="20" id="che-9I-ayI"/>
                             <constraint firstItem="TXr-p9-lGg" firstAttribute="leading" secondItem="AOK-UH-IIJ" secondAttribute="leading" constant="20" id="h2y-sK-P0X"/>
@@ -530,6 +500,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Editar avaliação" id="Ts8-Ib-jgC">
                         <barButtonItem key="backBarButtonItem" systemItem="undo" id="D6o-xG-oOL"/>
+                        <barButtonItem key="rightBarButtonItem" title="feito" id="vWF-vJ-azw">
+                            <connections>
+                                <action selector="salvaAvaliacao:" destination="e1y-cs-cT1" id="ABA-h6-P9m"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="pesoTextField" destination="TXr-p9-lGg" id="BvA-Ci-mXw"/>
