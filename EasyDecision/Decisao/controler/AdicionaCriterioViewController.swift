@@ -30,7 +30,7 @@ class AdicionaCriterioViewController: UIViewController {
         self.setupView()
         if criterio == nil {
             self.title = "Adicionar critério"
-        }else {
+        } else {
             self.title = "Editar critério"
         }
     }

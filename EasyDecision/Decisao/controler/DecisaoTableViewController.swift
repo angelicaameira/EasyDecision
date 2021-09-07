@@ -62,9 +62,6 @@ class DecisaoTableViewController: UITableViewController {
             if segue.identifier == "editarDecisao" {
                 destinationViewController.decisao = self.decisaoSelecionada
             }
-//            if segue.identifier == "adicionarDecisao" {
-//                destinationViewController.title = "Adicionar Decisão"
-//            }
         }
     }
     

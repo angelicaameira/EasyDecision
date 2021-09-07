@@ -25,7 +25,7 @@ class AdicionaDecisaoViewController: UIViewController {
         self.setupView()
         if decisao == nil {
             self.title = "Adicionar decisão"
-        }else {
+        } else {
             self.title = "Editar decisão"
         }
     }

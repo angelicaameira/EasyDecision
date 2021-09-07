@@ -25,7 +25,7 @@ class AdicionaOpcaoViewController: UIViewController {
         self.setupView()
         if opcao == nil {
             self.title = "Adicionar opção"
-        }else {
+        } else {
             self.title = "Editar opção"
         }
     }
