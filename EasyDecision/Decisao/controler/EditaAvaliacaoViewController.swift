@@ -17,8 +17,9 @@ class EditaAvaliacaoViewController: UIViewController {
     @IBOutlet weak var pesoTextField: UITextField!
     
     @IBAction func stepper(_ sender: UIStepper) {
-        self.pesoTextField.text = "\(sender.value)"
+        self.pesoTextField.text = NumberFormatter.localizedString(from: NSNumber(value: sender.value), number: .decimal)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         pesoTextField?.becomeFirstResponder()
@@ -27,6 +28,7 @@ class EditaAvaliacaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.title = "Editar avaliação"
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {

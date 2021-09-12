@@ -17,7 +17,7 @@ class AdicionaCriterioViewController: UIViewController {
     @IBOutlet weak var stepper: UIStepper!
     
     @IBAction func stepper(_ sender: UIStepper) {
-        self.pesoTextField.text = "\(sender.value)"
+        self.pesoTextField.text = NumberFormatter.localizedString(from: NSNumber(value: sender.value), number: .decimal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,6 +28,11 @@ class AdicionaCriterioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        if criterio == nil {
+            self.title = "Adicionar critério"
+        } else {
+            self.title = "Editar critério"
+        }
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
