@@ -45,7 +45,7 @@ class AdicionaCriterioViewController: UIViewController {
               let decisao = decisao else {
             return
         }
-        var pesoCriterio = (peso as NSString).integerValue
+        let pesoCriterio = (peso as NSString).integerValue
         let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
         
@@ -53,10 +53,6 @@ class AdicionaCriterioViewController: UIViewController {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
-        }
-        
-        if pesoCriterio == 0 {
-            pesoCriterio = 1
         }
         
         var insert = false
@@ -85,6 +81,7 @@ class AdicionaCriterioViewController: UIViewController {
     
     func setupView() {
         guard let criterioSendoEditado = self.criterio else {
+            self.pesoTextField?.text = "\(1)"
             return
         }
         self.descricaoTextField?.text = criterioSendoEditado.descricao
