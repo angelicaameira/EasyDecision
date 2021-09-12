@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class AdicionaOpcaoViewController: UIViewController {
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisao: Decisao?
     var opcao: Opcao?
     
@@ -41,6 +41,14 @@ class AdicionaOpcaoViewController: UIViewController {
             return
         }
         
+        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da opção para continuar", preferredStyle: .alert)
+        
+        if descricaoOpcao == "" {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         var insert = false
         if opcao == nil {
             self.opcao = Opcao(descricao: descricaoOpcao, decisao: decisao)
@@ -58,8 +66,8 @@ class AdicionaOpcaoViewController: UIViewController {
             }
             navigationController?.popViewController(animated: true)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            self.present(alertError, animated: true, completion: nil)
             print(error.localizedDescription)
         }
     }

@@ -96,5 +96,7 @@ class OpcoesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row] else { return }
+        self.opcaoSendoEditada = opcaoSendoEditada
+        self.performSegue(withIdentifier: "editarOpcao", sender: self)
     }
 }
