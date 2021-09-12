@@ -28,6 +28,11 @@ class AdicionaCriterioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        if criterio == nil {
+            self.title = "Adicionar critério"
+        } else {
+            self.title = "Editar critério"
+        }
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
