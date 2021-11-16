@@ -15,10 +15,52 @@ class OpcoesTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaOpcoes: [Opcao]?
     
+    //MARK: tela
+    
+    private lazy var addButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(image: .add, style: .plain, target: self, action: #selector(goToAdicionarOpcao(sender:)))
+        return view
+    }()
+    
+    
+    override func viewDidLoad() {
+        recuperaOpcao()
+        self.tableView.reloadData()
+    }
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            return tableView
+        }()
+        
+        self.title = "Opções"
+        self.navigationItem.setRightBarButton(addButton, animated: true)
+    }
+    
+    @objc func goToAdicionarOpcao(sender: UIBarButtonItem){
+        self.navigationController?.pushViewController(AdicionaOpcaoViewController(), animated: true)
+    }
+    
+    func goToEditarOpcao(sender: Any){
+        let destinationController = AdicionaOpcaoViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "editarOpcao" , source: self, destination: destinationController), sender: self)
+        self.navigationController?
+            .pushViewController(destinationController, animated: true)
+    }
+    
+    func goToMostrarCriterios(sender: Any) {
+        let destinationController = CriteriosTableViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "mostrarCriterios", source: self, destination: destinationController), sender: self)
+        self.navigationController?.pushViewController(destinationController, animated: true)
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recuperaOpcao()
-        tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
@@ -67,7 +109,7 @@ class OpcoesTableViewController: UITableViewController {
             }
         }
         if let destinationViewController = segue.destination as? CriteriosTableViewController {
-            if segue.identifier == "mostraCriterios" {
+            if segue.identifier == "mostrarCriterios" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -87,9 +129,11 @@ class OpcoesTableViewController: UITableViewController {
                     print(error.localizedDescription)
                 }
             }),
-            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
+            UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (contextualAction, view, _) in
+                guard let self = self else { return }
+                
                 self.opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
-                self.performSegue(withIdentifier: "editarOpcao", sender: contextualAction)
+                self.goToEditarOpcao(sender: contextualAction)
             })]
         return UISwipeActionsConfiguration(actions: acoes)
     }
@@ -97,6 +141,6 @@ class OpcoesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row] else { return }
         self.opcaoSendoEditada = opcaoSendoEditada
-        self.performSegue(withIdentifier: "editarOpcao", sender: self)
+        self.goToEditarOpcao(sender: self)
     }
 }

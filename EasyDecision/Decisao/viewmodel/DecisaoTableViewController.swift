@@ -31,7 +31,7 @@ class DecisaoTableViewController: UITableViewController {
         }()
         
         self.title = "Decisões"
-        self.navigationController?.navigationBar.topItem?.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setRightBarButton(addButton, animated: true)
     }
     
     override func viewDidLoad() {
@@ -133,6 +133,6 @@ class DecisaoTableViewController: UITableViewController {
         guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row] else { return }
         
         self.decisaoSelecionada = decisaoSelecionada
-        self.goToMostrarOpcoes(sender: self)
+        self.goToMostrarOpcoes(sender: tableView)
     }
 }
