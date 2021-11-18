@@ -15,10 +15,47 @@ class CriteriosTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaCriterios: [Criterio]?
     
+    //MARK: tela
+    
+    private lazy var addButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(image: .add, style: .plain, target: self, action: #selector(goToAdicionarCriterio(sender:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            return tableView
+        }()
+        
+        self.title = "Critérios"
+        self.navigationItem.setRightBarButton(addButton, animated: true)
+    }
+    
+    @objc func goToAdicionarCriterio(sender: UIBarButtonItem){
+        self.navigationController?.pushViewController(AdicionaCriterioViewController(), animated: true)
+    }
+    
+    func goToEditarCriterio(sender: Any){
+        let destinationController = AdicionaCriterioViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "editarCriterio" , source: self, destination: destinationController), sender: self)
+        self.navigationController?
+            .pushViewController(destinationController, animated: true)
+    }
+    
+    func goToMostrarAvaliacao(sender: Any) {
+        let destinationController = AvaliacaoTableViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "mostrarAvaliacao", source: self, destination: destinationController), sender: self)
+        self.navigationController?.pushViewController(destinationController, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaCriterio()
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
@@ -70,7 +107,7 @@ class CriteriosTableViewController: UITableViewController {
             }
         }
         if let destinationViewController = segue.destination as? AvaliacaoTableViewController {
-            if segue.identifier == "mostraAvaliacao" {
+            if segue.identifier == "mostrarAvaliacao" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -92,7 +129,7 @@ class CriteriosTableViewController: UITableViewController {
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
                 self.criterioSendoEditado = self.listaCriterios?[indexPath.row]
-                self.performSegue(withIdentifier: "editarCriterio", sender: contextualAction)
+                self.goToEditarCriterio(sender: contextualAction)
             })]
         
         return UISwipeActionsConfiguration(actions: acoes)
@@ -102,6 +139,6 @@ class CriteriosTableViewController: UITableViewController {
         guard let criterioSendoEditado = listaCriterios?[indexPath.row] else { return }
         
         self.criterioSendoEditado = criterioSendoEditado
-        self.performSegue(withIdentifier: "editarCriterio", sender: self)
+        self.goToEditarCriterio(sender: self)
     }
 }

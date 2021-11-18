@@ -34,11 +34,6 @@ class DecisaoTableViewController: UITableViewController {
         self.navigationItem.setRightBarButton(addButton, animated: true)
     }
     
-    override func viewDidLoad() {
-        recuperaDecisao()
-        self.tableView.reloadData()
-    }
-    
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {
         self.navigationController?.pushViewController(AdicionaDecisaoViewController(), animated: true)
     }
@@ -58,6 +53,8 @@ class DecisaoTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        recuperaDecisao()
+        self.tableView.reloadData()
     }
     
     //MARK: metodos

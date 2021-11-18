@@ -14,29 +14,60 @@ class AdicionaDecisaoViewController: UIViewController {
     var decisao: Decisao?
     var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
-    @IBOutlet weak var descricaoTextField: UITextField?
+    //MARK: tela
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        descricaoTextField?.becomeFirstResponder()
-    }
+    private lazy var descricaoTextField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupView()
+    private lazy var doneButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaDecisao(_:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let view = UIView()
+            view.backgroundColor = .systemBackground
+            return view
+        }()
+        
         if decisao == nil {
             self.title = "Adicionar decisão"
         } else {
             self.title = "Editar decisão"
         }
+        self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
     
-    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
-        salvaDecisao(sender)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        descricaoTextField.becomeFirstResponder()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupView()
+        view.backgroundColor = .systemBackground
+        
+        descricaoTextField.backgroundColor = .systemBackground
+        descricaoTextField.textColor =  .black
+        descricaoTextField.placeholder = "insira a descrição da decisão"
+        descricaoTextField.textAlignment = .left
+        descricaoTextField.autocapitalizationType = .none
+        descricaoTextField.borderStyle = .roundedRect
+        
+        view.addSubview(descricaoTextField)
+        
+        descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        descricaoTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        descricaoTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
     }
     
     @IBAction func salvaDecisao(_ sender: Any) {
-        guard let descricaoDecisao = descricaoTextField?.text else {
+        guard let descricaoDecisao = descricaoTextField.text else {
             return
         }
         
@@ -73,7 +104,7 @@ class AdicionaDecisaoViewController: UIViewController {
         guard let decisaoSelecionada = decisao else {
             return
         }
-        descricaoTextField?.text = decisaoSelecionada.descricao
+        descricaoTextField.text = decisaoSelecionada.descricao
     }
     
 }

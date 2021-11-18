@@ -22,12 +22,6 @@ class OpcoesTableViewController: UITableViewController {
         return view
     }()
     
-    
-    override func viewDidLoad() {
-        recuperaOpcao()
-        self.tableView.reloadData()
-    }
-    
     override func loadView() {
         self.view = {
             let tableView = UITableView()
@@ -42,7 +36,11 @@ class OpcoesTableViewController: UITableViewController {
     }
     
     @objc func goToAdicionarOpcao(sender: UIBarButtonItem){
-        self.navigationController?.pushViewController(AdicionaOpcaoViewController(), animated: true)
+        let telaAdicionaOpcao = AdicionaOpcaoViewController()
+        telaAdicionaOpcao.decisao = self.decisao
+        self.navigationController?.pushViewController(telaAdicionaOpcao, animated: true)
+        
+       
     }
     
     func goToEditarOpcao(sender: Any){
@@ -58,9 +56,10 @@ class OpcoesTableViewController: UITableViewController {
         self.navigationController?.pushViewController(destinationController, animated: true)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        recuperaOpcao()
+        self.tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
