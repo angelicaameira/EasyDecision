@@ -22,21 +22,29 @@ class CriteriosTableViewController: UITableViewController {
         return view
     }()
     
+    private lazy var continuarButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarAvaliacao(sender:)))
+        return view
+    }()
+    
     override func loadView() {
         self.view = {
             let tableView = UITableView()
             tableView.backgroundColor = .systemBackground
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.register(RatingTVCell.self, forCellReuseIdentifier: "celula-criterio")
             return tableView
         }()
         
         self.title = "Critérios"
-        self.navigationItem.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setRightBarButtonItems([continuarButton, addButton], animated: true)
     }
     
     @objc func goToAdicionarCriterio(sender: UIBarButtonItem){
-        self.navigationController?.pushViewController(AdicionaCriterioViewController(), animated: true)
+        let telaAdicionaCriterio = AdicionaCriterioViewController()
+        telaAdicionaCriterio.decisao = self.decisao
+        self.navigationController?.pushViewController(telaAdicionaCriterio, animated: true)
     }
     
     func goToEditarCriterio(sender: Any){
@@ -46,7 +54,7 @@ class CriteriosTableViewController: UITableViewController {
             .pushViewController(destinationController, animated: true)
     }
     
-    func goToMostrarAvaliacao(sender: Any) {
+    @objc func goToMostrarAvaliacao(sender: Any) {
         let destinationController = AvaliacaoTableViewController()
         self.prepare(for: UIStoryboardSegue(identifier: "mostrarAvaliacao", source: self, destination: destinationController), sender: self)
         self.navigationController?.pushViewController(destinationController, animated: true)
@@ -57,7 +65,7 @@ class CriteriosTableViewController: UITableViewController {
         recuperaCriterio()
         self.tableView.reloadData()
     }
-    
+
     // MARK: metodos que não são da table view
     
     func recuperaCriterio() {
@@ -82,7 +90,7 @@ class CriteriosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? TableViewCell else {
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? RatingTVCell else {
             return UITableViewCell()
         }
         
@@ -91,8 +99,8 @@ class CriteriosTableViewController: UITableViewController {
             return celula
         }
         
-        celula.title?.text = criterio.descricao
-        celula.peso?.text = "\(criterio.peso)"
+        celula.title.text = criterio.descricao
+        celula.peso.text = "\(criterio.peso)"
         return celula
     }
     

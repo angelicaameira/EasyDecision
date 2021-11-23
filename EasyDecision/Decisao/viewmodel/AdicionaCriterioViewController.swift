@@ -12,27 +12,99 @@ class AdicionaCriterioViewController: UIViewController {
     
     var decisao: Decisao?
     var criterio: Criterio?
-    @IBOutlet weak var descricaoTextField: UITextField?
-    @IBOutlet weak var pesoTextField: UITextField!
-    @IBOutlet weak var stepper: UIStepper!
     
-    @IBAction func stepper(_ sender: UIStepper) {
+    //MARK: tela
+    
+    private lazy var descricaoTextField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }()
+    
+    private lazy var pesoTextField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }()
+    
+    @objc private lazy var stepper: UIStepper = {
+        let view = UIStepper(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
+        view.minimumValue = 1
+        view.maximumValue = 5
+        return view
+      }()
+    
+    private lazy var doneButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaCriterio(_:)))
+        return view
+    }()
+    
+    @objc func stepper(_ sender: UIStepper) {
         self.pesoTextField.text = NumberFormatter.localizedString(from: NSNumber(value: sender.value), number: .decimal)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        descricaoTextField?.becomeFirstResponder()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupView()
+    override func loadView() {
+        self.view = {
+            let view = UIView()
+            view.backgroundColor = .systemBackground
+            return view
+        }()
+        
         if criterio == nil {
             self.title = "Adicionar critério"
         } else {
             self.title = "Editar critério"
         }
+        self.navigationItem.setRightBarButton(doneButton, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        descricaoTextField.becomeFirstResponder()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupView()
+        
+        view.backgroundColor = .systemBackground
+        
+        descricaoTextField.backgroundColor = .systemBackground
+        descricaoTextField.textColor =  .black
+        descricaoTextField.placeholder = "insira a descrição do critério"
+        descricaoTextField.textAlignment = .left
+        descricaoTextField.autocapitalizationType = .none
+        descricaoTextField.borderStyle = .roundedRect
+        
+        pesoTextField.backgroundColor = .systemBackground
+        pesoTextField.textColor =  .black
+        pesoTextField.placeholder = "insira o peso do critério"
+        pesoTextField.textAlignment = .left
+        pesoTextField.autocapitalizationType = .none
+        pesoTextField.borderStyle = .roundedRect
+        
+        
+        stepper.backgroundColor = .systemBackground
+        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
+        
+        view.addSubview(descricaoTextField)
+        view.addSubview(pesoTextField)
+        view.addSubview(stepper)
+        
+        descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        descricaoTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        descricaoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        
+        pesoTextField.topAnchor.constraint(equalTo: self.descricaoTextField.bottomAnchor, constant: 20).isActive = true
+        pesoTextField.trailingAnchor.constraint(equalTo: self.stepper.leadingAnchor, constant: -10).isActive = true
+        pesoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        
+        stepper.topAnchor.constraint(equalTo: self.descricaoTextField.bottomAnchor, constant: 20).isActive = true
+        stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
+        
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -40,7 +112,7 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @IBAction func salvaCriterio(_ sender: Any) {
-        guard let descricaoCriterio = descricaoTextField?.text,
+        guard let descricaoCriterio = descricaoTextField.text,
               let peso = pesoTextField.text,
               let decisao = decisao else {
             return
@@ -81,11 +153,11 @@ class AdicionaCriterioViewController: UIViewController {
     
     func setupView() {
         guard let criterioSendoEditado = self.criterio else {
-            self.pesoTextField?.text = "\(1)"
+            self.pesoTextField.text = "\(1)"
             return
         }
-        self.descricaoTextField?.text = criterioSendoEditado.descricao
-        self.pesoTextField?.text = "\(criterioSendoEditado.peso)"
+        self.descricaoTextField.text = criterioSendoEditado.descricao
+        self.pesoTextField.text = "\(criterioSendoEditado.peso)"
         stepper.value = Double(criterioSendoEditado.peso)
         
     }

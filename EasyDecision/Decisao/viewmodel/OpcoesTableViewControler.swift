@@ -22,6 +22,11 @@ class OpcoesTableViewController: UITableViewController {
         return view
     }()
     
+    private lazy var continuarButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarCriterios(sender:)))
+        return view
+    }()
+    
     override func loadView() {
         self.view = {
             let tableView = UITableView()
@@ -32,7 +37,7 @@ class OpcoesTableViewController: UITableViewController {
         }()
         
         self.title = "Opções"
-        self.navigationItem.setRightBarButton(addButton, animated: true)
+        self.navigationItem.setRightBarButtonItems([continuarButton, addButton], animated: true)
     }
     
     @objc func goToAdicionarOpcao(sender: UIBarButtonItem){
@@ -50,7 +55,7 @@ class OpcoesTableViewController: UITableViewController {
             .pushViewController(destinationController, animated: true)
     }
     
-    func goToMostrarCriterios(sender: Any) {
+    @objc func goToMostrarCriterios(sender: Any) {
         let destinationController = CriteriosTableViewController()
         self.prepare(for: UIStoryboardSegue(identifier: "mostrarCriterios", source: self, destination: destinationController), sender: self)
         self.navigationController?.pushViewController(destinationController, animated: true)

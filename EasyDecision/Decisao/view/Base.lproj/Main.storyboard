@@ -224,7 +224,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-criterio" id="0bq-in-9e9" customClass="TableViewCell" customModule="EasyDecision" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-criterio" id="0bq-in-9e9" customClass="RatingTVCell" customModule="EasyDecision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0bq-in-9e9" id="w5D-bd-V0Q">
@@ -294,7 +294,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-avaliacao" id="vs3-3Y-IS6" customClass="TableViewCell" customModule="EasyDecision" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-avaliacao" id="vs3-3Y-IS6" customClass="RatingTVCell" customModule="EasyDecision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vs3-3Y-IS6" id="9rx-cJ-7yC">
@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-resultado" id="SyN-As-ZsJ" customClass="TableViewCell" customModule="EasyDecision" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="celula-resultado" id="SyN-As-ZsJ" customClass="RatingTVCell" customModule="EasyDecision" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SyN-As-ZsJ" id="kRf-M3-aPr">
@@ -459,9 +459,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="descricaoTextField" destination="5Ea-5W-5Bs" id="JvH-Vs-4Z3"/>
-                        <outlet property="pesoTextField" destination="quH-RT-h6T" id="7mc-gp-Owa"/>
-                        <outlet property="stepper" destination="aKC-SC-oqN" id="kkA-Ex-Y0M"/>
+                        <outlet property="dois" destination="5Ea-5W-5Bs" id="JvH-Vs-4Z3"/>
+                        <outlet property="quatro" destination="aKC-SC-oqN" id="kkA-Ex-Y0M"/>
+                        <outlet property="tres" destination="quH-RT-h6T" id="7mc-gp-Owa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGq-f8-Jv8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

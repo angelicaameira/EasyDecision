@@ -11,24 +11,79 @@ import CoreData
 class EditaAvaliacaoViewController: UIViewController {
    
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-    var avaliacaoCelula: TableViewCell?
+    var avaliacaoCelula: RatingTVCell?
     var avaliacao: Avaliacao?
     
-    @IBOutlet weak var pesoTextField: UITextField!
+    //MARK: tela
     
-    @IBAction func stepper(_ sender: UIStepper) {
+    private lazy var pesoTextField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }()
+    
+    @objc private lazy var stepper: UIStepper = {
+        let view = UIStepper(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
+        view.minimumValue = 1
+        view.maximumValue = 5
+        return view
+      }()
+    
+    private lazy var doneButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaAvaliacao(_:)))
+        return view
+    }()
+    
+    @objc func stepper(_ sender: UIStepper) {
         self.pesoTextField.text = NumberFormatter.localizedString(from: NSNumber(value: sender.value), number: .decimal)
+    }
+    
+    override func loadView() {
+        self.view = {
+            let view = UIView()
+            view.backgroundColor = .systemBackground
+            return view
+        }()
+        
+        self.title = "Editar Avaliação"
+        self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        pesoTextField?.becomeFirstResponder()
+        pesoTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        self.title = "Editar avaliação"
+        
+        view.backgroundColor = .systemBackground
+        
+        pesoTextField.backgroundColor = .systemBackground
+        pesoTextField.textColor =  .black
+        pesoTextField.placeholder = "insira a nota da avaliação"
+        pesoTextField.textAlignment = .left
+        pesoTextField.autocapitalizationType = .none
+        pesoTextField.borderStyle = .roundedRect
+        
+        
+        stepper.backgroundColor = .systemBackground
+        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
+        
+        view.addSubview(pesoTextField)
+        view.addSubview(stepper)
+        
+        pesoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        pesoTextField.trailingAnchor.constraint(equalTo: self.stepper.leadingAnchor, constant: -10).isActive = true
+        pesoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        
+        stepper.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
+        
     }
     
     @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
@@ -57,6 +112,6 @@ class EditaAvaliacaoViewController: UIViewController {
         guard let avaliacaoSendoEditada = self.avaliacao else {
             return
         }
-        self.pesoTextField?.text = "\(avaliacaoSendoEditada.nota)"
+        self.pesoTextField.text = "\(avaliacaoSendoEditada.nota)"
     }
 }
