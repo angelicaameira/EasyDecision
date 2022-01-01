@@ -18,14 +18,28 @@ class AdicionaCriterioViewController: UIViewController {
     private lazy var descricaoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.returnKeyType = .done
+        view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira a descrição do critério"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
         return view
-      }()
+    }()
     
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira o peso do critério"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
         return view
-      }()
+    }()
     
     @objc private lazy var stepper: UIStepper = {
         let view = UIStepper(frame: .zero)
@@ -33,8 +47,9 @@ class AdicionaCriterioViewController: UIViewController {
         view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
         view.minimumValue = 1
         view.maximumValue = 5
+        view.backgroundColor = .systemBackground
         return view
-      }()
+    }()
     
     private lazy var doneButton: UIBarButtonItem = {
         let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaCriterio(_:)))
@@ -68,26 +83,10 @@ class AdicionaCriterioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        
-        view.backgroundColor = .systemBackground
-        
-        descricaoTextField.backgroundColor = .systemBackground
-        descricaoTextField.textColor =  .black
-        descricaoTextField.placeholder = "insira a descrição do critério"
-        descricaoTextField.textAlignment = .left
-        descricaoTextField.autocapitalizationType = .none
-        descricaoTextField.borderStyle = .roundedRect
-        
-        pesoTextField.backgroundColor = .systemBackground
-        pesoTextField.textColor =  .black
-        pesoTextField.placeholder = "insira o peso do critério"
-        pesoTextField.textAlignment = .left
-        pesoTextField.autocapitalizationType = .none
-        pesoTextField.borderStyle = .roundedRect
-        
-        
-        stepper.backgroundColor = .systemBackground
-        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
+        self.setupConstraints()
+    }
+    
+    func setupConstraints(){
         
         view.addSubview(descricaoTextField)
         view.addSubview(pesoTextField)
@@ -104,19 +103,18 @@ class AdicionaCriterioViewController: UIViewController {
         stepper.topAnchor.constraint(equalTo: self.descricaoTextField.bottomAnchor, constant: 20).isActive = true
         stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
-        
     }
     
-    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
+    @objc func clicaBotaoDoneTeclado(_ sender: Any) {
         salvaCriterio(sender)
     }
     
-    @IBAction func salvaCriterio(_ sender: Any) {
+    @objc func salvaCriterio(_ sender: Any) {
         guard let descricaoCriterio = descricaoTextField.text,
               let peso = pesoTextField.text,
               let decisao = decisao else {
-            return
-        }
+                  return
+              }
         let pesoCriterio = (peso as NSString).integerValue
         let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
@@ -159,6 +157,6 @@ class AdicionaCriterioViewController: UIViewController {
         self.descricaoTextField.text = criterioSendoEditado.descricao
         self.pesoTextField.text = "\(criterioSendoEditado.peso)"
         stepper.value = Double(criterioSendoEditado.peso)
-        
+        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
     }
 }
