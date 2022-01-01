@@ -18,6 +18,12 @@ class AdicionaOpcaoViewController: UIViewController {
     private lazy var descricaoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira a descrição da opção"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
         return view
       }()
     
@@ -49,15 +55,10 @@ class AdicionaOpcaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        
-        view.backgroundColor = .systemBackground
-        
-        descricaoTextField.backgroundColor = .systemBackground
-        descricaoTextField.textColor =  .black
-        descricaoTextField.placeholder = "insira a descrição da opção"
-        descricaoTextField.textAlignment = .left
-        descricaoTextField.autocapitalizationType = .none
-        descricaoTextField.borderStyle = .roundedRect
+        self.setupConstraints()
+    }
+    
+    func setupConstraints() {
         
         view.addSubview(descricaoTextField)
         
@@ -66,7 +67,7 @@ class AdicionaOpcaoViewController: UIViewController {
         descricaoTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
     }
     
-    @IBAction func salvaOpcao(_ sender: Any) {
+    @objc func salvaOpcao(_ sender: Any) {
         guard let descricaoOpcao = descricaoTextField.text,
               let decisao = decisao
         else {

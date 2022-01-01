@@ -19,6 +19,12 @@ class AdicionaDecisaoViewController: UIViewController {
     private lazy var descricaoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira a descrição da decisão"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
         return view
       }()
     
@@ -50,14 +56,10 @@ class AdicionaDecisaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        view.backgroundColor = .systemBackground
-        
-        descricaoTextField.backgroundColor = .systemBackground
-        descricaoTextField.textColor =  .black
-        descricaoTextField.placeholder = "insira a descrição da decisão"
-        descricaoTextField.textAlignment = .left
-        descricaoTextField.autocapitalizationType = .none
-        descricaoTextField.borderStyle = .roundedRect
+        self.setupConstraints()
+    }
+    
+    func setupConstraints(){
         
         view.addSubview(descricaoTextField)
         
@@ -66,7 +68,7 @@ class AdicionaDecisaoViewController: UIViewController {
         descricaoTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
     }
     
-    @IBAction func salvaDecisao(_ sender: Any) {
+    @objc func salvaDecisao(_ sender: Any) {
         guard let descricaoDecisao = descricaoTextField.text else {
             return
         }

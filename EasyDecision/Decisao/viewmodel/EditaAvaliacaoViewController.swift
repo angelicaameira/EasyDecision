@@ -19,6 +19,12 @@ class EditaAvaliacaoViewController: UIViewController {
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira a nota da avaliação"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
         return view
       }()
     
@@ -28,6 +34,7 @@ class EditaAvaliacaoViewController: UIViewController {
         view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
         view.minimumValue = 1
         view.maximumValue = 5
+        view.backgroundColor = .systemBackground
         return view
       }()
     
@@ -59,19 +66,11 @@ class EditaAvaliacaoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.setupConstraints()
         
-        view.backgroundColor = .systemBackground
-        
-        pesoTextField.backgroundColor = .systemBackground
-        pesoTextField.textColor =  .black
-        pesoTextField.placeholder = "insira a nota da avaliação"
-        pesoTextField.textAlignment = .left
-        pesoTextField.autocapitalizationType = .none
-        pesoTextField.borderStyle = .roundedRect
-        
-        
-        stepper.backgroundColor = .systemBackground
-        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
+    }
+    
+    func setupConstraints(){
         
         view.addSubview(pesoTextField)
         view.addSubview(stepper)
@@ -83,14 +82,13 @@ class EditaAvaliacaoViewController: UIViewController {
         stepper.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
-        
     }
     
-    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
+    @objc func clicaBotaoDoneTeclado(_ sender: Any) {
         salvaAvaliacao(sender)
     }
     
-    @IBAction func salvaAvaliacao(_ sender: Any) {
+    @objc func salvaAvaliacao(_ sender: Any) {
         guard let peso = pesoTextField.text else {
             return
         }
@@ -113,5 +111,6 @@ class EditaAvaliacaoViewController: UIViewController {
             return
         }
         self.pesoTextField.text = "\(avaliacaoSendoEditada.nota)"
+        stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
     }
 }
