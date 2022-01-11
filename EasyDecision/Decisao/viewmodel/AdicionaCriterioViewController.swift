@@ -110,7 +110,7 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @objc func salvaCriterio(_ sender: Any) {
-        guard let descricaoCriterio = descricaoTextField.text,
+        guard var descricaoCriterio = descricaoTextField.text,
               let peso = pesoTextField.text,
               let decisao = decisao else {
                   return
@@ -119,7 +119,9 @@ class AdicionaCriterioViewController: UIViewController {
         let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
         
-        if descricaoCriterio == "" {
+        descricaoCriterio = descricaoCriterio.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if descricaoCriterio.isEmpty {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
