@@ -13,29 +13,62 @@ class AdicionaOpcaoViewController: UIViewController {
     var decisao: Decisao?
     var opcao: Opcao?
     
-    @IBOutlet weak var descricaoTextField: UITextField?
+    //MARK: tela
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        descricaoTextField?.becomeFirstResponder()
-    }
+    private lazy var descricaoTextField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        view.textColor =  .black
+        view.placeholder = "insira a descrição da opção"
+        view.textAlignment = .left
+        view.autocapitalizationType = .none
+        view.borderStyle = .roundedRect
+        return view
+      }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupView()
+    private lazy var doneButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaOpcao(_:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let view = UIView()
+            view.backgroundColor = .systemBackground
+            return view
+        }()
+        
         if opcao == nil {
             self.title = "Adicionar opção"
         } else {
             self.title = "Editar opção"
         }
+        self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
     
-    @IBAction func clicaBotaoDoneTeclado(_ sender: Any) {
-        salvaOpcao(sender)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        descricaoTextField.becomeFirstResponder()
     }
     
-    @IBAction func salvaOpcao(_ sender: Any) {
-        guard let descricaoOpcao = descricaoTextField?.text,
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupView()
+        self.setupConstraints()
+    }
+    
+    func setupConstraints() {
+        
+        view.addSubview(descricaoTextField)
+        
+        descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        descricaoTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        descricaoTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+    }
+    
+    @objc func salvaOpcao(_ sender: Any) {
+        guard let descricaoOpcao = descricaoTextField.text,
               let decisao = decisao
         else {
             return
@@ -76,7 +109,7 @@ class AdicionaOpcaoViewController: UIViewController {
         guard let opcaoSendoEditada = opcao else {
             return
         }
-        descricaoTextField?.text = opcaoSendoEditada.descricao
+        descricaoTextField.text = opcaoSendoEditada.descricao
     }
 }
 

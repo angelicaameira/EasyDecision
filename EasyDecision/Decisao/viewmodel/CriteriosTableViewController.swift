@@ -15,12 +15,57 @@ class CriteriosTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaCriterios: [Criterio]?
     
+    //MARK: tela
+    
+    private lazy var addButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(image: .add, style: .plain, target: self, action: #selector(goToAdicionarCriterio(sender:)))
+        return view
+    }()
+    
+    private lazy var continuarButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarAvaliacao(sender:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.register(RatingTVCell.self, forCellReuseIdentifier: "celula-criterio")
+            return tableView
+        }()
+        
+        self.title = "Critérios"
+        self.navigationItem.setRightBarButtonItems([continuarButton, addButton], animated: true)
+    }
+    
+    @objc func goToAdicionarCriterio(sender: UIBarButtonItem){
+        let telaAdicionaCriterio = AdicionaCriterioViewController()
+        telaAdicionaCriterio.decisao = self.decisao
+        self.navigationController?.pushViewController(telaAdicionaCriterio, animated: true)
+    }
+    
+    func goToEditarCriterio(sender: Any){
+        let destinationController = AdicionaCriterioViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "editarCriterio" , source: self, destination: destinationController), sender: self)
+        self.navigationController?
+            .pushViewController(destinationController, animated: true)
+    }
+    
+    @objc func goToMostrarAvaliacao(sender: Any) {
+        let destinationController = AvaliacaoTableViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "mostrarAvaliacao", source: self, destination: destinationController), sender: self)
+        self.navigationController?.pushViewController(destinationController, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaCriterio()
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
-    
+
     // MARK: metodos que não são da table view
     
     func recuperaCriterio() {
@@ -45,7 +90,7 @@ class CriteriosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? TableViewCell else {
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? RatingTVCell else {
             return UITableViewCell()
         }
         
@@ -54,8 +99,8 @@ class CriteriosTableViewController: UITableViewController {
             return celula
         }
         
-        celula.title?.text = criterio.descricao
-        celula.peso?.text = "\(criterio.peso)"
+        celula.title.text = criterio.descricao
+        celula.peso.text = "\(criterio.peso)"
         return celula
     }
     
@@ -70,7 +115,7 @@ class CriteriosTableViewController: UITableViewController {
             }
         }
         if let destinationViewController = segue.destination as? AvaliacaoTableViewController {
-            if segue.identifier == "mostraAvaliacao" {
+            if segue.identifier == "mostrarAvaliacao" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -92,7 +137,7 @@ class CriteriosTableViewController: UITableViewController {
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
                 self.criterioSendoEditado = self.listaCriterios?[indexPath.row]
-                self.performSegue(withIdentifier: "editarCriterio", sender: contextualAction)
+                self.goToEditarCriterio(sender: contextualAction)
             })]
         
         return UISwipeActionsConfiguration(actions: acoes)
@@ -102,6 +147,6 @@ class CriteriosTableViewController: UITableViewController {
         guard let criterioSendoEditado = listaCriterios?[indexPath.row] else { return }
         
         self.criterioSendoEditado = criterioSendoEditado
-        self.performSegue(withIdentifier: "editarCriterio", sender: self)
+        self.goToEditarCriterio(sender: self)
     }
 }

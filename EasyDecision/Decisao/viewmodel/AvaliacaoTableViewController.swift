@@ -18,6 +18,40 @@ class AvaliacaoTableViewController: UITableViewController {
     var listaOpcoes: [Opcao]?
     var listaAvaliacoes: [Avaliacao] = []
     
+    //MARK: tela
+    
+    private lazy var continuarButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarResultado(sender:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.register(RatingTVCell.self, forCellReuseIdentifier: "celula-avaliacao")
+            return tableView
+        }()
+        
+        self.title = "Avaliação"
+        self.navigationItem.setRightBarButton(continuarButton, animated: true)
+    }
+    
+    func goToEditarAvaliacao(sender: Any){
+        let destinationController = EditaAvaliacaoViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "editarAvaliacao" , source: self, destination: destinationController), sender: self)
+        self.navigationController?
+            .pushViewController(destinationController, animated: true)
+    }
+    
+    @objc func goToMostrarResultado(sender: Any) {
+        let destinationController = ResultadoTableViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "mostrarResultado", source: self, destination: destinationController), sender: self)
+        self.navigationController?.pushViewController(destinationController, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         recuperaOpcoes()
@@ -102,7 +136,7 @@ class AvaliacaoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-avaliacao") as? TableViewCell else {
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-avaliacao") as? RatingTVCell else {
             return UITableViewCell()
         }
         
@@ -116,8 +150,8 @@ class AvaliacaoTableViewController: UITableViewController {
             return celula
         }
         
-        celula.title?.text = avaliacao.criterio.descricao
-        celula.peso?.text = "\(avaliacao.nota)"
+        celula.title.text = avaliacao.criterio.descricao
+        celula.peso.text = "\(avaliacao.nota)"
         return celula
     }
     
@@ -129,7 +163,7 @@ class AvaliacaoTableViewController: UITableViewController {
             }
         }
         if let destinationViewController = segue.destination as? ResultadoTableViewController {
-            if segue.identifier == "mostraResultado" {
+            if segue.identifier == "mostrarResultado" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -149,6 +183,6 @@ class AvaliacaoTableViewController: UITableViewController {
         // quero a Avaliacao selecionada. As Avaliacoes estao na listaAvaliacoes
         
         // chamar a outra tela
-        self.performSegue(withIdentifier: "editarAvaliacao", sender: self)
+        self.goToEditarAvaliacao(sender: self)
     }
 }
