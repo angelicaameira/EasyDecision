@@ -55,7 +55,9 @@ class ResultadoTableViewController: UITableViewController {
     }
     
     func preencheListaAvaliacoes() {
-        guard let decisao = decisao else { return }
+        guard let decisao = decisao
+        else { return }
+        
         do {
             self.listaAvaliacoes = try Avaliacao.listaDoBanco(decisao: decisao)
         } catch {
@@ -97,8 +99,8 @@ class ResultadoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as! ResultadoTVCell
-        
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as? ResultadoTVCell
+        else { return UITableViewCell() }
         let resultado = self.listaResultados[indexPath.row]
         
         celula.title.text = resultado.opcao.descricao

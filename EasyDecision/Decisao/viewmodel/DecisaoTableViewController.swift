@@ -81,9 +81,8 @@ class DecisaoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-decisao")
-        guard let decisao = self.listaDecisoes?[indexPath.row] else {
-            return celula
-        }
+        guard let decisao = self.listaDecisoes?[indexPath.row]
+        else { return celula }
         
         celula.textLabel?.text = decisao.descricao
         return celula
@@ -105,8 +104,11 @@ class DecisaoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] (contextualAction, view, _) in
-                guard let self = self else { return }
-                guard let decisao = self.listaDecisoes?[indexPath.row] else { return }
+                guard
+                    let self = self,
+                    let decisao = self.listaDecisoes?[indexPath.row]
+                else { return }
+                
                 do {
                     try decisao.apagaNoBanco()
                     self.recuperaDecisao()
@@ -118,7 +120,8 @@ class DecisaoTableViewController: UITableViewController {
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (contextualAction, view, _) in
-                guard let self = self else { return }
+                guard let self = self
+                else { return }
                 
                 self.decisaoSelecionada = self.listaDecisoes?[indexPath.row]
                 self.goToEditarDecisao(sender: contextualAction)
@@ -127,7 +130,8 @@ class DecisaoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row] else { return }
+        guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row]
+        else { return }
         
         self.decisaoSelecionada = decisaoSelecionada
         self.goToMostrarOpcoes(sender: tableView)

@@ -65,7 +65,7 @@ class CriteriosTableViewController: UITableViewController {
         recuperaCriterio()
         self.tableView.reloadData()
     }
-
+    
     // MARK: metodos que não são da table view
     
     func recuperaCriterio() {
@@ -90,14 +90,10 @@ class CriteriosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? RatingTVCell else {
-            return UITableViewCell()
-        }
-        
-        guard let criterio = listaCriterios?[indexPath.row]
-        else {
-            return celula
-        }
+        guard
+            let celula = tableView.dequeueReusableCell(withIdentifier: "celula-criterio") as? RatingTVCell,
+            let criterio = listaCriterios?[indexPath.row]
+        else { return UITableViewCell() }
         
         celula.title.text = criterio.descricao
         celula.peso.text = "\(criterio.peso)"
@@ -106,6 +102,7 @@ class CriteriosTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? AdicionaCriterioViewController {
+            
             if segue.identifier == "editarCriterio" {
                 destinationViewController.criterio = self.criterioSendoEditado
                 destinationViewController.decisao = self.decisao
@@ -124,7 +121,9 @@ class CriteriosTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                guard let criterio = self.listaCriterios?[indexPath.row] else { return }
+                guard let criterio = self.listaCriterios?[indexPath.row]
+                else { return }
+                
                 do {
                     try criterio.apagaNoBanco()
                     self.recuperaCriterio()
@@ -144,7 +143,8 @@ class CriteriosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let criterioSendoEditado = listaCriterios?[indexPath.row] else { return }
+        guard let criterioSendoEditado = listaCriterios?[indexPath.row]
+        else { return }
         
         self.criterioSendoEditado = criterioSendoEditado
         self.goToEditarCriterio(sender: self)

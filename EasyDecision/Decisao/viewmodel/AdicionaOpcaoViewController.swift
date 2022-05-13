@@ -6,7 +6,6 @@
 //
 import Foundation
 import UIKit
-import CoreData
 
 class AdicionaOpcaoViewController: UIViewController {
     var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
@@ -25,7 +24,7 @@ class AdicionaOpcaoViewController: UIViewController {
         view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
-      }()
+    }()
     
     private lazy var doneButton: UIBarButtonItem = {
         let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaOpcao(_:)))
@@ -59,7 +58,6 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     func setupConstraints() {
-        
         view.addSubview(descricaoTextField)
         
         descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -68,11 +66,10 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     @objc func salvaOpcao(_ sender: Any) {
-        guard let descricaoOpcao = descricaoTextField.text,
-              let decisao = decisao
-        else {
-            return
-        }
+        guard
+            let descricaoOpcao = descricaoTextField.text,
+            let decisao = decisao
+        else { return }
         
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da opção para continuar", preferredStyle: .alert)
         
@@ -106,9 +103,9 @@ class AdicionaOpcaoViewController: UIViewController {
     }
     
     func setupView() {
-        guard let opcaoSendoEditada = opcao else {
-            return
-        }
+        guard let opcaoSendoEditada = opcao
+        else { return }
+        
         descricaoTextField.text = opcaoSendoEditada.descricao
     }
 }
