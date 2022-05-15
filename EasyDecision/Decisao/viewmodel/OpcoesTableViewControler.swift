@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 import SQLite
 
-class OpcoesTableViewController: UITableViewController {
+class OpcoesTableViewController: UITableViewController, OpcaoTableViewControllerDelegate {
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var opcaoSendoEditada: Opcao?
@@ -43,19 +43,22 @@ class OpcoesTableViewController: UITableViewController {
     @objc func goToAdicionarOpcao(sender: UIBarButtonItem){
         let telaAdicionaOpcao = AdicionaOpcaoViewController()
         telaAdicionaOpcao.decisao = self.decisao
-        self.navigationController?.pushViewController(telaAdicionaOpcao, animated: true)
+        telaAdicionaOpcao.delegate = self
+        self.present(UINavigationController(rootViewController: telaAdicionaOpcao), animated: true)
     }
     
     func goToEditarOpcao(sender: Any){
         let destinationController = AdicionaOpcaoViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "editarOpcao" , source: self, destination: destinationController), sender: self)
-        self.navigationController?
-            .pushViewController(destinationController, animated: true)
+        destinationController.opcao = self.opcaoSendoEditada
+        destinationController.decisao = self.decisao
+        destinationController.delegate = self
+        self.present(UINavigationController(rootViewController: destinationController), animated: true)
+       
     }
     
     @objc func goToMostrarCriterios(sender: Any) {
         let destinationController = CriteriosTableViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "mostrarCriterios", source: self, destination: destinationController), sender: self)
+        destinationController.decisao = self.decisao
         self.navigationController?.pushViewController(destinationController, animated: true)
     }
     
@@ -73,6 +76,7 @@ class OpcoesTableViewController: UITableViewController {
             else { return }
             
             self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
+            tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -97,24 +101,6 @@ class OpcoesTableViewController: UITableViewController {
         
         celula.textLabel?.text = opcao.descricao
         return celula
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? AdicionaOpcaoViewController {
-            
-            if segue.identifier == "editarOpcao" {
-                destinationViewController.opcao = self.opcaoSendoEditada
-                destinationViewController.decisao = self.decisao
-            }
-            if segue.identifier == "adicionarOpcao" {
-                destinationViewController.decisao = self.decisao
-            }
-        }
-        if let destinationViewController = segue.destination as? CriteriosTableViewController {
-            if segue.identifier == "mostrarCriterios" {
-                destinationViewController.decisao = self.decisao
-            }
-        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -149,4 +135,8 @@ class OpcoesTableViewController: UITableViewController {
         self.opcaoSendoEditada = opcaoSendoEditada
         self.goToEditarOpcao(sender: self)
     }
+}
+
+protocol OpcaoTableViewControllerDelegate: AnyObject {
+    func recuperaOpcao()
 }

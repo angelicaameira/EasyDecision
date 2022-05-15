@@ -12,13 +12,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = scene as? UIWindowScene
-        else { return }
-        let navigationController = UINavigationController(rootViewController: DecisaoTableViewController())
-        window = UIWindow(frame: .zero)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = navigationController
-        window?.windowScene = windowScene
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        let vc = DecisaoTableViewController()
+        vc.view.backgroundColor = .white
+        window.rootViewController = UINavigationController(rootViewController: vc)
+        self.window = window
+        window.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

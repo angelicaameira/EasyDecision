@@ -8,6 +8,8 @@ import Foundation
 import UIKit
 
 class AdicionaOpcaoViewController: UIViewController {
+    
+    weak var delegate: OpcaoTableViewControllerDelegate?
     var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisao: Decisao?
     var opcao: Opcao?
@@ -44,6 +46,11 @@ class AdicionaOpcaoViewController: UIViewController {
             self.title = "Editar opção"
         }
         self.navigationItem.setRightBarButton(doneButton, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.sheetPresentationController?.detents = [.medium()]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,7 +101,10 @@ class AdicionaOpcaoViewController: UIViewController {
             } else {
                 try opcao?.atualizaNoBanco()
             }
-            navigationController?.popViewController(animated: true)
+            navigationController?.dismiss(animated: true) { [weak self]
+                in
+                self?.delegate?.recuperaOpcao()
+            }
         } catch {
             alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)

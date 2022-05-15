@@ -9,6 +9,7 @@ import UIKit
 
 class AdicionaCriterioViewController: UIViewController {
     
+    weak var delegate: CriterioTableViewControllerDelegate?
     var decisao: Decisao?
     var criterio: Criterio?
     
@@ -85,6 +86,11 @@ class AdicionaCriterioViewController: UIViewController {
         self.setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.sheetPresentationController?.detents = [.medium()]
+    }
+    
     func setupConstraints(){
         view.addSubview(descricaoTextField)
         view.addSubview(pesoTextField)
@@ -137,7 +143,10 @@ class AdicionaCriterioViewController: UIViewController {
             } else {
                 try criterio?.atualizaNoBanco()
             }
-            navigationController?.popViewController(animated: true)
+            navigationController?.dismiss(animated: true) { [weak self]
+                in
+                self?.delegate?.recuperaCriterio()
+            }
         } catch {
             alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)

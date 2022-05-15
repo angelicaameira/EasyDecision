@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SQLite
 
-class CriteriosTableViewController: UITableViewController {
+class CriteriosTableViewController: UITableViewController, CriterioTableViewControllerDelegate {
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var criterioSendoEditado: Criterio?
     var decisao: Decisao?
@@ -44,19 +44,21 @@ class CriteriosTableViewController: UITableViewController {
     @objc func goToAdicionarCriterio(sender: UIBarButtonItem){
         let telaAdicionaCriterio = AdicionaCriterioViewController()
         telaAdicionaCriterio.decisao = self.decisao
-        self.navigationController?.pushViewController(telaAdicionaCriterio, animated: true)
+        telaAdicionaCriterio.delegate = self
+        self.present(UINavigationController(rootViewController: telaAdicionaCriterio), animated: true)
     }
     
     func goToEditarCriterio(sender: Any){
         let destinationController = AdicionaCriterioViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "editarCriterio" , source: self, destination: destinationController), sender: self)
-        self.navigationController?
-            .pushViewController(destinationController, animated: true)
+        destinationController.criterio = self.criterioSendoEditado
+        destinationController.decisao = self.decisao
+        destinationController.delegate = self
+        self.present(UINavigationController(rootViewController: destinationController), animated: true)
     }
     
     @objc func goToMostrarAvaliacao(sender: Any) {
         let destinationController = AvaliacaoTableViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "mostrarAvaliacao", source: self, destination: destinationController), sender: self)
+        destinationController.decisao = self.decisao
         self.navigationController?.pushViewController(destinationController, animated: true)
     }
     
@@ -71,6 +73,7 @@ class CriteriosTableViewController: UITableViewController {
     func recuperaCriterio() {
         do {
             self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao!)
+            tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -98,24 +101,6 @@ class CriteriosTableViewController: UITableViewController {
         celula.title.text = criterio.descricao
         celula.peso.text = "\(criterio.peso)"
         return celula
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? AdicionaCriterioViewController {
-            
-            if segue.identifier == "editarCriterio" {
-                destinationViewController.criterio = self.criterioSendoEditado
-                destinationViewController.decisao = self.decisao
-            }
-            if segue.identifier == "adicionarCriterio" {
-                destinationViewController.decisao = self.decisao
-            }
-        }
-        if let destinationViewController = segue.destination as? AvaliacaoTableViewController {
-            if segue.identifier == "mostrarAvaliacao" {
-                destinationViewController.decisao = self.decisao
-            }
-        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -149,4 +134,8 @@ class CriteriosTableViewController: UITableViewController {
         self.criterioSendoEditado = criterioSendoEditado
         self.goToEditarCriterio(sender: self)
     }
+}
+
+protocol CriterioTableViewControllerDelegate: AnyObject {
+    func recuperaCriterio()
 }
