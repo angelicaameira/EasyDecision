@@ -105,6 +105,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         else { return celula }
         
         celula.textLabel?.text = decisao.descricao
+        celula.accessoryType = .disclosureIndicator
         return celula
     }
     

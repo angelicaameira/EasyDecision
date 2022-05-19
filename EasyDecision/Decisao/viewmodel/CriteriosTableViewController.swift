@@ -100,6 +100,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
         
         celula.title.text = criterio.descricao
         celula.peso.text = "\(criterio.peso)"
+        celula.accessoryType = .disclosureIndicator
         return celula
     }
     

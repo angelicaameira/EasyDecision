@@ -100,6 +100,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
         else { return celula }
         
         celula.textLabel?.text = opcao.descricao
+        celula.accessoryType = .disclosureIndicator
         return celula
     }
     

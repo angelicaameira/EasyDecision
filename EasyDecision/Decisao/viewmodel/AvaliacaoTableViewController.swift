@@ -147,6 +147,8 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         
         celula.title.text = avaliacao.criterio.descricao
         celula.peso.text = "\(avaliacao.nota)"
+        celula.accessoryType = .disclosureIndicator
+        
         return celula
     }
     
