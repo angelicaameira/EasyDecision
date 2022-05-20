@@ -18,6 +18,40 @@ class AvaliacaoTableViewController: UITableViewController {
     var listaOpcoes: [Opcao]?
     var listaAvaliacoes: [Avaliacao] = []
     
+    //MARK: tela
+    
+    private lazy var continuarButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarResultado(sender:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.register(RatingTVCell.self, forCellReuseIdentifier: "celula-avaliacao")
+            return tableView
+        }()
+        
+        self.title = "Avaliação"
+        self.navigationItem.setRightBarButton(continuarButton, animated: true)
+    }
+    
+    func goToEditarAvaliacao(sender: Any){
+        let destinationController = EditaAvaliacaoViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "editarAvaliacao" , source: self, destination: destinationController), sender: self)
+        self.navigationController?
+            .pushViewController(destinationController, animated: true)
+    }
+    
+    @objc func goToMostrarResultado(sender: Any) {
+        let destinationController = ResultadoTableViewController()
+        self.prepare(for: UIStoryboardSegue(identifier: "mostrarResultado", source: self, destination: destinationController), sender: self)
+        self.navigationController?.pushViewController(destinationController, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         recuperaOpcoes()
@@ -29,7 +63,7 @@ class AvaliacaoTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
+    
     func criaAvaliacoes() {
         guard let listaOpcoes = listaOpcoes,
               let listaCriterios = listaCriterios,
@@ -46,7 +80,9 @@ class AvaliacaoTableViewController: UITableViewController {
         for opcao in listaOpcoes {
             for criterio in listaCriterios {
                 let avaliacao = Avaliacao(nota: 1, decisao: decisao, opcao: opcao, criterio: criterio)
-                guard let listaAvaliacoesQueJaExistem = listaAvaliacoesQueJaExistem else { continue }
+                guard let listaAvaliacoesQueJaExistem = listaAvaliacoesQueJaExistem
+                else { continue }
+                
                 do {
                     if !listaAvaliacoesQueJaExistem.contains(avaliacao) {
                         try avaliacao.insereNoBanco()
@@ -63,9 +99,8 @@ class AvaliacaoTableViewController: UITableViewController {
     }
     
     func recuperaOpcoes() {
-        guard let decisao = decisao else {
-            return
-        }
+        guard let decisao = decisao
+        else { return }
         
         do {
             self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
@@ -75,9 +110,8 @@ class AvaliacaoTableViewController: UITableViewController {
     }
     
     func recuperaCriterios() {
-        guard let decisao = decisao else {
-            return
-        }
+        guard let decisao = decisao
+        else { return }
         
         do {
             self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao)
@@ -102,7 +136,7 @@ class AvaliacaoTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-avaliacao") as? TableViewCell else {
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-avaliacao") as? RatingTVCell else {
             return UITableViewCell()
         }
         
@@ -112,24 +146,24 @@ class AvaliacaoTableViewController: UITableViewController {
         guard let avaliacao = listaAvaliacoes.first(where: { avaliacao in
             return (opcao?.id == avaliacao.opcao.id &&
                     criterio?.id == avaliacao.criterio.id)
-        }) else {
-            return celula
-        }
+        })
+        else { return celula }
         
-        celula.title?.text = avaliacao.criterio.descricao
-        celula.peso?.text = "\(avaliacao.nota)"
+        celula.title.text = avaliacao.criterio.descricao
+        celula.peso.text = "\(avaliacao.nota)"
         return celula
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? EditaAvaliacaoViewController {
+            
             if segue.identifier == "editarAvaliacao" {
-                // passar a avaliaçao selecionada para a outra tela
                 destinationViewController.avaliacao = self.avaliacaoSendoEditada
             }
         }
+        
         if let destinationViewController = segue.destination as? ResultadoTableViewController {
-            if segue.identifier == "mostraResultado" {
+            if segue.identifier == "mostrarResultado" {
                 destinationViewController.decisao = self.decisao
             }
         }
@@ -147,8 +181,7 @@ class AvaliacaoTableViewController: UITableViewController {
         // define qual é a avaliação selecionada (que será passada depois)
         self.avaliacaoSendoEditada = avaliacao
         // quero a Avaliacao selecionada. As Avaliacoes estao na listaAvaliacoes
-        
         // chamar a outra tela
-        self.performSegue(withIdentifier: "editarAvaliacao", sender: self)
+        self.goToEditarAvaliacao(sender: self)
     }
 }

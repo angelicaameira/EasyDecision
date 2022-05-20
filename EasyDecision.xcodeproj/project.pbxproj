@@ -14,77 +14,8 @@
 		BF15E1DF268633BD002DB26A /* AdicionaOpcaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */; };
 		BF17A3DC269660DF0099CDA3 /* AdicionaCriterioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */; };
 		BF427B74269F62E400C77DF8 /* AvaliacaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */; };
-		BF492DE026D919370022434F /* AvaliacaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */; };
-		BF492DE126D919370022434F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90A3892698BB38006D2283 /* TableViewCell.swift */; };
-		BF492DE226D919370022434F /* CriteriosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */; };
-		BF492DE326D919370022434F /* EditaAvaliacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */; };
-		BF492DE426D919370022434F /* DecisaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */; };
-		BF492DE526D919370022434F /* OpcoesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DB268534A8002DB26A /* OpcoesTableViewControler.swift */; };
-		BF492DE626D919370022434F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */; };
-		BF492DE726D919370022434F /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
-		BF492DE826D919370022434F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */; };
-		BF492DE926D919370022434F /* Resultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAA26B6D20D00253789 /* Resultado.swift */; };
-		BF492DEA26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */; };
-		BF492DEB26D919370022434F /* Criterio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD126AED7F7007D9786 /* Criterio.swift */; };
-		BF492DEC26D919370022434F /* Opcao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCF26ADDE3C007D9786 /* Opcao.swift */; };
-		BF492DED26D919370022434F /* Avaliacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD326AF2086007D9786 /* Avaliacao.swift */; };
-		BF492DEE26D919370022434F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */; };
-		BF492DEF26D919370022434F /* AdicionaCriterioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */; };
-		BF492DF026D919370022434F /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
-		BF492DF126D919370022434F /* ResultadoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAC26B6D9CA00253789 /* ResultadoTableViewController.swift */; };
-		BF492DF226D919370022434F /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */; };
-		BF492DF426D919370022434F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = BF492DDD26D919370022434F /* SQLite */; };
-		BF492DF626D919370022434F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC90265EFF7A00C5FA10 /* LaunchScreen.storyboard */; };
-		BF492DF726D919370022434F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8E265EFF7A00C5FA10 /* Assets.xcassets */; };
-		BF492DF826D919370022434F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8B265EFF7600C5FA10 /* Main.storyboard */; };
-		BF492E0126D919370022434F /* AvaliacaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */; };
-		BF492E0226D919370022434F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90A3892698BB38006D2283 /* TableViewCell.swift */; };
-		BF492E0326D919370022434F /* CriteriosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */; };
-		BF492E0426D919370022434F /* EditaAvaliacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */; };
-		BF492E0526D919370022434F /* DecisaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */; };
-		BF492E0626D919370022434F /* OpcoesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DB268534A8002DB26A /* OpcoesTableViewControler.swift */; };
-		BF492E0726D919370022434F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */; };
-		BF492E0826D919370022434F /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
-		BF492E0926D919370022434F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */; };
-		BF492E0A26D919370022434F /* Resultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAA26B6D20D00253789 /* Resultado.swift */; };
-		BF492E0B26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */; };
-		BF492E0C26D919370022434F /* Criterio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD126AED7F7007D9786 /* Criterio.swift */; };
-		BF492E0D26D919370022434F /* Opcao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCF26ADDE3C007D9786 /* Opcao.swift */; };
-		BF492E0E26D919370022434F /* Avaliacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD326AF2086007D9786 /* Avaliacao.swift */; };
-		BF492E0F26D919370022434F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */; };
-		BF492E1026D919370022434F /* AdicionaCriterioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */; };
-		BF492E1126D919370022434F /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
-		BF492E1226D919370022434F /* ResultadoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAC26B6D9CA00253789 /* ResultadoTableViewController.swift */; };
-		BF492E1326D919370022434F /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */; };
-		BF492E1526D919370022434F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = BF492DFE26D919370022434F /* SQLite */; };
-		BF492E1726D919370022434F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC90265EFF7A00C5FA10 /* LaunchScreen.storyboard */; };
-		BF492E1826D919370022434F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8E265EFF7A00C5FA10 /* Assets.xcassets */; };
-		BF492E1926D919370022434F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8B265EFF7600C5FA10 /* Main.storyboard */; };
-		BF492E2326D919370022434F /* AvaliacaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */; };
-		BF492E2426D919370022434F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90A3892698BB38006D2283 /* TableViewCell.swift */; };
-		BF492E2526D919370022434F /* CriteriosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */; };
-		BF492E2626D919370022434F /* EditaAvaliacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */; };
-		BF492E2726D919370022434F /* DecisaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */; };
-		BF492E2826D919370022434F /* OpcoesTableViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DB268534A8002DB26A /* OpcoesTableViewControler.swift */; };
-		BF492E2926D919370022434F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */; };
-		BF492E2A26D919370022434F /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
-		BF492E2B26D919370022434F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */; };
-		BF492E2C26D919370022434F /* Resultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAA26B6D20D00253789 /* Resultado.swift */; };
-		BF492E2D26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */; };
-		BF492E2E26D919370022434F /* Criterio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD126AED7F7007D9786 /* Criterio.swift */; };
-		BF492E2F26D919370022434F /* Opcao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCF26ADDE3C007D9786 /* Opcao.swift */; };
-		BF492E3026D919370022434F /* Avaliacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD326AF2086007D9786 /* Avaliacao.swift */; };
-		BF492E3126D919370022434F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */; };
-		BF492E3226D919370022434F /* AdicionaCriterioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */; };
-		BF492E3326D919370022434F /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
-		BF492E3426D919370022434F /* ResultadoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF021BAC26B6D9CA00253789 /* ResultadoTableViewController.swift */; };
-		BF492E3526D919370022434F /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */; };
-		BF492E3726D919370022434F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = BF492E2026D919370022434F /* SQLite */; };
-		BF492E3926D919370022434F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC90265EFF7A00C5FA10 /* LaunchScreen.storyboard */; };
-		BF492E3A26D919370022434F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8E265EFF7A00C5FA10 /* Assets.xcassets */; };
-		BF492E3B26D919370022434F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC8B265EFF7600C5FA10 /* Main.storyboard */; };
 		BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
-		BF90A38A2698BB38006D2283 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90A3892698BB38006D2283 /* TableViewCell.swift */; };
+		BF6F7095274D90FA004DF3E1 /* ResultadoTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */; };
 		BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
 		BFBBEC86265EFF7600C5FA10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */; };
 		BFBBEC88265EFF7600C5FA10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */; };
@@ -99,6 +30,7 @@
 		BFFD5BD026ADDE3D007D9786 /* Opcao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCF26ADDE3C007D9786 /* Opcao.swift */; };
 		BFFD5BD226AED7F7007D9786 /* Criterio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD126AED7F7007D9786 /* Criterio.swift */; };
 		BFFD5BD426AF2086007D9786 /* Avaliacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BD326AF2086007D9786 /* Avaliacao.swift */; };
+		BFFE2EE72741CA4F00CC4BF0 /* RatingTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFE2EE62741CA4F00CC4BF0 /* RatingTVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,12 +42,9 @@
 		BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaOpcaoViewController.swift; sourceTree = "<group>"; };
 		BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaCriterioViewController.swift; sourceTree = "<group>"; };
 		BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliacaoTableViewController.swift; sourceTree = "<group>"; };
-		BF492DFC26D919370022434F /* EasyDecision copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyDecision copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF492E1D26D919370022434F /* EasyDecision copy 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyDecision copy 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF492E3F26D919370022434F /* EasyDecision copy copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EasyDecision copy copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6A803726A487030057614A /* Aplicativo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aplicativo.swift; sourceTree = "<group>"; };
 		BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyDecision.xcdatamodel; sourceTree = "<group>"; };
-		BF90A3892698BB38006D2283 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = EasyDecision/Decisao/controler/TableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoTVCell.swift; sourceTree = "<group>"; };
 		BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaDecisaoViewController.swift; sourceTree = "<group>"; };
 		BFBBEC82265EFF7600C5FA10 /* EasyDecision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyDecision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,33 +61,10 @@
 		BFFD5BCF26ADDE3C007D9786 /* Opcao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcao.swift; sourceTree = "<group>"; };
 		BFFD5BD126AED7F7007D9786 /* Criterio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Criterio.swift; sourceTree = "<group>"; };
 		BFFD5BD326AF2086007D9786 /* Avaliacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avaliacao.swift; sourceTree = "<group>"; };
+		BFFE2EE62741CA4F00CC4BF0 /* RatingTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BF492DF326D919370022434F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492DF426D919370022434F /* SQLite in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E1426D919370022434F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E1526D919370022434F /* SQLite in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E3626D919370022434F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E3726D919370022434F /* SQLite in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BFBBEC7F265EFF7600C5FA10 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -175,7 +81,7 @@
 			children = (
 				BFFD5BCA26ADA2F3007D9786 /* model */,
 				BF0DD6BF2662AEE700DC7AB5 /* view */,
-				BF0DD6C02662AEF200DC7AB5 /* controler */,
+				BF0DD6C02662AEF200DC7AB5 /* viewmodel */,
 			);
 			path = Decisao;
 			sourceTree = "<group>";
@@ -183,13 +89,14 @@
 		BF0DD6BF2662AEE700DC7AB5 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				BF90A3892698BB38006D2283 /* TableViewCell.swift */,
+				BFFE2EE62741CA4F00CC4BF0 /* RatingTVCell.swift */,
+				BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */,
 				BFBBEC8B265EFF7600C5FA10 /* Main.storyboard */,
 			);
 			path = view;
 			sourceTree = "<group>";
 		};
-		BF0DD6C02662AEF200DC7AB5 /* controler */ = {
+		BF0DD6C02662AEF200DC7AB5 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
 				BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */,
@@ -202,7 +109,7 @@
 				BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */,
 				BF021BAC26B6D9CA00253789 /* ResultadoTableViewController.swift */,
 			);
-			path = controler;
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 		BFBBEC79265EFF7600C5FA10 = {
@@ -218,9 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				BFBBEC82265EFF7600C5FA10 /* EasyDecision.app */,
-				BF492DFC26D919370022434F /* EasyDecision copy.app */,
-				BF492E1D26D919370022434F /* EasyDecision copy 2.app */,
-				BF492E3F26D919370022434F /* EasyDecision copy copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,66 +169,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BF492DDC26D919370022434F /* EasyDecision copy */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF492DF926D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy" */;
-			buildPhases = (
-				BF492DDF26D919370022434F /* Sources */,
-				BF492DF326D919370022434F /* Frameworks */,
-				BF492DF526D919370022434F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "EasyDecision copy";
-			packageProductDependencies = (
-				BF492DDD26D919370022434F /* SQLite */,
-			);
-			productName = EasyDecision;
-			productReference = BF492DFC26D919370022434F /* EasyDecision copy.app */;
-			productType = "com.apple.product-type.application";
-		};
-		BF492DFD26D919370022434F /* EasyDecision copy 2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF492E1A26D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy 2" */;
-			buildPhases = (
-				BF492E0026D919370022434F /* Sources */,
-				BF492E1426D919370022434F /* Frameworks */,
-				BF492E1626D919370022434F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "EasyDecision copy 2";
-			packageProductDependencies = (
-				BF492DFE26D919370022434F /* SQLite */,
-			);
-			productName = EasyDecision;
-			productReference = BF492E1D26D919370022434F /* EasyDecision copy 2.app */;
-			productType = "com.apple.product-type.application";
-		};
-		BF492E1F26D919370022434F /* EasyDecision copy copy */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BF492E3C26D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy copy" */;
-			buildPhases = (
-				BF492E2226D919370022434F /* Sources */,
-				BF492E3626D919370022434F /* Frameworks */,
-				BF492E3826D919370022434F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "EasyDecision copy copy";
-			packageProductDependencies = (
-				BF492E2026D919370022434F /* SQLite */,
-			);
-			productName = EasyDecision;
-			productReference = BF492E3F26D919370022434F /* EasyDecision copy copy.app */;
-			productType = "com.apple.product-type.application";
-		};
 		BFBBEC81265EFF7600C5FA10 /* EasyDecision */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFBBEC96265EFF7A00C5FA10 /* Build configuration list for PBXNativeTarget "EasyDecision" */;
@@ -376,44 +220,11 @@
 			projectRoot = "";
 			targets = (
 				BFBBEC81265EFF7600C5FA10 /* EasyDecision */,
-				BF492DDC26D919370022434F /* EasyDecision copy */,
-				BF492DFD26D919370022434F /* EasyDecision copy 2 */,
-				BF492E1F26D919370022434F /* EasyDecision copy copy */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BF492DF526D919370022434F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492DF626D919370022434F /* LaunchScreen.storyboard in Resources */,
-				BF492DF726D919370022434F /* Assets.xcassets in Resources */,
-				BF492DF826D919370022434F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E1626D919370022434F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E1726D919370022434F /* LaunchScreen.storyboard in Resources */,
-				BF492E1826D919370022434F /* Assets.xcassets in Resources */,
-				BF492E1926D919370022434F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E3826D919370022434F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E3926D919370022434F /* LaunchScreen.storyboard in Resources */,
-				BF492E3A26D919370022434F /* Assets.xcassets in Resources */,
-				BF492E3B26D919370022434F /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BFBBEC80265EFF7600C5FA10 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,97 +238,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BF492DDF26D919370022434F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492DE026D919370022434F /* AvaliacaoTableViewController.swift in Sources */,
-				BF492DE126D919370022434F /* TableViewCell.swift in Sources */,
-				BF492DE226D919370022434F /* CriteriosTableViewController.swift in Sources */,
-				BF492DE326D919370022434F /* EditaAvaliacaoViewController.swift in Sources */,
-				BF492DE426D919370022434F /* DecisaoTableViewController.swift in Sources */,
-				BF492DE526D919370022434F /* OpcoesTableViewControler.swift in Sources */,
-				BF492DE626D919370022434F /* DatabaseManager.swift in Sources */,
-				BF492DE726D919370022434F /* AdicionaDecisaoViewController.swift in Sources */,
-				BF492DE826D919370022434F /* AppDelegate.swift in Sources */,
-				BF492DE926D919370022434F /* Resultado.swift in Sources */,
-				BF492DEA26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */,
-				BF492DEB26D919370022434F /* Criterio.swift in Sources */,
-				BF492DEC26D919370022434F /* Opcao.swift in Sources */,
-				BF492DED26D919370022434F /* Avaliacao.swift in Sources */,
-				BF492DEE26D919370022434F /* SceneDelegate.swift in Sources */,
-				BF492DEF26D919370022434F /* AdicionaCriterioViewController.swift in Sources */,
-				BF492DF026D919370022434F /* EasyDecision.xcdatamodeld in Sources */,
-				BF492DF126D919370022434F /* ResultadoTableViewController.swift in Sources */,
-				BF492DF226D919370022434F /* Decisao.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E0026D919370022434F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E0126D919370022434F /* AvaliacaoTableViewController.swift in Sources */,
-				BF492E0226D919370022434F /* TableViewCell.swift in Sources */,
-				BF492E0326D919370022434F /* CriteriosTableViewController.swift in Sources */,
-				BF492E0426D919370022434F /* EditaAvaliacaoViewController.swift in Sources */,
-				BF492E0526D919370022434F /* DecisaoTableViewController.swift in Sources */,
-				BF492E0626D919370022434F /* OpcoesTableViewControler.swift in Sources */,
-				BF492E0726D919370022434F /* DatabaseManager.swift in Sources */,
-				BF492E0826D919370022434F /* AdicionaDecisaoViewController.swift in Sources */,
-				BF492E0926D919370022434F /* AppDelegate.swift in Sources */,
-				BF492E0A26D919370022434F /* Resultado.swift in Sources */,
-				BF492E0B26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */,
-				BF492E0C26D919370022434F /* Criterio.swift in Sources */,
-				BF492E0D26D919370022434F /* Opcao.swift in Sources */,
-				BF492E0E26D919370022434F /* Avaliacao.swift in Sources */,
-				BF492E0F26D919370022434F /* SceneDelegate.swift in Sources */,
-				BF492E1026D919370022434F /* AdicionaCriterioViewController.swift in Sources */,
-				BF492E1126D919370022434F /* EasyDecision.xcdatamodeld in Sources */,
-				BF492E1226D919370022434F /* ResultadoTableViewController.swift in Sources */,
-				BF492E1326D919370022434F /* Decisao.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BF492E2226D919370022434F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BF492E2326D919370022434F /* AvaliacaoTableViewController.swift in Sources */,
-				BF492E2426D919370022434F /* TableViewCell.swift in Sources */,
-				BF492E2526D919370022434F /* CriteriosTableViewController.swift in Sources */,
-				BF492E2626D919370022434F /* EditaAvaliacaoViewController.swift in Sources */,
-				BF492E2726D919370022434F /* DecisaoTableViewController.swift in Sources */,
-				BF492E2826D919370022434F /* OpcoesTableViewControler.swift in Sources */,
-				BF492E2926D919370022434F /* DatabaseManager.swift in Sources */,
-				BF492E2A26D919370022434F /* AdicionaDecisaoViewController.swift in Sources */,
-				BF492E2B26D919370022434F /* AppDelegate.swift in Sources */,
-				BF492E2C26D919370022434F /* Resultado.swift in Sources */,
-				BF492E2D26D919370022434F /* AdicionaOpcaoViewController.swift in Sources */,
-				BF492E2E26D919370022434F /* Criterio.swift in Sources */,
-				BF492E2F26D919370022434F /* Opcao.swift in Sources */,
-				BF492E3026D919370022434F /* Avaliacao.swift in Sources */,
-				BF492E3126D919370022434F /* SceneDelegate.swift in Sources */,
-				BF492E3226D919370022434F /* AdicionaCriterioViewController.swift in Sources */,
-				BF492E3326D919370022434F /* EasyDecision.xcdatamodeld in Sources */,
-				BF492E3426D919370022434F /* ResultadoTableViewController.swift in Sources */,
-				BF492E3526D919370022434F /* Decisao.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BFBBEC7E265EFF7600C5FA10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BF427B74269F62E400C77DF8 /* AvaliacaoTableViewController.swift in Sources */,
-				BF90A38A2698BB38006D2283 /* TableViewCell.swift in Sources */,
 				BFE05E0D269210A500FE1DA1 /* CriteriosTableViewController.swift in Sources */,
 				BFCD9C8926A0F02F0037C550 /* EditaAvaliacaoViewController.swift in Sources */,
 				BF0DD6BC2662ADBD00DC7AB5 /* DecisaoTableViewController.swift in Sources */,
+				BFFE2EE72741CA4F00CC4BF0 /* RatingTVCell.swift in Sources */,
 				BF15E1DC268534A8002DB26A /* OpcoesTableViewControler.swift in Sources */,
 				BFFD5BCE26ADA6D5007D9786 /* DatabaseManager.swift in Sources */,
 				BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */,
 				BFBBEC86265EFF7600C5FA10 /* AppDelegate.swift in Sources */,
+				BF6F7095274D90FA004DF3E1 /* ResultadoTVCell.swift in Sources */,
 				BF021BAB26B6D20D00253789 /* Resultado.swift in Sources */,
 				BF15E1DF268633BD002DB26A /* AdicionaOpcaoViewController.swift in Sources */,
 				BFFD5BD226AED7F7007D9786 /* Criterio.swift in Sources */,
@@ -553,120 +287,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		BF492DFA26D919370022434F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BF492DFB26D919370022434F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		BF492E1B26D919370022434F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy 2-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BF492E1C26D919370022434F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy 2-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		BF492E3D26D919370022434F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy copy-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		BF492E3E26D919370022434F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGUPB9UU3P;
-				INFOPLIST_FILE = "EasyDecision copy copy-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.alura.EasyDecision;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		BFBBEC94265EFF7A00C5FA10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -824,33 +444,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BF492DF926D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF492DFA26D919370022434F /* Debug */,
-				BF492DFB26D919370022434F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BF492E1A26D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy 2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF492E1B26D919370022434F /* Debug */,
-				BF492E1C26D919370022434F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BF492E3C26D919370022434F /* Build configuration list for PBXNativeTarget "EasyDecision copy copy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BF492E3D26D919370022434F /* Debug */,
-				BF492E3E26D919370022434F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		BFBBEC7D265EFF7600C5FA10 /* Build configuration list for PBXProject "EasyDecision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -872,30 +465,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BF492DDE26D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
-			};
-		};
-		BF492DFF26D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
-			};
-		};
-		BF492E2126D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
-			};
-		};
 		BFFD5BC726AD9F90007D9786 /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
@@ -907,21 +476,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BF492DDD26D919370022434F /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF492DDE26D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */;
-			productName = SQLite;
-		};
-		BF492DFE26D919370022434F /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF492DFF26D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */;
-			productName = SQLite;
-		};
-		BF492E2026D919370022434F /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF492E2126D919370022434F /* XCRemoteSwiftPackageReference "SQLite" */;
-			productName = SQLite;
-		};
 		BFFD5BC826AD9F90007D9786 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BFFD5BC726AD9F90007D9786 /* XCRemoteSwiftPackageReference "SQLite" */;

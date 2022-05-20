@@ -16,8 +16,25 @@ class ResultadoTableViewController: UITableViewController {
     var listaResultados: [Resultado] = []
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
-    @IBAction func botaoConcluir(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+    //MARK: tela
+    
+    private lazy var concluirButton: UIBarButtonItem = {
+        let view = UIBarButtonItem(title: "concluir", style: .done, target: self, action: #selector(goToConcluirResultado(sender:)))
+        return view
+    }()
+    
+    override func loadView() {
+        self.view = {
+            let tableView = UITableView()
+            tableView.backgroundColor = .systemBackground
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.register(ResultadoTVCell.self, forCellReuseIdentifier: "celula-resultado")
+            return tableView
+        }()
+        
+        self.title = "Resultados"
+        self.navigationItem.setRightBarButton(concluirButton, animated: true)
     }
     
     override func viewDidLoad() {
@@ -27,6 +44,10 @@ class ResultadoTableViewController: UITableViewController {
         ordenaListaResultadosPorPorcentagem()
     }
     
+    @objc func goToConcluirResultado(sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func ordenaListaResultadosPorPorcentagem() {
         listaResultados.sort(by: { resultadoEsquerda, resultadoDireita in
             return resultadoEsquerda.porcentagem > resultadoDireita.porcentagem
@@ -34,7 +55,9 @@ class ResultadoTableViewController: UITableViewController {
     }
     
     func preencheListaAvaliacoes() {
-        guard let decisao = decisao else { return }
+        guard let decisao = decisao
+        else { return }
+        
         do {
             self.listaAvaliacoes = try Avaliacao.listaDoBanco(decisao: decisao)
         } catch {
@@ -76,12 +99,12 @@ class ResultadoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as! TableViewCell
-        
+        guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as? ResultadoTVCell
+        else { return UITableViewCell() }
         let resultado = self.listaResultados[indexPath.row]
         
-        celula.title?.text = resultado.opcao.descricao
-        celula.peso?.text = NumberFormatter.localizedString(from: NSNumber(value: resultado.porcentagem), number: .percent)
+        celula.title.text = resultado.opcao.descricao
+        celula.numero.text = NumberFormatter.localizedString(from: NSNumber(value: resultado.porcentagem), number: .percent)
         return celula
     }
     
