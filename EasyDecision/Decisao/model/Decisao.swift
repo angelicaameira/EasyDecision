@@ -42,6 +42,7 @@ class Decisao: NSObject, Salvavel {
         var lista = [Decisao]()
         for decisaoDoBanco in try DatabaseManager.db.prepare(tabela) {
             print("id: \(decisaoDoBanco[idExpression]), name: \(decisaoDoBanco[descricaoExpression])")
+            
             lista.append(Decisao(id: decisaoDoBanco[idExpression], descricao: decisaoDoBanco[descricaoExpression]))
         }
         return lista

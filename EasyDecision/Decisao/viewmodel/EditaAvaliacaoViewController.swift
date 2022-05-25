@@ -19,11 +19,7 @@ class EditaAvaliacaoViewController: UIViewController {
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
-        view.textColor =  .black
         view.placeholder = "insira a nota da avaliação"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -34,7 +30,6 @@ class EditaAvaliacaoViewController: UIViewController {
         view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
         view.minimumValue = 1
         view.maximumValue = 5
-        view.backgroundColor = .systemBackground
         return view
     }()
     

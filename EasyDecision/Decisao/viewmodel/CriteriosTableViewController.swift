@@ -71,8 +71,14 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     // MARK: metodos que não são da table view
     
     func recuperaCriterio() {
+        guard let decisao = decisao
+        else { return }
+        
         do {
-            self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao!)
+           self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao).sorted { criterioAnterior, criterioPosterior in
+                return criterioAnterior.descricao.lowercased() < criterioPosterior.descricao.lowercased()
+            }
+ 
             tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
@@ -101,6 +107,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
         celula.title.text = criterio.descricao
         celula.peso.text = "\(criterio.peso)"
         celula.accessoryType = .disclosureIndicator
+        
         return celula
     }
     

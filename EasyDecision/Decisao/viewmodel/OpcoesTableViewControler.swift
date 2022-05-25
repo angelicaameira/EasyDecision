@@ -71,11 +71,14 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     // MARK: metodos que não são da table view
     
     func recuperaOpcao() {
+        guard let decisao = decisao
+        else { return }
+        
         do {
-            guard let decisao = decisao
-            else { return }
+            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao).sorted { opcaoAnterior, opcaoPosterior in
+                return opcaoAnterior.descricao.lowercased() < opcaoPosterior.descricao.lowercased()
+            }
             
-            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
             tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
@@ -100,7 +103,9 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
         else { return celula }
         
         celula.textLabel?.text = opcao.descricao
+        celula.textLabel?.numberOfLines = 0
         celula.accessoryType = .disclosureIndicator
+        
         return celula
     }
     

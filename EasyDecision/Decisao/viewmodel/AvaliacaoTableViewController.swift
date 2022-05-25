@@ -11,6 +11,7 @@ import SQLite
 
 class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewControllerDelegate {
     
+    weak var delegate: UITableViewHeaderFooterView?
     var decisao: Decisao?
     var avaliacaoSendoEditada: Avaliacao?
     var criterio: Criterio?
@@ -32,11 +33,13 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
             tableView.dataSource = self
             tableView.delegate = self
             tableView.register(RatingTVCell.self, forCellReuseIdentifier: "celula-avaliacao")
+            tableView.register(AvaliacaoTVSection.self, forHeaderFooterViewReuseIdentifier: "secao-avaliacao")
             return tableView
         }()
         
         self.title = "Avaliação"
         self.navigationItem.setRightBarButton(continuarButton, animated: true)
+        
     }
     
     func goToEditarAvaliacao(sender: Any){
@@ -99,7 +102,10 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         else { return }
         
         do {
-            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
+            self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao).sorted { opcaoAnterior, opcaoPosterior in
+                return opcaoAnterior.descricao.lowercased() < opcaoPosterior.descricao.lowercased()
+            }
+            
         } catch {
             print(error.localizedDescription)
         }
@@ -110,7 +116,10 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         else { return }
         
         do {
-            self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao)
+            self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao).sorted { criterioAnterior, criterioPosterior in
+                 return criterioAnterior.descricao.lowercased() < criterioPosterior.descricao.lowercased()
+             }
+            
         } catch {
             print(error.localizedDescription)
         }
@@ -122,8 +131,14 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         return listaOpcoes?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return listaOpcoes?[section].descricao
+    override func tableView(_ tableView: UITableView,
+            viewForHeaderInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "secao-avaliacao") as? AvaliacaoTVSection
+        else { return UIView() }
+        
+        view.descricaoOpcao.text = listaOpcoes?[section].descricao
+
+       return view
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
