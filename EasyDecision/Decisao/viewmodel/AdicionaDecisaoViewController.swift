@@ -19,6 +19,8 @@ class AdicionaDecisaoViewController: UIViewController {
     private lazy var descricaoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.returnKeyType = .done
+        view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
         view.placeholder = "insira a descrição da decisão"
         view.borderStyle = .roundedRect
         return view
@@ -109,4 +111,9 @@ class AdicionaDecisaoViewController: UIViewController {
         else { return }
         descricaoTextField.text = decisaoSelecionada.descricao
     }
+    
+    @objc func clicaBotaoDoneTeclado(_ sender: Any) {
+        salvaDecisao(sender)
+    }
+    
 }

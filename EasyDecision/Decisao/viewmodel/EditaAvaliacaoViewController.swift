@@ -19,6 +19,8 @@ class EditaAvaliacaoViewController: UIViewController {
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.returnKeyType = .done
+        view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
         view.placeholder = "insira a nota da avaliação"
         view.borderStyle = .roundedRect
         return view
