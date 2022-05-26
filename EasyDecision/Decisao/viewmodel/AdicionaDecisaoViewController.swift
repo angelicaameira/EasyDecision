@@ -59,7 +59,11 @@ class AdicionaDecisaoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.sheetPresentationController?.detents = [.medium()]
+        if #available(iOS 15.0, *) {
+            self.sheetPresentationController?.detents = [.medium()]
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func setupConstraints(){

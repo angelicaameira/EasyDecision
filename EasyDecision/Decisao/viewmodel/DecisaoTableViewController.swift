@@ -34,23 +34,6 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         self.navigationItem.setRightBarButton(addButton, animated: true)
     }
     
-    func showMyViewControllerInACustomizedSheet() {
-        let viewControllerToPresent = AdicionaDecisaoViewController()
-        if #available(iOS 15.0, *) {
-            if let sheet = viewControllerToPresent.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-                sheet.largestUndimmedDetentIdentifier = .medium
-                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-                sheet.prefersEdgeAttachedInCompactHeight = true
-                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-        present(viewControllerToPresent, animated: true, completion: nil)
-    }
-    
-    
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {
         let destinationController = AdicionaDecisaoViewController()
         destinationController.delegate = self
