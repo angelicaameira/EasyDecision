@@ -107,7 +107,7 @@ class AdicionaCriterioViewController: UIViewController {
     
     @objc func salvaCriterio(_ sender: Any) {
         guard
-            let descricaoCriterio = descricaoTextField.text,
+            var descricaoCriterio = descricaoTextField.text,
             let peso = pesoTextField.text,
             let decisao = decisao
         else { return }

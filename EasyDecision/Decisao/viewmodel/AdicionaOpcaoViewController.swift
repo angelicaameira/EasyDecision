@@ -69,7 +69,7 @@ class AdicionaOpcaoViewController: UIViewController {
     
     @objc func salvaOpcao(_ sender: Any) {
         guard
-            let descricaoOpcao = descricaoTextField.text,
+            var descricaoOpcao = descricaoTextField.text,
             let decisao = decisao
         else { return }
         
