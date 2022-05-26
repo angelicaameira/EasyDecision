@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import SQLite
 
-class AvaliacaoTableViewController: UITableViewController {
+class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewControllerDelegate {
     
     var decisao: Decisao?
     var avaliacaoSendoEditada: Avaliacao?
@@ -41,14 +41,14 @@ class AvaliacaoTableViewController: UITableViewController {
     
     func goToEditarAvaliacao(sender: Any){
         let destinationController = EditaAvaliacaoViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "editarAvaliacao" , source: self, destination: destinationController), sender: self)
-        self.navigationController?
-            .pushViewController(destinationController, animated: true)
+        destinationController.delegate = self
+        destinationController.avaliacao = self.avaliacaoSendoEditada
+        self.present(UINavigationController(rootViewController: destinationController), animated: true)
     }
     
     @objc func goToMostrarResultado(sender: Any) {
         let destinationController = ResultadoTableViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "mostrarResultado", source: self, destination: destinationController), sender: self)
+        destinationController.decisao = self.decisao
         self.navigationController?.pushViewController(destinationController, animated: true)
     }
     
@@ -57,11 +57,6 @@ class AvaliacaoTableViewController: UITableViewController {
         recuperaOpcoes()
         recuperaCriterios()
         criaAvaliacoes()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
     
     func criaAvaliacoes() {
@@ -73,6 +68,7 @@ class AvaliacaoTableViewController: UITableViewController {
         var listaAvaliacoesQueJaExistem: [Avaliacao]?
         do {
             listaAvaliacoesQueJaExistem = try Avaliacao.listaDoBanco(decisao: decisao)
+            tableView.reloadData()
         } catch {
             print(error.localizedDescription)
         }
@@ -154,21 +150,6 @@ class AvaliacaoTableViewController: UITableViewController {
         return celula
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? EditaAvaliacaoViewController {
-            
-            if segue.identifier == "editarAvaliacao" {
-                destinationViewController.avaliacao = self.avaliacaoSendoEditada
-            }
-        }
-        
-        if let destinationViewController = segue.destination as? ResultadoTableViewController {
-            if segue.identifier == "mostrarResultado" {
-                destinationViewController.decisao = self.decisao
-            }
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let posicaoDaOpcaoNaTableView = indexPath.section
         let posicaoDaCriterioNaTableView = indexPath.row
@@ -184,4 +165,8 @@ class AvaliacaoTableViewController: UITableViewController {
         // chamar a outra tela
         self.goToEditarAvaliacao(sender: self)
     }
+}
+
+protocol AvaliacaoTableViewControllerDelegate: AnyObject {
+    func criaAvaliacoes()
 }

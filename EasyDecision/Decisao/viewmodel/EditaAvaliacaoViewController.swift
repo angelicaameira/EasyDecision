@@ -9,6 +9,7 @@ import UIKit
 
 class EditaAvaliacaoViewController: UIViewController {
     
+    weak var delegate: AvaliacaoTableViewControllerDelegate?
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var avaliacaoCelula: RatingTVCell?
     var avaliacao: Avaliacao?
@@ -59,6 +60,15 @@ class EditaAvaliacaoViewController: UIViewController {
         self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 15.0, *) {
+            self.sheetPresentationController?.detents = [.medium()]
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         pesoTextField.becomeFirstResponder()
@@ -94,7 +104,10 @@ class EditaAvaliacaoViewController: UIViewController {
         
         do {
             try avaliacao?.atualizaNoBanco()
-            navigationController?.popViewController(animated: true)
+            navigationController?.dismiss(animated: true) { [weak self]
+                in
+                self?.delegate?.criaAvaliacoes()
+            }
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

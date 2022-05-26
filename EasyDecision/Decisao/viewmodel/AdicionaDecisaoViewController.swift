@@ -10,6 +10,7 @@ import UIKit
 
 class AdicionaDecisaoViewController: UIViewController {
     
+    weak var delegate: DecisaoTableViewControllerDelegate?
     var decisao: Decisao?
     var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
@@ -60,6 +61,15 @@ class AdicionaDecisaoViewController: UIViewController {
         self.setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 15.0, *) {
+            self.sheetPresentationController?.detents = [.medium()]
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     func setupConstraints(){
         view.addSubview(descricaoTextField)
         
@@ -95,7 +105,10 @@ class AdicionaDecisaoViewController: UIViewController {
             } else {
                 try decisao?.atualizaNoBanco()
             }
-            navigationController?.popViewController(animated: true)
+            navigationController?.dismiss(animated: true) { [weak self]
+                in
+                self?.delegate?.recuperaDecisao()
+            }
         } catch {
             alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)

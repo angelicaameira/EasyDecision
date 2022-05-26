@@ -8,7 +8,7 @@ import UIKit
 import Foundation
 import SQLite
 
-class DecisaoTableViewController: UITableViewController {
+class DecisaoTableViewController: UITableViewController, DecisaoTableViewControllerDelegate {
     
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
@@ -35,19 +35,21 @@ class DecisaoTableViewController: UITableViewController {
     }
     
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {
-        self.navigationController?.pushViewController(AdicionaDecisaoViewController(), animated: true)
+        let destinationController = AdicionaDecisaoViewController()
+        destinationController.delegate = self
+        self.present(UINavigationController(rootViewController: destinationController), animated: true)
     }
     
     func goToEditarDecisao(sender: Any) {
         let destinationController = AdicionaDecisaoViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "editarDecisao" , source: self, destination: destinationController), sender: self)
-        self.navigationController?
-            .pushViewController(destinationController, animated: true)
+        destinationController.decisao = self.decisaoSelecionada
+        destinationController.delegate = self
+        self.present(UINavigationController(rootViewController: destinationController), animated: true)
     }
     
     func goToMostrarOpcoes(sender: Any) {
         let destinationController = OpcoesTableViewController()
-        self.prepare(for: UIStoryboardSegue(identifier: "mostrarOpcoes", source: self, destination: destinationController), sender: self)
+        destinationController.decisao = self.decisaoSelecionada
         self.navigationController?.pushViewController(destinationController, animated: true)
     }
     
@@ -62,6 +64,7 @@ class DecisaoTableViewController: UITableViewController {
     func recuperaDecisao() {
         do {
             self.listaDecisoes = try Decisao.listaDoBanco()
+            tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -86,19 +89,6 @@ class DecisaoTableViewController: UITableViewController {
         
         celula.textLabel?.text = decisao.descricao
         return celula
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? OpcoesTableViewController {
-            if segue.identifier == "mostrarOpcoes" {
-                destinationViewController.decisao = self.decisaoSelecionada
-            }
-        }
-        if let destinationViewController = segue.destination as? AdicionaDecisaoViewController {
-            if segue.identifier == "editarDecisao" {
-                destinationViewController.decisao = self.decisaoSelecionada
-            }
-        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -136,4 +126,8 @@ class DecisaoTableViewController: UITableViewController {
         self.decisaoSelecionada = decisaoSelecionada
         self.goToMostrarOpcoes(sender: tableView)
     }
+}
+
+protocol DecisaoTableViewControllerDelegate: AnyObject {
+    func recuperaDecisao()
 }
