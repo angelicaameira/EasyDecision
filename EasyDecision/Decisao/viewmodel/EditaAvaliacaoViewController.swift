@@ -62,7 +62,11 @@ class EditaAvaliacaoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.sheetPresentationController?.detents = [.medium()]
+        if #available(iOS 15.0, *) {
+            self.sheetPresentationController?.detents = [.medium()]
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
