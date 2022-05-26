@@ -19,6 +19,8 @@ class AdicionaOpcaoViewController: UIViewController {
     private lazy var descricaoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.returnKeyType = .done
+        view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
         view.backgroundColor = .systemBackground
         view.textColor =  .black
         view.placeholder = "insira a descrição da opção"
@@ -117,6 +119,9 @@ class AdicionaOpcaoViewController: UIViewController {
         else { return }
         
         descricaoTextField.text = opcaoSendoEditada.descricao
+    }
+    @objc func clicaBotaoDoneTeclado(_ sender: Any) {
+        salvaOpcao(sender)
     }
 }
 
