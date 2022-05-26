@@ -6,10 +6,9 @@
 //
 import Foundation
 import UIKit
-import CoreData
 
 class EditaAvaliacaoViewController: UIViewController {
-   
+    
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     var avaliacaoCelula: RatingTVCell?
     var avaliacao: Avaliacao?
@@ -28,7 +27,7 @@ class EditaAvaliacaoViewController: UIViewController {
         view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
-      }()
+    }()
     
     @objc private lazy var stepper: UIStepper = {
         let view = UIStepper(frame: .zero)
@@ -38,7 +37,7 @@ class EditaAvaliacaoViewController: UIViewController {
         view.maximumValue = 5
         view.backgroundColor = .systemBackground
         return view
-      }()
+    }()
     
     private lazy var doneButton: UIBarButtonItem = {
         let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaAvaliacao(_:)))
@@ -69,18 +68,15 @@ class EditaAvaliacaoViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupConstraints()
-        
     }
     
     func setupConstraints(){
-        
         view.addSubview(pesoTextField)
         view.addSubview(stepper)
         
         pesoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         pesoTextField.trailingAnchor.constraint(equalTo: self.stepper.leadingAnchor, constant: -10).isActive = true
         pesoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        
         stepper.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
@@ -91,13 +87,11 @@ class EditaAvaliacaoViewController: UIViewController {
     }
     
     @objc func salvaAvaliacao(_ sender: Any) {
-        guard let peso = pesoTextField.text else {
-            return
-        }
+        guard let peso = pesoTextField.text
+        else { return }
         let nota = (peso as NSString).integerValue
-        
         avaliacao?.nota = Int(nota)
-
+        
         do {
             try avaliacao?.atualizaNoBanco()
             navigationController?.popViewController(animated: true)
@@ -109,9 +103,9 @@ class EditaAvaliacaoViewController: UIViewController {
     }
     
     func setupView() {
-        guard let avaliacaoSendoEditada = self.avaliacao else {
-            return
-        }
+        guard let avaliacaoSendoEditada = self.avaliacao
+        else { return }
+        
         self.pesoTextField.text = "\(avaliacaoSendoEditada.nota)"
         stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
     }

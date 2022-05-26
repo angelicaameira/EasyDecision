@@ -44,8 +44,6 @@ class OpcoesTableViewController: UITableViewController {
         let telaAdicionaOpcao = AdicionaOpcaoViewController()
         telaAdicionaOpcao.decisao = self.decisao
         self.navigationController?.pushViewController(telaAdicionaOpcao, animated: true)
-        
-       
     }
     
     func goToEditarOpcao(sender: Any){
@@ -71,9 +69,9 @@ class OpcoesTableViewController: UITableViewController {
     
     func recuperaOpcao() {
         do {
-            guard let decisao = decisao else {
-                return
-            }
+            guard let decisao = decisao
+            else { return }
+            
             self.listaOpcoes = try Opcao.listaDoBanco(decisao: decisao)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
@@ -94,9 +92,8 @@ class OpcoesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: "celula-opcao")
-        guard let opcao = self.listaOpcoes?[indexPath.row] else {
-            return celula
-        }
+        guard let opcao = self.listaOpcoes?[indexPath.row]
+        else { return celula }
         
         celula.textLabel?.text = opcao.descricao
         return celula
@@ -104,6 +101,7 @@ class OpcoesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? AdicionaOpcaoViewController {
+            
             if segue.identifier == "editarOpcao" {
                 destinationViewController.opcao = self.opcaoSendoEditada
                 destinationViewController.decisao = self.decisao
@@ -122,7 +120,9 @@ class OpcoesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
             UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                guard let opcao = self.listaOpcoes?[indexPath.row] else { return }
+                guard let opcao = self.listaOpcoes?[indexPath.row]
+                else { return }
+                
                 do {
                     try opcao.apagaNoBanco()
                     self.recuperaOpcao()
@@ -134,7 +134,8 @@ class OpcoesTableViewController: UITableViewController {
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (contextualAction, view, _) in
-                guard let self = self else { return }
+                guard let self = self
+                else { return }
                 
                 self.opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
                 self.goToEditarOpcao(sender: contextualAction)
@@ -143,7 +144,8 @@ class OpcoesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row] else { return }
+        guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
+        else { return }
         self.opcaoSendoEditada = opcaoSendoEditada
         self.goToEditarOpcao(sender: self)
     }

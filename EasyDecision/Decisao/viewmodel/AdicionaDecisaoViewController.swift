@@ -7,10 +7,9 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 class AdicionaDecisaoViewController: UIViewController {
-
+    
     var decisao: Decisao?
     var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
     
@@ -28,7 +27,7 @@ class AdicionaDecisaoViewController: UIViewController {
         view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
-      }()
+    }()
     
     private lazy var doneButton: UIBarButtonItem = {
         let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaDecisao(_:)))
@@ -62,7 +61,6 @@ class AdicionaDecisaoViewController: UIViewController {
     }
     
     func setupConstraints(){
-        
         view.addSubview(descricaoTextField)
         
         descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -71,9 +69,8 @@ class AdicionaDecisaoViewController: UIViewController {
     }
     
     @objc func salvaDecisao(_ sender: Any) {
-        guard let descricaoDecisao = descricaoTextField.text else {
-            return
-        }
+        guard let descricaoDecisao = descricaoTextField.text
+        else { return }
         
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da decissão para continuar", preferredStyle: .alert)
         
@@ -99,15 +96,14 @@ class AdicionaDecisaoViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         } catch {
             alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                        self.present(alertError, animated: true, completion: nil)
-                        print(error.localizedDescription)
+            self.present(alertError, animated: true, completion: nil)
+            print(error.localizedDescription)
         }
     }
     
     func setupView() {
-        guard let decisaoSelecionada = decisao else {
-            return
-        }
+        guard let decisaoSelecionada = decisao
+        else { return }
         descricaoTextField.text = decisaoSelecionada.descricao
     }
     
