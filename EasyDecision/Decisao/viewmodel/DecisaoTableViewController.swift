@@ -34,6 +34,10 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         self.navigationItem.setRightBarButton(addButton, animated: true)
     }
     
+    // comentário
+    
+    // fim do comentário
+    
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {
         let destinationController = AdicionaDecisaoViewController()
         destinationController.delegate = self
