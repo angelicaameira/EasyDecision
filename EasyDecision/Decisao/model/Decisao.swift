@@ -41,7 +41,9 @@ class Decisao: NSObject, Salvavel {
     static func listaDoBanco() throws -> [Decisao] {
         var lista = [Decisao]()
         for decisaoDoBanco in try DatabaseManager.db.prepare(tabela) {
+#if DEBUG
             print("id: \(decisaoDoBanco[idExpression]), name: \(decisaoDoBanco[descricaoExpression])")
+#endif
             
             lista.append(Decisao(id: decisaoDoBanco[idExpression], descricao: decisaoDoBanco[descricaoExpression]))
         }

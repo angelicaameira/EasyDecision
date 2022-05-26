@@ -15,7 +15,7 @@ class Criterio: NSObject, Salvavel {
     var descricao: String
     var peso: Int
     var decisao: Decisao
-
+    
     // MARK: propriedades do banco
     private static let tabela = Table("Criterio")
     private static let idExpression = Expression<Int64>("id")
@@ -50,7 +50,9 @@ class Criterio: NSObject, Salvavel {
         var lista = [Criterio]()
         let filtro = Criterio.tabela.filter(Criterio.idDecisaoExpression == decisao.id)
         for criterioDoBanco in try DatabaseManager.db.prepare(filtro) {
+#if DEBUG
             print("id: \(criterioDoBanco[idExpression]), name: \(criterioDoBanco[descricaoExpression]), peso:\(criterioDoBanco[pesoExpression])")
+#endif
             lista.append(Criterio(id: criterioDoBanco[Criterio.idExpression], descricao: criterioDoBanco[Criterio.descricaoExpression], peso: criterioDoBanco[Criterio.pesoExpression], decisao: try Decisao.comId(criterioDoBanco[idDecisaoExpression])))
         }
         return lista
@@ -62,8 +64,8 @@ class Criterio: NSObject, Salvavel {
     
     func insereNoBanco() throws {
         let insert = Criterio.tabela.insert(Criterio.descricaoExpression <- self.descricao,
-                                         Criterio.pesoExpression <- self.peso,
-                                         Criterio.idDecisaoExpression <- self.decisao.id)
+                                            Criterio.pesoExpression <- self.peso,
+                                            Criterio.idDecisaoExpression <- self.decisao.id)
         self.id = try DatabaseManager.db.run(insert)
     }
     

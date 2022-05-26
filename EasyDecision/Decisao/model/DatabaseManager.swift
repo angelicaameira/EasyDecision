@@ -25,8 +25,10 @@ class DatabaseManager: NSObject {
     
     static let db: Connection = {
         let connection = try! Connection(databasePath)
+#if DEBUG
         print("Arquivo do banco de dados:")
         print(databasePath)
+#endif
         return connection
     }()
 }

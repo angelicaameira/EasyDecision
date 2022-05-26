@@ -117,8 +117,8 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         
         do {
             self.listaCriterios = try Criterio.listaDoBanco(decisao: decisao).sorted { criterioAnterior, criterioPosterior in
-                 return criterioAnterior.descricao.lowercased() < criterioPosterior.descricao.lowercased()
-             }
+                return criterioAnterior.descricao.lowercased() < criterioPosterior.descricao.lowercased()
+            }
             
         } catch {
             print(error.localizedDescription)
@@ -132,13 +132,13 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
     }
     
     override func tableView(_ tableView: UITableView,
-            viewForHeaderInSection section: Int) -> UIView? {
+                            viewForHeaderInSection section: Int) -> UIView? {
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "secao-avaliacao") as? AvaliacaoTVSection
         else { return UIView() }
         
         view.descricaoOpcao.text = listaOpcoes?[section].descricao
-
-       return view
+        
+        return view
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
