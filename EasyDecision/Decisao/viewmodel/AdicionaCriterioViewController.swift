@@ -6,7 +6,6 @@
 //
 import Foundation
 import UIKit
-import CoreData
 
 class AdicionaCriterioViewController: UIViewController {
     
@@ -87,7 +86,6 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     func setupConstraints(){
-        
         view.addSubview(descricaoTextField)
         view.addSubview(pesoTextField)
         view.addSubview(stepper)
@@ -95,11 +93,9 @@ class AdicionaCriterioViewController: UIViewController {
         descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         descricaoTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         descricaoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        
         pesoTextField.topAnchor.constraint(equalTo: self.descricaoTextField.bottomAnchor, constant: 20).isActive = true
         pesoTextField.trailingAnchor.constraint(equalTo: self.stepper.leadingAnchor, constant: -10).isActive = true
         pesoTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        
         stepper.topAnchor.constraint(equalTo: self.descricaoTextField.bottomAnchor, constant: 20).isActive = true
         stepper.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         stepper.leadingAnchor.constraint(equalTo: self.pesoTextField.trailingAnchor, constant: 10).isActive = true
@@ -110,11 +106,11 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     @objc func salvaCriterio(_ sender: Any) {
-        guard var descricaoCriterio = descricaoTextField.text,
-              let peso = pesoTextField.text,
-              let decisao = decisao else {
-                  return
-              }
+        guard
+            let descricaoCriterio = descricaoTextField.text,
+            let peso = pesoTextField.text,
+            let decisao = decisao
+        else { return }
         let pesoCriterio = (peso as NSString).integerValue
         let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
@@ -152,7 +148,8 @@ class AdicionaCriterioViewController: UIViewController {
     }
     
     func setupView() {
-        guard let criterioSendoEditado = self.criterio else {
+        guard let criterioSendoEditado = self.criterio
+        else {
             self.pesoTextField.text = "\(1)"
             return
         }
