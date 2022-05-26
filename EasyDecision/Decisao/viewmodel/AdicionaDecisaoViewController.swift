@@ -71,12 +71,14 @@ class AdicionaDecisaoViewController: UIViewController {
     }
     
     @objc func salvaDecisao(_ sender: Any) {
-        guard let descricaoDecisao = descricaoTextField.text
+        guard var descricaoDecisao = descricaoTextField.text
         else { return }
         
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da decissão para continuar", preferredStyle: .alert)
         
-        if descricaoDecisao == "" {
+        descricaoDecisao = descricaoDecisao.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if descricaoDecisao.isEmpty {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return

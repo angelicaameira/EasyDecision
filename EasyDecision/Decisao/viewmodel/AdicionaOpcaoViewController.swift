@@ -72,13 +72,15 @@ class AdicionaOpcaoViewController: UIViewController {
     
     @objc func salvaOpcao(_ sender: Any) {
         guard
-            let descricaoOpcao = descricaoTextField.text,
+            var descricaoOpcao = descricaoTextField.text,
             let decisao = decisao
         else { return }
         
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da opção para continuar", preferredStyle: .alert)
         
-        if descricaoOpcao == "" {
+        descricaoOpcao = descricaoOpcao.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if descricaoOpcao.isEmpty {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
