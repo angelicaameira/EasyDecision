@@ -21,11 +21,7 @@ class AdicionaOpcaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.backgroundColor = .systemBackground
-        view.textColor =  .black
         view.placeholder = "insira a descrição da opção"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -130,4 +126,3 @@ class AdicionaOpcaoViewController: UIViewController {
         salvaOpcao(sender)
     }
 }
-

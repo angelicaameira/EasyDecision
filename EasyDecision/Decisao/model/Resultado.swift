@@ -15,7 +15,7 @@ class Resultado: NSObject {
     var porcentagem: Double
     var decisao: Decisao
     var opcao: Opcao
-
+    
     init(porcentagem: Double, decisao: Decisao, opcao: Opcao) {
         self.id = -1
         self.porcentagem = porcentagem
@@ -29,5 +29,4 @@ class Resultado: NSObject {
         self.decisao = decisao
         self.opcao = opcao
     }
-    
 }

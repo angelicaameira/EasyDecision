@@ -14,7 +14,7 @@ class Opcao: NSObject, Salvavel {
     var id: Int64
     var descricao: String
     var decisao: Decisao
-
+    
     // MARK: propriedades do banco
     private static let tabela = Table("Opcao")
     private static let idExpression = Expression<Int64>("id")
@@ -46,7 +46,9 @@ class Opcao: NSObject, Salvavel {
         var lista = [Opcao]()
         let filtro = Opcao.tabela.filter(Opcao.idDecisaoExpression == decisao.id)
         for opcaoDoBanco in try DatabaseManager.db.prepare(filtro) {
+#if DEBUG
             print("id: \(opcaoDoBanco[idExpression]), name: \(opcaoDoBanco[descricaoExpression])")
+#endif
             lista.append(Opcao(id: opcaoDoBanco[Opcao.idExpression], descricao: opcaoDoBanco[Opcao.descricaoExpression], decisao: try Decisao.comId(opcaoDoBanco[idDecisaoExpression])))
         }
         return lista

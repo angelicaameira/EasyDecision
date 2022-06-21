@@ -24,6 +24,7 @@
 		BFBBEC92265EFF7A00C5FA10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFBBEC90265EFF7A00C5FA10 /* LaunchScreen.storyboard */; };
 		BFCD9C8926A0F02F0037C550 /* EditaAvaliacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */; };
 		BFE05E0D269210A500FE1DA1 /* CriteriosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */; };
+		BFE7DEC8283EADFA00DAB160 /* AvaliacaoTVSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7DEC7283EADFA00DAB160 /* AvaliacaoTVSection.swift */; };
 		BFFD5BC926AD9F90007D9786 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = BFFD5BC826AD9F90007D9786 /* SQLite */; };
 		BFFD5BCC26ADA3E0007D9786 /* Decisao.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */; };
 		BFFD5BCE26ADA6D5007D9786 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */; };
@@ -55,6 +56,7 @@
 		BFBBEC93265EFF7A00C5FA10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditaAvaliacaoViewController.swift; sourceTree = "<group>"; };
 		BFE05E0C269210A500FE1DA1 /* CriteriosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriteriosTableViewController.swift; sourceTree = "<group>"; };
+		BFE7DEC7283EADFA00DAB160 /* AvaliacaoTVSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliacaoTVSection.swift; sourceTree = "<group>"; };
 		BFFD5BC526AD9B97007D9786 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		BFFD5BCB26ADA3E0007D9786 /* Decisao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decisao.swift; sourceTree = "<group>"; };
 		BFFD5BCD26ADA6D5007D9786 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		BF0DD6BF2662AEE700DC7AB5 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				BFE7DEC7283EADFA00DAB160 /* AvaliacaoTVSection.swift */,
 				BFFE2EE62741CA4F00CC4BF0 /* RatingTVCell.swift */,
 				BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */,
 				BFBBEC8B265EFF7600C5FA10 /* Main.storyboard */,
@@ -262,6 +265,7 @@
 				BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */,
 				BF021BAD26B6D9CA00253789 /* ResultadoTableViewController.swift in Sources */,
 				BFFD5BCC26ADA3E0007D9786 /* Decisao.swift in Sources */,
+				BFE7DEC8283EADFA00DAB160 /* AvaliacaoTVSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
