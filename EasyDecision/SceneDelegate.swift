@@ -11,12 +11,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    lazy var navigationController: UINavigationController = {
+        let view = UINavigationController(rootViewController: DecisaoTableViewController())
+        return view
+    }()
+    
+    func setCustomTheme() {
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.backgroundColor = .systemPurple
+        navigationBarAppearance.tintColor = .white
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
+        setCustomTheme()
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: DecisaoTableViewController())
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     

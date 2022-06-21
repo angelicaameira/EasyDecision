@@ -71,8 +71,9 @@ class ResultadoTableViewController: UITableViewController {
     ///
     /// percentualDaOpção = (avaliação1.nota * critério1.peso + avaliaçãoN.nota * critérioN.peso) / (5 * critério1.peso + 5 * critérioN.peso)
     func criaListaResultados() {
-        guard let listaAvaliacoes = self.listaAvaliacoes,
-              let decisao = self.decisao
+        guard
+            let listaAvaliacoes = self.listaAvaliacoes,
+            let decisao = self.decisao
         else { return }
         
         do {
@@ -101,6 +102,7 @@ class ResultadoTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let celula = tableView.dequeueReusableCell(withIdentifier: "celula-resultado") as? ResultadoTVCell
         else { return UITableViewCell() }
+        
         let resultado = self.listaResultados[indexPath.row]
         
         celula.title.text = resultado.opcao.descricao
