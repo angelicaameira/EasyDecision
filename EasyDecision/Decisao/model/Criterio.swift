@@ -55,6 +55,7 @@ class Criterio: NSObject, Salvavel {
 #endif
             lista.append(Criterio(id: criterioDoBanco[Criterio.idExpression], descricao: criterioDoBanco[Criterio.descricaoExpression], peso: criterioDoBanco[Criterio.pesoExpression], decisao: try Decisao.comId(criterioDoBanco[idDecisaoExpression])))
         }
+        
         return lista
     }
     
@@ -93,6 +94,4 @@ class Criterio: NSObject, Salvavel {
             print(error.localizedDescription)
         }
     }
-    
 }
-

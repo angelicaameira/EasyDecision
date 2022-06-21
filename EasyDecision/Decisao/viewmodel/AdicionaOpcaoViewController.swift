@@ -126,4 +126,3 @@ class AdicionaOpcaoViewController: UIViewController {
         salvaOpcao(sender)
     }
 }
-

@@ -63,9 +63,10 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
     }
     
     func criaAvaliacoes() {
-        guard let listaOpcoes = listaOpcoes,
-              let listaCriterios = listaCriterios,
-              let decisao = decisao
+        guard
+            let listaOpcoes = listaOpcoes,
+            let listaCriterios = listaCriterios,
+            let decisao = decisao
         else { return }
         
         var listaAvaliacoesQueJaExistem: [Avaliacao]?
@@ -87,7 +88,9 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
                         try avaliacao.insereNoBanco()
                         self.listaAvaliacoes.append(avaliacao)
                     } else {
-                        guard let indiceDaAvaliacaoExistente = listaAvaliacoesQueJaExistem.firstIndex(of: avaliacao) else { continue }
+                        guard let indiceDaAvaliacaoExistente = listaAvaliacoesQueJaExistem.firstIndex(of: avaliacao)
+                        else { continue }
+                        
                         self.listaAvaliacoes.append(listaAvaliacoesQueJaExistem[indiceDaAvaliacaoExistente])
                     }
                 } catch {

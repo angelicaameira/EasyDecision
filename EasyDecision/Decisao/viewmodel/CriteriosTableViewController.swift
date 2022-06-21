@@ -94,7 +94,8 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let contadorListaDeCriterios = listaCriterios?.count else { return 0 }
+        guard let contadorListaDeCriterios = listaCriterios?.count
+        else { return 0 }
         return contadorListaDeCriterios
     }
     
@@ -113,8 +114,10 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
-            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                guard let criterio = self.listaCriterios?[indexPath.row]
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] (contextualAction, view, _) in
+                guard
+                    let self = self,
+                    let criterio = self.listaCriterios?[indexPath.row]
                 else { return }
                 
                 do {
@@ -122,12 +125,15 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
                     self.recuperaCriterio()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.present(self.alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }
             }),
-            UIContextualAction(style: .normal, title: "Edit", handler: { (contextualAction, view, _) in
+            UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (contextualAction, view, _) in
+                guard let self = self
+                else { return }
+                
                 self.criterioSendoEditado = self.listaCriterios?[indexPath.row]
                 self.goToEditarCriterio(sender: contextualAction)
             })]

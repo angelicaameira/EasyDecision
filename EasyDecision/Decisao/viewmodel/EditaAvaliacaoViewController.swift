@@ -94,6 +94,7 @@ class EditaAvaliacaoViewController: UIViewController {
     @objc func salvaAvaliacao(_ sender: Any) {
         guard let peso = pesoTextField.text
         else { return }
+        
         let nota = (peso as NSString).integerValue
         avaliacao?.nota = Int(nota)
         
