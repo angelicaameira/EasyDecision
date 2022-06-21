@@ -53,7 +53,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
         destinationController.decisao = self.decisao
         destinationController.delegate = self
         self.present(UINavigationController(rootViewController: destinationController), animated: true)
-       
+        
     }
     
     @objc func goToMostrarCriterios(sender: Any) {
@@ -111,8 +111,10 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let acoes = [
-            UIContextualAction(style: .destructive, title: "Delete", handler: { [self] (contextualAction, view, _) in
-                guard let opcao = self.listaOpcoes?[indexPath.row]
+            UIContextualAction(style: .destructive, title: "Delete", handler: { [weak self] (contextualAction, view, _) in
+                guard
+                    let self = self,
+                    let opcao = self.listaOpcoes?[indexPath.row]
                 else { return }
                 
                 do {
@@ -120,8 +122,8 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
                     self.recuperaOpcao()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.present(self.alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }
             }),

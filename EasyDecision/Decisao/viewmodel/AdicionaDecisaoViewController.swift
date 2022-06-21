@@ -66,7 +66,7 @@ class AdicionaDecisaoViewController: UIViewController {
         }
     }
     
-    func setupConstraints(){
+    func setupConstraints() {
         view.addSubview(descricaoTextField)
         
         descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -121,5 +121,4 @@ class AdicionaDecisaoViewController: UIViewController {
     @objc func clicaBotaoDoneTeclado(_ sender: Any) {
         salvaDecisao(sender)
     }
-    
 }

@@ -46,7 +46,8 @@ class Avaliacao: NSObject, Salvavel {
     // MARK: NSObject
     
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? Avaliacao else { return false }
+        guard let object = object as? Avaliacao
+        else { return false }
         
         return self.opcao.id == object.opcao.id
         && self.decisao.id == object.decisao.id
