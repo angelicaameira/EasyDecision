@@ -21,11 +21,7 @@ class AdicionaDecisaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.backgroundColor = .systemBackground
-        view.textColor = .black
         view.placeholder = "insira a descrição da decisão"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -70,7 +66,7 @@ class AdicionaDecisaoViewController: UIViewController {
         }
     }
     
-    func setupConstraints(){
+    func setupConstraints() {
         view.addSubview(descricaoTextField)
         
         descricaoTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -125,5 +121,4 @@ class AdicionaDecisaoViewController: UIViewController {
     @objc func clicaBotaoDoneTeclado(_ sender: Any) {
         salvaDecisao(sender)
     }
-    
 }

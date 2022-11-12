@@ -20,11 +20,7 @@ class AdicionaCriterioViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.backgroundColor = .systemBackground
-        view.textColor =  .black
         view.placeholder = "insira a descrição do critério"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -32,11 +28,7 @@ class AdicionaCriterioViewController: UIViewController {
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
-        view.textColor =  .black
         view.placeholder = "insira o peso do critério"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -47,7 +39,6 @@ class AdicionaCriterioViewController: UIViewController {
         view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
         view.minimumValue = 1
         view.maximumValue = 5
-        view.backgroundColor = .systemBackground
         return view
     }()
     

@@ -63,7 +63,10 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     
     func recuperaDecisao() {
         do {
-            self.listaDecisoes = try Decisao.listaDoBanco()
+            self.listaDecisoes = try Decisao.listaDoBanco().sorted { decisaoAnterior, decisaoPosterior in
+                return decisaoAnterior.descricao.lowercased() < decisaoPosterior.descricao.lowercased()
+            }
+            
             tableView.reloadData()
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
@@ -88,7 +91,9 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         else { return celula }
         
         celula.textLabel?.text = decisao.descricao
+        celula.textLabel?.numberOfLines = 0
         celula.accessoryType = .disclosureIndicator
+        
         return celula
     }
     

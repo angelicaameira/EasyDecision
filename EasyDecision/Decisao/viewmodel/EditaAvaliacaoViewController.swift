@@ -21,11 +21,7 @@ class EditaAvaliacaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.backgroundColor = .systemBackground
-        view.textColor =  .black
         view.placeholder = "insira a nota da avaliação"
-        view.textAlignment = .left
-        view.autocapitalizationType = .none
         view.borderStyle = .roundedRect
         return view
     }()
@@ -36,7 +32,6 @@ class EditaAvaliacaoViewController: UIViewController {
         view.addTarget(self, action: #selector(stepper(_:)), for: .valueChanged)
         view.minimumValue = 1
         view.maximumValue = 5
-        view.backgroundColor = .systemBackground
         return view
     }()
     
@@ -99,6 +94,7 @@ class EditaAvaliacaoViewController: UIViewController {
     @objc func salvaAvaliacao(_ sender: Any) {
         guard let peso = pesoTextField.text
         else { return }
+        
         let nota = (peso as NSString).integerValue
         avaliacao?.nota = Int(nota)
         

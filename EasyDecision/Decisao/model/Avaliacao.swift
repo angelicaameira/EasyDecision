@@ -17,7 +17,7 @@ class Avaliacao: NSObject, Salvavel {
     var decisao: Decisao
     var opcao: Opcao
     var criterio: Criterio
-
+    
     // MARK: propriedades do banco
     
     private static let tabela = Table("Avaliacao")
@@ -46,11 +46,12 @@ class Avaliacao: NSObject, Salvavel {
     // MARK: NSObject
     
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? Avaliacao else { return false }
+        guard let object = object as? Avaliacao
+        else { return false }
         
         return self.opcao.id == object.opcao.id
-            && self.decisao.id == object.decisao.id
-            && self.criterio.id == object.criterio.id;
+        && self.decisao.id == object.decisao.id
+        && self.criterio.id == object.criterio.id;
     }
     
     // MARK: Salvavel e funções no banco
@@ -71,14 +72,16 @@ class Avaliacao: NSObject, Salvavel {
         var lista = [Avaliacao]()
         let filtro = Avaliacao.tabela.filter(Avaliacao.idDecisaoExpression == decisao.id)
         for avaliacaoDoBanco in try DatabaseManager.db.prepare(filtro) {
+#if DEBUG
             print("id: \(avaliacaoDoBanco[idExpression]), nota: \(avaliacaoDoBanco[notaExpression])")
+#endif
             lista.append(
                 Avaliacao(id: avaliacaoDoBanco[Avaliacao.idExpression],
-                         nota: avaliacaoDoBanco[Avaliacao.notaExpression],
-                         decisao: try Decisao.comId(avaliacaoDoBanco[idDecisaoExpression]),
-                         opcao: try Opcao.comId(avaliacaoDoBanco[idOpcaoExpression]),
-                         criterio: try Criterio.comId(avaliacaoDoBanco[idCriterioExpression])
-                ))
+                          nota: avaliacaoDoBanco[Avaliacao.notaExpression],
+                          decisao: try Decisao.comId(avaliacaoDoBanco[idDecisaoExpression]),
+                          opcao: try Opcao.comId(avaliacaoDoBanco[idOpcaoExpression]),
+                          criterio: try Criterio.comId(avaliacaoDoBanco[idCriterioExpression])
+                         ))
         }
         return lista
     }
@@ -98,10 +101,10 @@ class Avaliacao: NSObject, Salvavel {
     func atualizaNoBanco() throws {
         let avaliacao = Avaliacao.tabela.filter(rowid == self.id)
         try DatabaseManager.db.run(avaliacao.update(
-                                    Avaliacao.notaExpression <- self.nota,
-                                    Avaliacao.idDecisaoExpression <- self.decisao.id,
-                                    Avaliacao.idOpcaoExpression <- self.opcao.id,
-                                    Avaliacao.idCriterioExpression <- self.criterio.id))
+            Avaliacao.notaExpression <- self.nota,
+            Avaliacao.idDecisaoExpression <- self.decisao.id,
+            Avaliacao.idOpcaoExpression <- self.opcao.id,
+            Avaliacao.idCriterioExpression <- self.criterio.id))
     }
     
     func apagaNoBanco() throws {
