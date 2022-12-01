@@ -39,7 +39,6 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         
         self.title = "Avaliação"
         self.navigationItem.setRightBarButton(continuarButton, animated: true)
-        
     }
     
     func goToEditarAvaliacao(sender: Any){
