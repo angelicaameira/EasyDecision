@@ -10,7 +10,7 @@ import UIKit
 import SQLite
 
 class CriteriosTableViewController: UITableViewController, CriterioTableViewControllerDelegate {
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter os critérios", preferredStyle: .alert)
     var criterioSendoEditado: Criterio?
     var decisao: Decisao?
     var listaCriterios: [Criterio]?
@@ -65,7 +65,6 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaCriterio()
-        self.tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
@@ -123,7 +122,6 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
                 do {
                     try criterio.apagaNoBanco()
                     self.recuperaCriterio()
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)

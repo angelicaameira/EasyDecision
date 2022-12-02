@@ -10,7 +10,7 @@ import SQLite
 
 class DecisaoTableViewController: UITableViewController, DecisaoTableViewControllerDelegate {
     
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as decisões", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
     
@@ -24,7 +24,6 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     override func loadView() {
         self.view = {
             let tableView = UITableView()
-            tableView.backgroundColor = .systemBackground
             tableView.dataSource = self
             tableView.delegate = self
             return tableView
@@ -56,7 +55,6 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaDecisao()
-        self.tableView.reloadData()
     }
     
     //MARK: metodos
@@ -66,8 +64,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
             self.listaDecisoes = try Decisao.listaDoBanco().sorted { decisaoAnterior, decisaoPosterior in
                 return decisaoAnterior.descricao.lowercased() < decisaoPosterior.descricao.lowercased()
             }
-            
-            tableView.reloadData()
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         } catch {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -75,11 +72,11 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         }
     }
     
+    // MARK: metodos table view
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
-    // MARK: metodos table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listaDecisoes?.count ?? 0
@@ -108,11 +105,10 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
                 do {
                     try decisao.apagaNoBanco()
                     self.recuperaDecisao()
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    
                 } catch {
                     self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)
-                    print(error.localizedDescription)
                 }
             }),
             UIContextualAction(style: .normal, title: "Edit", handler: { [weak self] (contextualAction, view, _) in
