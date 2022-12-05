@@ -122,6 +122,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let decisaoSelecionada = self.listaDecisoes?[indexPath.row]
         else { return }
         

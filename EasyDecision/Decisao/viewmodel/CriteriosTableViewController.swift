@@ -140,6 +140,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let criterioSendoEditado = listaCriterios?[indexPath.row]
         else { return }
         

@@ -136,6 +136,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
         else { return }
         self.opcaoSendoEditada = opcaoSendoEditada
