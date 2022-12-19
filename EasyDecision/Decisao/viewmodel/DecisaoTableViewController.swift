@@ -9,10 +9,19 @@ import Foundation
 import SQLite
 
 class DecisaoTableViewController: UITableViewController, DecisaoTableViewControllerDelegate {
-    
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as decisões", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
+    var countAcessos: Int = 0
+    
+    
+#if APPSTORE_SCREENSHOTS
+    var showOnboardingView = true
+#else
+    var showOnboardingView = !UserDefaults.standard.bool(forKey: "didShowOnboarding")
+#endif
+    var showError = false
+    var error: LocalizedError?
     
     // MARK: tela
     
@@ -21,7 +30,8 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         return view
     }()
     
-    override func loadView() {
+    override func loadView(){
+        super.loadView()
         self.view = {
             let tableView = UITableView()
             tableView.dataSource = self
@@ -31,6 +41,17 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         
         self.title = "Decisões"
         self.navigationItem.setRightBarButton(addButton, animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if !UserDefaults.standard.bool(forKey: "didShowOnboarding") {
+            let destinationController = Onboarding()
+            self.present(UINavigationController(rootViewController: destinationController), animated: true) {
+                UserDefaults.standard.set(true, forKey: "didShowOnboarding")
+            }
+        }
     }
     
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {
