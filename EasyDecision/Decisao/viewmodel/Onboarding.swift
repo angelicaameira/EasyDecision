@@ -13,88 +13,253 @@ import SQLite
 #if DEBUG
 @available(iOS 15.0, *)
 private struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    let viewController = UINavigationController(rootViewController: Onboarding())
-    func makeUIViewController(context: Context) -> some UIViewController {
-        return viewController
-    }
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
+  let viewController = UINavigationController(rootViewController: Onboarding())
+  func makeUIViewController(context: Context) -> some UIViewController {
+    return viewController
+  }
+  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }
 
 @available(iOS 15.0, *)
 struct ViewControllerPreview: PreviewProvider {
-    static var previews: some SwiftUI.View {
-        ViewControllerRepresentable()
-    }
+  static var previews: some SwiftUI.View {
+    ViewControllerRepresentable()
+  }
 }
 #endif
 
 class Onboarding: UIViewController {
-    //MARK: tela
-    private lazy var continuarButton: UIButton = {
-        let view = UIButton()
-        view.addTarget(self, action: #selector(goToContinuar), for: .touchUpInside)
-        view.setTitle("Continuar", for: .normal)
-        view.backgroundColor = .systemPurple
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
-        return view
-    }()
+  //MARK: tela
+  var scrollView = UIScrollView()
+  
+  private lazy var saudacaoBoasVindas: UILabel = {
+    let view = UILabel()
+    view.text = "Bem Vindo(a)!"
+    view.font = .boldSystemFont(ofSize: 30)
+    view.textAlignment = .center
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var continuarButton: UIButton = {
+    let view = UIButton()
+    view.addTarget(self, action: #selector(goToContinuar), for: .touchUpInside)
+    view.setTitle("Continue", for: .normal)
+    view.backgroundColor = .systemPurple
+    view.layer.cornerRadius = 10
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var tituloFeature3: UILabel = {
+    var view = UILabel()
+    view.text = "Privacy policy"
+    view.font = .systemFont(ofSize: 20)
+    view.numberOfLines = .max
+    view.textColor = .black
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var descricaoFeature3: UILabel = {
+    var view = UILabel()
+    view.text = "We do not collect any data whatsoever. App crash and analytics is provided by Apple only if you allow when asked by your Apple device, and is bound by Apple's privacy policy. Analytics data does not contain personal information and will only be used for fixing bugs, crashes and improving the app."
+    view.font = .systemFont(ofSize: 20)
+    view.textColor = .systemGray
+    view.numberOfLines = .max
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var iconeFeature3: UIImageView = {
+    var view = UIImageView()
+    view.image = UIImage(systemName: "lock")
+    view.tintColor = .systemPurple
+    view.contentMode = .scaleAspectFill
+    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var tituloFeature1: UILabel = {
+    var view = UILabel()
+    view.text = "About Easy Decision"
+    view.font = .systemFont(ofSize: 20)
+    view.numberOfLines = .max
+    view.textColor = .black
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var descricaoFeature1: UILabel = {
+    var view = UILabel()
+    view.text = "Easy Decision is a app that was created to help people choose any important decisions."
+    view.font = .systemFont(ofSize: 20)
+    view.textColor = .systemGray
+    view.numberOfLines = .max
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  private lazy var tituloFeature2: UILabel = {
+    var view = UILabel()
+    view.text = "How it works?"
+    view.font = .systemFont(ofSize: 20)
+    view.textColor = .black
+    view.numberOfLines = .max
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var descricaoFeature2: UILabel = {
+    var view = UILabel()
+    view.text = "With Easy Decision You can register your personals decisions, and the app will ask to you register some important points about each decision, like options and criteria. After, it calculate and returns with the best decision."
+    view.font = .systemFont(ofSize: 20)
+    view.textColor = .systemGray
+    view.numberOfLines = .max
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var iconeFeature2: UIImageView = {
+    var view = UIImageView()
+    view.image = UIImage(systemName: "shuffle")
+    view.tintColor = .systemPurple
+    view.contentMode = .scaleAspectFill
+    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var iconeFeature1: UIImageView = {
+    var view = UIImageView()
+    view.image = UIImage(systemName: "person.fill.questionmark")
+    view.contentMode = .scaleAspectFill
+    view.tintColor = .systemPurple
+    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var vStackFeature1: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      tituloFeature1,
+      descricaoFeature1
+    ])
+    view.alignment = .leading
+    view.distribution = .fillProportionally
+    view.axis = .vertical
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var vStackFeature2: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      tituloFeature2,
+      descricaoFeature2
+    ])
+    view.alignment = .leading
+    view.distribution = .fillProportionally
+    view.axis = .vertical
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var vStackFeature3: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      tituloFeature3,
+      descricaoFeature3
+    ])
+    view.alignment = .leading
+    view.distribution = .fillProportionally
+    view.axis = .vertical
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var hStackFeature1: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      iconeFeature1,
+      vStackFeature1
+    ])
+    view.alignment = .center
+    view.distribution = .fill
+    view.spacing = 15
+    view.axis = .horizontal
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var hStackFeature2: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      iconeFeature2,
+      vStackFeature2
+    ])
+    view.alignment = .center
+    view.distribution = .fill
+    view.spacing = 15
+    view.axis = .horizontal
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var hStackFeature3: UIStackView = {
+    var view = UIStackView(arrangedSubviews: [
+      iconeFeature3,
+      vStackFeature3
+    ])
+    view.alignment = .center
+    view.distribution = .fill
+    view.spacing = 15
+    view.axis = .horizontal
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  override func loadView() {
+    super.loadView()
+    view.backgroundColor = .white
+  
     
-    private lazy var descricao: UILabel = {
-        let view = UILabel()
-        view.text = "ahjafjfhsfbashfbfhjsbfhbhjsdfbhjdsfbjsdhfbhjsdfsfbshjfbhjesfbebfhnkjnkjzbnvjkzbjsvbbdskfuhfiuslfhisueldghsuieglliuefgaisufgaluwisfghiuawlfglaigsfauisgfayusigflawiueaiulfguaielgfuilaefgaiuwalgfyifglagwfuykas"
-        view.font = .systemFont(ofSize: 20)
-        view.tintColor = .gray
-        view.numberOfLines = .max
-        view.textAlignment = .justified
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
-    private lazy var titulo: UILabel = {
-        let view = UILabel()
-        view.text = "Bem Vindo(a)!"
-        view.font = .boldSystemFont(ofSize: 30)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.textAlignment = .center
-        
-        
-      
-        
-        
-        
-        return view
-    }()
+    view.addSubview(scrollView)
+    view.addSubview(continuarButton)
+    view.addSubview(saudacaoBoasVindas)
+    view.addSubview(hStackFeature1)
+    view.addSubview(hStackFeature2)
+    view.addSubview(hStackFeature3)
     
-    override func loadView() {
-        super.loadView()
-        view.backgroundColor = .white
-        
-        view.addSubview(continuarButton)
-        view.addSubview(titulo)
-        view.addSubview(descricao)
-        
-        continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -50).isActive = true
-        continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-        
-        titulo.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30).isActive = true
-        titulo.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        titulo.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-        
-        descricao.topAnchor.constraint(equalTo: self.titulo.bottomAnchor, constant: 30).isActive = true
-        descricao.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        descricao.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-    }
+    continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+    continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+    continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
     
-    @objc func goToContinuar(sender: Any) {
-        self.dismiss(animated: true)
-        UserDefaults.standard.set(true, forKey: "didShowOnboarding")
-    }
+    saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30).isActive = true
+    saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+    saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.loadView()
-        self.dismiss(animated: true)
-        UserDefaults.standard.set(true, forKey: "didShowOnboarding")
-    }
+    
+    hStackFeature1.topAnchor.constraint(equalTo: self.saudacaoBoasVindas.bottomAnchor, constant: 20).isActive = true
+    hStackFeature1.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+    hStackFeature1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+    
+    hStackFeature2.topAnchor.constraint(equalTo: self.vStackFeature1.bottomAnchor, constant: 20).isActive = true
+    hStackFeature2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+    hStackFeature2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+    
+    
+    hStackFeature3.topAnchor.constraint(equalTo: self.vStackFeature2.bottomAnchor, constant: 20).isActive = true
+    hStackFeature3.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+    hStackFeature3.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+  }
+  
+  @objc func goToContinuar(sender: Any) {
+    self.dismiss(animated: true)
+    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.loadView()
+    self.dismiss(animated: true)
+    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
+  }
 }

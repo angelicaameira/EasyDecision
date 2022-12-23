@@ -47,7 +47,6 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         super.viewDidLoad()
         
         if !UserDefaults.standard.bool(forKey: "didShowOnboarding") {
-            let destinationController = Onboarding()
             self.present(Onboarding(), animated: true)
         }
     }
