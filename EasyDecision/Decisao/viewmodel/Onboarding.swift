@@ -30,7 +30,6 @@ struct ViewControllerPreview: PreviewProvider {
 
 class Onboarding: UIViewController {
   //MARK: tela
-  var scrollView = UIScrollView()
   
   private lazy var saudacaoBoasVindas: UILabel = {
     let view = UILabel()
@@ -76,7 +75,9 @@ class Onboarding: UIViewController {
     view.image = UIImage(systemName: "lock")
     view.tintColor = .systemPurple
     view.contentMode = .scaleAspectFill
-    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    NSLayoutConstraint.activate([
+      view.widthAnchor.constraint(equalToConstant: 40)
+    ])
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -126,7 +127,9 @@ class Onboarding: UIViewController {
     view.image = UIImage(systemName: "shuffle")
     view.tintColor = .systemPurple
     view.contentMode = .scaleAspectFill
-    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    NSLayoutConstraint.activate([
+      view.widthAnchor.constraint(equalToConstant: 40)
+    ])
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -136,7 +139,7 @@ class Onboarding: UIViewController {
     view.image = UIImage(systemName: "person.fill.questionmark")
     view.contentMode = .scaleAspectFill
     view.tintColor = .systemPurple
-    view.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    NSLayoutConstraint.activate([view.widthAnchor.constraint(equalToConstant: 40)])
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -216,40 +219,77 @@ class Onboarding: UIViewController {
     return view
   }()
   
-  override func loadView() {
-    super.loadView()
-    view.backgroundColor = .white
-  
-    
-    
-    view.addSubview(scrollView)
-    view.addSubview(continuarButton)
+  private lazy var scrollView: UIScrollView = {
+    var view = UIScrollView()
     view.addSubview(saudacaoBoasVindas)
     view.addSubview(hStackFeature1)
     view.addSubview(hStackFeature2)
     view.addSubview(hStackFeature3)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var blurredView = {
+    var view = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+    view.insetsLayoutMarginsFromSafeArea = false
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  override func loadView() {
+    super.loadView()
+    view.backgroundColor = .white
+  
+    view.addSubview(scrollView)
+    view.addSubview(blurredView)
+    view.addSubview(continuarButton)
     
-    continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
-    continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-    continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-    
-    saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30).isActive = true
-    saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-    saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-    
-    
-    hStackFeature1.topAnchor.constraint(equalTo: self.saudacaoBoasVindas.bottomAnchor, constant: 20).isActive = true
-    hStackFeature1.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-    hStackFeature1.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
-    
-    hStackFeature2.topAnchor.constraint(equalTo: self.vStackFeature1.bottomAnchor, constant: 20).isActive = true
-    hStackFeature2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-    hStackFeature2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
-    
-    
-    hStackFeature3.topAnchor.constraint(equalTo: self.vStackFeature2.bottomAnchor, constant: 20).isActive = true
-    hStackFeature3.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-    hStackFeature3.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+    NSLayoutConstraint.activate([
+      blurredView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+      blurredView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+      blurredView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -20),
+      
+      
+      continuarButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+      continuarButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+      continuarButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+      continuarButton.heightAnchor.constraint(equalToConstant: 50),
+       
+      
+      saudacaoBoasVindas.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 60),
+      saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -10),
+      saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 10),
+  //    saudacaoBoasVindas.bottomAnchor.constraint(equalTo: self.hStackFeature1.topAnchor, constant: -20),
+      
+      
+      hStackFeature1.topAnchor.constraint(equalTo: self.saudacaoBoasVindas.bottomAnchor, constant: 40),
+      hStackFeature1.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
+      hStackFeature1.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 30),
+      hStackFeature1.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+  //    hStackFeature1.bottomAnchor.constraint(equalTo: self.hStackFeature2.Anchor, constant: -20),
+  //
+      hStackFeature2.topAnchor.constraint(equalTo: self.hStackFeature1.bottomAnchor, constant: 20),
+      hStackFeature2.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
+      hStackFeature2.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 30),
+  //    hStackFeature1.bottomAnchor.constraint(equalTo: self.hStackFeature3.topAnchor, constant: -20),
+  //
+      hStackFeature3.topAnchor.constraint(equalTo: self.hStackFeature2.bottomAnchor, constant: 20),
+      hStackFeature3.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
+      hStackFeature3.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 30),
+      hStackFeature3.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -110),
+       
+      
+      scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+      scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+      scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+      scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+    ])
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    isModalInPresentation = true
   }
   
   @objc func goToContinuar(sender: Any) {

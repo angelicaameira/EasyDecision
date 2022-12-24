@@ -12,25 +12,14 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as decisões", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
-    var countAcessos: Int = 0
-    
-    
-#if APPSTORE_SCREENSHOTS
-    var showOnboardingView = true
-#else
-    var showOnboardingView = !UserDefaults.standard.bool(forKey: "didShowOnboarding")
-#endif
-    var showError = false
-    var error: LocalizedError?
-    
+  
     // MARK: tela
-    
     private lazy var addButton: UIBarButtonItem = {
         let view = UIBarButtonItem(image: .add, style: .plain, target: self, action: #selector(goToAdicionarDecisao(sender:)))
         return view
     }()
     
-    override func loadView(){
+    override func loadView() {
         super.loadView()
         self.view = {
             let tableView = UITableView()
@@ -46,7 +35,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !UserDefaults.standard.bool(forKey: "didShowOnboarding") {
+      if true { //!UserDefaults.standard.bool(forKey: "didShowOnboarding") {
             self.present(Onboarding(), animated: true)
         }
     }
