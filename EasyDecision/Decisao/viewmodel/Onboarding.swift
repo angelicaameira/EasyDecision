@@ -35,15 +35,15 @@ private struct ViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 struct ViewRepresentable: UIViewRepresentable {
-  typealias UIViewType = Onboarding.FeatureRow
+  typealias UIViewType = FeatureRow
   
-  func makeUIView(context: Context) -> Onboarding.FeatureRow {
-    let featureRow = Onboarding.FeatureRow()
+  func makeUIView(context: Context) -> FeatureRow {
+    let featureRow = FeatureRow()
     featureRow.feature = Feature(title: "Exemplo", featureDescription: "Exemplo descrição", icon: "questionmark")
     return featureRow
   }
   
-  func updateUIView(_ uiView: Onboarding.FeatureRow, context: Context) { }
+  func updateUIView(_ uiView: FeatureRow, context: Context) { }
 }
 
 @available(iOS 15.0, *)
@@ -58,82 +58,77 @@ struct ViewControllerPreview: PreviewProvider {
 }
 #endif
 
+class FeatureRow: UIView {
+  var feature: Feature?
+  
+  private var viewTitulo: UILabel {
+    let view = UILabel()
+    view.text = feature?.title ?? "Title test\nExample title\nTitle test\nExample title"
+    view.numberOfLines = .max
+    view.textColor = .label
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }
+  private var viewDescricao: UILabel {
+    let view = UILabel()
+    view.text = feature?.featureDescription ?? "Description test\nMulti\nline\n1\n2\n3\n4\n5"
+    
+    view.numberOfLines = .max
+    view.textColor = .secondaryLabel
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }
+  private var viewIcon: UIImageView {
+    let view = UIImageView()
+    view.image = UIImage(systemName: feature?.icon ?? "questionmark")
+    view.tintColor = .systemPurple
+    view.contentMode = .scaleAspectFill
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }
+  private lazy var vStack: UIStackView = { [self] in
+    var view = UIStackView(arrangedSubviews: [
+      viewTitulo,
+      viewDescricao
+    ])
+    view.alignment = .leading
+    view.distribution = .fillProportionally
+    view.axis = .vertical
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  private lazy var hStack: UIStackView = { [self] in
+    var view = UIStackView(arrangedSubviews: [
+      viewIcon,
+      vStack
+    ])
+    view.alignment = .center
+    view.distribution = .fill
+    view.spacing = 15
+    view.axis = .horizontal
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    //      self.translatesAutoresizingMaskIntoConstraints = false
+    self.addSubview(hStack)
+    NSLayoutConstraint.activate([
+      hStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      hStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      hStack.topAnchor.constraint(equalTo: self.topAnchor),
+      hStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+    ])
+  }
+  
+  required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+  }
+}
+
 class Onboarding: UIViewController {
   //MARK: tela
-  
-  class FeatureRow: UIView {
-    var feature: Feature?
-    
-    private var viewTitulo: UILabel {
-      let view = UILabel()
-      view.text = feature?.title ?? "Title test\nExample title\nTitle test\nExample title"
-      view.numberOfLines = .max
-      view.textColor = .label
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-    }
-    private var viewDescricao: UILabel {
-      let view = UILabel()
-      view.text = feature?.featureDescription ?? "Description test\nMulti\nline\n1\n2\n3\n4\n5"
-      
-      view.numberOfLines = .max
-      view.textColor = .secondaryLabel
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-    }
-    private var viewIcon: UIImageView {
-      let view = UIImageView()
-      view.image = UIImage(systemName: feature?.icon ?? "questionmark")
-      view.tintColor = .systemPurple
-      view.contentMode = .scaleAspectFill
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-    }
-    private lazy var vStack: UIStackView = { [self] in
-      var view = UIStackView(arrangedSubviews: [
-        viewTitulo,
-        viewDescricao
-      ])
-      view.alignment = .leading
-      view.distribution = .fillProportionally
-      view.axis = .vertical
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-    }()
-    private lazy var hStack: UIStackView = { [self] in
-      var view = UIStackView(arrangedSubviews: [
-        viewIcon,
-        vStack
-      ])
-      view.alignment = .center
-      view.distribution = .fill
-      view.spacing = 15
-      view.axis = .horizontal
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-    }()
-    
-    override init(frame: CGRect) {
-      super.init(frame: frame)
-      //      self.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(hStack)
-      NSLayoutConstraint.activate([
-        hStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-        hStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-        hStack.topAnchor.constraint(equalTo: self.topAnchor),
-        hStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-      ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-  }
-  
-  @objc func goToContinuar(sender: Any) {
-    self.dismiss(animated: true)
-    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
-  }
   
   var saudacaoBoasVindas: UILabel = {
     let view = UILabel()
@@ -148,7 +143,6 @@ class Onboarding: UIViewController {
   var scrollView: UIScrollView = {
     var view = UIScrollView()
 //    view.addSubview(saudacaoBoasVindas)
-//    view.addSubview(hStack)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -163,15 +157,12 @@ class Onboarding: UIViewController {
     return view
   }()
   
-      
-  
   var blurredView = {
     var view = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
     view.insetsLayoutMarginsFromSafeArea = false
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
-  
   
   override func loadView() {
     super.loadView()
@@ -205,14 +196,6 @@ class Onboarding: UIViewController {
 //              saudacaoBoasVindas.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 60),
 //              saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -10),
 //              saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 10),
-//          saudacaoBoasVindas.bottomAnchor.constraint(equalTo: self.hStackFeature1.topAnchor, constant: -20),
-      
-      
-      
-      
-      
-      
-      
       
       
       
@@ -243,6 +226,11 @@ class Onboarding: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.loadView()
+    self.dismiss(animated: true)
+    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
+  }
+  
+  @objc func goToContinuar(sender: Any) {
     self.dismiss(animated: true)
     UserDefaults.standard.set(true, forKey: "didShowOnboarding")
   }
