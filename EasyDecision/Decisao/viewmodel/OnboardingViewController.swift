@@ -1,5 +1,5 @@
 //
-//  Onboarding.swift
+//  OnboardingViewController.swift
 //  EasyDecision
 //
 //  Created by Angélica Andrade de Meira on 18/12/22.
@@ -27,7 +27,7 @@ let welcomeFeatures = [
 #if DEBUG
 @available(iOS 15.0, *)
 private struct ViewControllerRepresentable: UIViewControllerRepresentable {
-  let viewController = UINavigationController(rootViewController: Onboarding())
+  let viewController = UINavigationController(rootViewController: OnboardingViewController())
   func makeUIViewController(context: Context) -> some UIViewController {
     return viewController
   }
@@ -50,7 +50,7 @@ struct ViewRepresentable: UIViewRepresentable {
 struct ViewControllerPreview: PreviewProvider {
   static var previews: some SwiftUI.View {
     ViewControllerRepresentable()
-      .previewDisplayName("Onboarding")
+      .previewDisplayName("OnboardingViewController")
     ViewRepresentable()
       .previewLayout(.fixed(width: 400, height: 150))
       .previewDisplayName("FeatureRow")
@@ -112,7 +112,7 @@ class FeatureRow: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    //      self.translatesAutoresizingMaskIntoConstraints = false
+    self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(hStack)
     NSLayoutConstraint.activate([
       hStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -123,33 +123,44 @@ class FeatureRow: UIView {
   }
   
   required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
-class Onboarding: UIViewController {
+class OnboardingViewController: UIViewController {
   //MARK: tela
   
-  var saudacaoBoasVindas: UILabel = {
+  private lazy var vStack: UIStackView = {
+    let view = UIStackView(arrangedSubviews: [
+      saudacaoBoasVindas,
+      FeatureRow()
+    ])
+    view.alignment = .leading
+    view.distribution = .fillProportionally
+    view.axis = .vertical
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var saudacaoBoasVindas: UILabel = {
     let view = UILabel()
     view.text = "Welcome to Easy Decision!"
-    view.font = .boldSystemFont(ofSize: 30)
+    view.font = .boldSystemFont(ofSize: 25)
     view.textAlignment = .center
     view.numberOfLines = .max
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
-  var scrollView: UIScrollView = {
+  private lazy var scrollView: UIScrollView = {
     var view = UIScrollView()
-//    view.addSubview(saudacaoBoasVindas)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
   var continuarButton: UIButton = {
     let view = UIButton()
-    view.addTarget(Onboarding.self, action: #selector(goToContinuar), for: .touchUpInside)
+    view.addTarget(OnboardingViewController.self, action: #selector(goToContinuar), for: .touchUpInside)
     view.setTitle("Continue", for: .normal)
     view.backgroundColor = .systemPurple
     view.layer.cornerRadius = 10
@@ -168,53 +179,48 @@ class Onboarding: UIViewController {
     super.loadView()
     view.backgroundColor = .white
     
+    view.addSubview(scrollView)
+    view.addSubview(blurredView)
+    view.addSubview(continuarButton)
+    scrollView.addSubview(vStack)
+    
     let featuresViewArray: [FeatureRow] = []
+    
     for feature in welcomeFeatures {
       let featureRow = FeatureRow()
       featureRow.feature = feature
     }
     
-    view.addSubview(scrollView)
-    view.addSubview(blurredView)
-    view.addSubview(continuarButton)
-    //view.addSubview(hStack)
-    //view.addSubview(vStack)
-    
     NSLayoutConstraint.activate([
+      
+      //vStack
+      vStack.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
+      vStack.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
+      vStack.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
+      vStack.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0),
+      
+      // ScrollView
+      scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+      scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+      scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+      scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+      
+      // BlurredView
       blurredView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
       blurredView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
       blurredView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -20),
+      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -30),
       
-      
-      continuarButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-      continuarButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-      continuarButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+      // ContinuarButton
+      continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+      continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+      continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
       continuarButton.heightAnchor.constraint(equalToConstant: 50),
       
-      
-//              saudacaoBoasVindas.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 60),
-//              saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -10),
-//              saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 10),
-      
-      
-      
-      
-      
-      
-//              hStack.topAnchor.constraint(equalTo: self.saudacaoBoasVindas.bottomAnchor, constant: 40),
-//              hStack.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
-//              hStack.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 30),
-//              hStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-//              hStack.bottomAnchor.constraint(equalTo: self.hStackFeature2.Anchor, constant: -20),
-      
-      
-      
-      
-              scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-              scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-              scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-              scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+      // saudacao
+      saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+      saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+      saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20)
     ])
     
   }

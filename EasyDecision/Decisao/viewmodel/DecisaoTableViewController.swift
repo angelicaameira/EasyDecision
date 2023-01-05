@@ -36,7 +36,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
         super.viewDidLoad()
         
       if true { //!UserDefaults.standard.bool(forKey: "didShowOnboarding") {
-            self.present(Onboarding(), animated: true)
+            self.present(OnboardingViewController(), animated: true)
         }
     }
     
