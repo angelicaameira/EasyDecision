@@ -61,35 +61,49 @@ struct ViewControllerPreview: PreviewProvider {
 class FeatureRow: UIView {
   var feature: Feature?
   
-  private var viewTitulo: UILabel {
-    let view = UILabel()
-    view.text = feature?.title ?? "Title test\nExample title\nTitle test\nExample title"
-    view.numberOfLines = .max
-    view.textColor = .label
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
+  let featuresViewArray: [FeatureRow] = []
+  
+  
+  func arrumaCampos(){
+    for feature in welcomeFeatures {
+      let featureRow = FeatureRow()
+      featureRow.feature = feature
+
+      var viewTitulo: UILabel {
+        let view = UILabel()
+        view.text = feature.title ?? "Title test"
+        view.numberOfLines = .max
+        view.textColor = .label
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }
+      var viewDescricao: UILabel {
+        let view = UILabel()
+        view.text = feature.featureDescription ?? "Description test"
+        view.numberOfLines = .max
+        view.textColor = .secondaryLabel
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }
+       var viewIcon: UIImageView {
+        let view = UIImageView()
+        view.image = UIImage(systemName: feature.icon ?? "questionmark")
+        view.tintColor = .systemPurple
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+      }
+
+      
+
+    }
   }
-  private var viewDescricao: UILabel {
-    let view = UILabel()
-    view.text = feature?.featureDescription ?? "Description test\nMulti\nline\n1\n2\n3\n4\n5"
-    
-    view.numberOfLines = .max
-    view.textColor = .secondaryLabel
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }
-  private var viewIcon: UIImageView {
-    let view = UIImageView()
-    view.image = UIImage(systemName: feature?.icon ?? "questionmark")
-    view.tintColor = .systemPurple
-    view.contentMode = .scaleAspectFill
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }
+  
+  
   private lazy var vStack: UIStackView = { [self] in
     var view = UIStackView(arrangedSubviews: [
-      viewTitulo,
-      viewDescricao
+     // viewTitulo,
+     // viewDescricao
     ])
     view.alignment = .leading
     view.distribution = .fillProportionally
@@ -99,7 +113,7 @@ class FeatureRow: UIView {
   }()
   private lazy var hStack: UIStackView = { [self] in
     var view = UIStackView(arrangedSubviews: [
-      viewIcon,
+     // viewIcon,
       vStack
     ])
     view.alignment = .center
@@ -110,9 +124,18 @@ class FeatureRow: UIView {
     return view
   }()
   
+  //  let featuresViewArray: [FeatureRow] = []
+  //
+  //  for feature in welcomeFeatures {
+  //    let featureRow = FeatureRow()
+  //    featureRow.feature = feature
+  //  }
+  
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.translatesAutoresizingMaskIntoConstraints = false
+    //arrumaCampos()
+    //self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(hStack)
     NSLayoutConstraint.activate([
       hStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -126,6 +149,7 @@ class FeatureRow: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 }
+
 
 class OnboardingViewController: UIViewController {
   //MARK: tela
@@ -184,12 +208,7 @@ class OnboardingViewController: UIViewController {
     view.addSubview(continuarButton)
     scrollView.addSubview(vStack)
     
-    let featuresViewArray: [FeatureRow] = []
     
-    for feature in welcomeFeatures {
-      let featureRow = FeatureRow()
-      featureRow.feature = feature
-    }
     
     NSLayoutConstraint.activate([
       
@@ -215,12 +234,12 @@ class OnboardingViewController: UIViewController {
       continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
       continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
       continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-      continuarButton.heightAnchor.constraint(equalToConstant: 50),
+      continuarButton.heightAnchor.constraint(equalToConstant: 50)
       
-      // saudacao
-      saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-      saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-      saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20)
+      //      // saudacao
+      //      saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+      //      saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+      //      saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20)
     ])
     
   }
@@ -242,3 +261,23 @@ class OnboardingViewController: UIViewController {
   }
 }
 
+
+
+//Onboarding { // 182
+//  ScrollView {// 181
+//    vStack { // 184
+//      saudacaoBoasVindas //134
+//      FeatureRow {//135
+//        HStack { //115
+//          viewIcon //101
+//          vStack {//102
+//            titulo //90
+//            descricao // 91
+//          }
+//        }
+//      }
+//    }
+//  }
+//  blurredView //182
+//  continuarButton //183
+//}

@@ -152,3 +152,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
 protocol CriterioTableViewControllerDelegate: AnyObject {
     func recuperaCriterio()
 }
+
+// addButton//22
+//continuarButton //27
+  // UITableViewCell //101

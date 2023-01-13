@@ -189,3 +189,9 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
 protocol AvaliacaoTableViewControllerDelegate: AnyObject {
     func criaAvaliacoes()
 }
+
+//continuarButton //26
+//  tableView(_ tableView: UITableView,
+//  viewForHeaderInSection section: Int) -> UIView? //143
+//  tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+//  -> UITableViewCell //168
