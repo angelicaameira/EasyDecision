@@ -10,7 +10,7 @@ import SQLite
 
 class OpcoesTableViewController: UITableViewController, OpcaoTableViewControllerDelegate {
     
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Error", message: "A error occurred to receive the options", preferredStyle: .alert)
     var opcaoSendoEditada: Opcao?
     var decisao: Decisao?
     var listaOpcoes: [Opcao]?
@@ -23,7 +23,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     }()
     
     private lazy var continuarButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarCriterios(sender:)))
+        let view = UIBarButtonItem(title: "continue", style: .done, target: self, action: #selector(goToMostrarCriterios(sender:)))
         return view
     }()
     
@@ -36,7 +36,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
             return tableView
         }()
         
-        self.title = "Opções"
+        self.title = "Options"
         self.navigationItem.setRightBarButtonItems([continuarButton, addButton], animated: true)
     }
     
@@ -81,7 +81,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
             
             tableView.reloadData()
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
@@ -122,7 +122,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
                     self.recuperaOpcao()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }

@@ -20,7 +20,7 @@ class AdicionaCriterioViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.placeholder = "insira a descrição do critério"
+        view.placeholder = "Insert the criterium description"
         view.borderStyle = .roundedRect
         return view
     }()
@@ -28,7 +28,7 @@ class AdicionaCriterioViewController: UIViewController {
     private lazy var pesoTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.placeholder = "insira o peso do critério"
+        view.placeholder = "Insert the criterium weight"
         view.borderStyle = .roundedRect
         return view
     }()
@@ -43,7 +43,7 @@ class AdicionaCriterioViewController: UIViewController {
     }()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaCriterio(_:)))
+        let view = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(salvaCriterio(_:)))
         return view
     }()
     
@@ -59,9 +59,9 @@ class AdicionaCriterioViewController: UIViewController {
         }()
         
         if criterio == nil {
-            self.title = "Adicionar critério"
+            self.title = "Insert criterium"
         } else {
-            self.title = "Editar critério"
+            self.title = "Edit criterium"
         }
         self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
@@ -113,13 +113,13 @@ class AdicionaCriterioViewController: UIViewController {
             let decisao = decisao
         else { return }
         let pesoCriterio = (peso as NSString).integerValue
-        let alertError = UIAlertController(title: "Atenção", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
-        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição do critério para continuar", preferredStyle: .alert)
+        let alertError = UIAlertController(title: "Error", message: "A error occurred to receive the criteria", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "Insert the criterium description to continue", preferredStyle: .alert)
         
         descricaoCriterio = descricaoCriterio.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if descricaoCriterio.isEmpty {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -145,7 +145,7 @@ class AdicionaCriterioViewController: UIViewController {
                 self?.delegate?.recuperaCriterio()
             }
         } catch {
-            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)
             print(error.localizedDescription)
         }

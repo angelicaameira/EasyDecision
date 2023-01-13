@@ -10,7 +10,7 @@ import UIKit
 import SQLite
 
 class CriteriosTableViewController: UITableViewController, CriterioTableViewControllerDelegate {
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Error", message: "A error occurred to receive the criteria", preferredStyle: .alert)
     var criterioSendoEditado: Criterio?
     var decisao: Decisao?
     var listaCriterios: [Criterio]?
@@ -23,7 +23,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
     }()
     
     private lazy var continuarButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarAvaliacao(sender:)))
+        let view = UIBarButtonItem(title: "continue", style: .done, target: self, action: #selector(goToMostrarAvaliacao(sender:)))
         return view
     }()
     
@@ -37,7 +37,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
             return tableView
         }()
         
-        self.title = "Critérios"
+        self.title = "Criteria"
         self.navigationItem.setRightBarButtonItems([continuarButton, addButton], animated: true)
     }
     
@@ -81,7 +81,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
             
             tableView.reloadData()
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
@@ -125,7 +125,7 @@ class CriteriosTableViewController: UITableViewController, CriterioTableViewCont
                     self.recuperaCriterio()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }

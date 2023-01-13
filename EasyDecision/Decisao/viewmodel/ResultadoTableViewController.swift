@@ -14,12 +14,12 @@ class ResultadoTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaAvaliacoes: [Avaliacao]?
     var listaResultados: [Resultado] = []
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Error", message: "A error occurred to receive the options", preferredStyle: .alert)
     
     //MARK: tela
     
     private lazy var concluirButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "concluir", style: .done, target: self, action: #selector(goToConcluirResultado(sender:)))
+        let view = UIBarButtonItem(title: "conclude", style: .done, target: self, action: #selector(goToConcluirResultado(sender:)))
         return view
     }()
     
@@ -33,7 +33,7 @@ class ResultadoTableViewController: UITableViewController {
             return tableView
         }()
         
-        self.title = "Resultados"
+        self.title = "Results"
         self.navigationItem.setRightBarButton(concluirButton, animated: true)
     }
     
@@ -61,7 +61,7 @@ class ResultadoTableViewController: UITableViewController {
         do {
             self.listaAvaliacoes = try Avaliacao.listaDoBanco(decisao: decisao)
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
