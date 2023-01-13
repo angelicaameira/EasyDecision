@@ -12,7 +12,7 @@ class AdicionaDecisaoViewController: UIViewController {
     
     weak var delegate: DecisaoTableViewControllerDelegate?
     var decisao: Decisao?
-    var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alertError = UIAlertController(title: "Error", message: "A error occurred to receive the decisions", preferredStyle: .alert)
     
     //MARK: tela
     
@@ -21,13 +21,13 @@ class AdicionaDecisaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.placeholder = "insira a descrição da decisão"
+        view.placeholder = "Insert decision description"
         view.borderStyle = .roundedRect
         return view
     }()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaDecisao(_:)))
+        let view = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(salvaDecisao(_:)))
         return view
     }()
     
@@ -39,9 +39,9 @@ class AdicionaDecisaoViewController: UIViewController {
         }()
         
         if decisao == nil {
-            self.title = "Adicionar decisão"
+            self.title = "Insert decision"
         } else {
-            self.title = "Editar decisão"
+            self.title = "Edit decision"
         }
         self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
@@ -78,12 +78,12 @@ class AdicionaDecisaoViewController: UIViewController {
         guard var descricaoDecisao = descricaoTextField.text
         else { return }
         
-        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da decissão para continuar", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "Insert the decision description to continue", preferredStyle: .alert)
         
         descricaoDecisao = descricaoDecisao.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if descricaoDecisao.isEmpty {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -106,7 +106,7 @@ class AdicionaDecisaoViewController: UIViewController {
                 self?.delegate?.recuperaDecisao()
             }
         } catch {
-            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)
             print(error.localizedDescription)
         }

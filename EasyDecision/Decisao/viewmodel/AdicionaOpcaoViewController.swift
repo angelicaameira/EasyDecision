@@ -10,7 +10,7 @@ import UIKit
 class AdicionaOpcaoViewController: UIViewController {
     
     weak var delegate: OpcaoTableViewControllerDelegate?
-    var alertError = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alertError = UIAlertController(title: "Error", message: "A error occurred to receive the options", preferredStyle: .alert)
     var decisao: Decisao?
     var opcao: Opcao?
     
@@ -21,13 +21,13 @@ class AdicionaOpcaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.placeholder = "insira a descrição da opção"
+        view.placeholder = "Insert the option description"
         view.borderStyle = .roundedRect
         return view
     }()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaOpcao(_:)))
+        let view = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(salvaOpcao(_:)))
         return view
     }()
     
@@ -39,9 +39,9 @@ class AdicionaOpcaoViewController: UIViewController {
         }()
         
         if opcao == nil {
-            self.title = "Adicionar opção"
+            self.title = "Insert option"
         } else {
-            self.title = "Editar opção"
+            self.title = "Edit option"
         }
         self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
@@ -80,12 +80,12 @@ class AdicionaOpcaoViewController: UIViewController {
             let decisao = decisao
         else { return }
         
-        let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da opção para continuar", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "Insert the option description to continue", preferredStyle: .alert)
         
         descricaoOpcao = descricaoOpcao.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if descricaoOpcao.isEmpty {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -110,7 +110,7 @@ class AdicionaOpcaoViewController: UIViewController {
                 self?.delegate?.recuperaOpcao()
             }
         } catch {
-            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alertError.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alertError, animated: true, completion: nil)
             print(error.localizedDescription)
         }

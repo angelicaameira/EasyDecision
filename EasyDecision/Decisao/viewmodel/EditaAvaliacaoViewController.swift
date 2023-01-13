@@ -10,7 +10,7 @@ import UIKit
 class EditaAvaliacaoViewController: UIViewController {
     
     weak var delegate: AvaliacaoTableViewControllerDelegate?
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Error", message: "A error occurred to receive the options", preferredStyle: .alert)
     var avaliacaoCelula: RatingTVCell?
     var avaliacao: Avaliacao?
     
@@ -21,7 +21,7 @@ class EditaAvaliacaoViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.returnKeyType = .done
         view.addTarget(self, action: #selector(clicaBotaoDoneTeclado(_:)), for: .editingDidEndOnExit)
-        view.placeholder = "insira a nota da avaliação"
+        view.placeholder = "Insert the Evaluate grade"
         view.borderStyle = .roundedRect
         return view
     }()
@@ -36,7 +36,7 @@ class EditaAvaliacaoViewController: UIViewController {
     }()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "feito", style: .done, target: self, action: #selector(salvaAvaliacao(_:)))
+        let view = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(salvaAvaliacao(_:)))
         return view
     }()
     
@@ -51,7 +51,7 @@ class EditaAvaliacaoViewController: UIViewController {
             return view
         }()
         
-        self.title = "Editar Avaliação"
+        self.title = "Edit evaluate"
         self.navigationItem.setRightBarButton(doneButton, animated: true)
     }
     
@@ -105,7 +105,7 @@ class EditaAvaliacaoViewController: UIViewController {
                 self?.delegate?.criaAvaliacoes()
             }
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }

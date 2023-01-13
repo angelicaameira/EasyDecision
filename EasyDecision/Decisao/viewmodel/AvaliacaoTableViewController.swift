@@ -22,7 +22,7 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
     //MARK: tela
     
     private lazy var continuarButton: UIBarButtonItem = {
-        let view = UIBarButtonItem(title: "continuar", style: .done, target: self, action: #selector(goToMostrarResultado(sender:)))
+        let view = UIBarButtonItem(title: "continue", style: .done, target: self, action: #selector(goToMostrarResultado(sender:)))
         return view
     }()
     
@@ -37,7 +37,7 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
             return tableView
         }()
         
-        self.title = "Avaliação"
+        self.title = "Evaluate"
         self.navigationItem.setRightBarButton(continuarButton, animated: true)
     }
     

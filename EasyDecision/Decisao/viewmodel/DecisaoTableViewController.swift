@@ -10,7 +10,7 @@ import SQLite
 
 class DecisaoTableViewController: UITableViewController, DecisaoTableViewControllerDelegate {
     
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Error", message: "A error occurred to receive the decisions", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
     
@@ -30,7 +30,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
             return tableView
         }()
         
-        self.title = "Decisões"
+        self.title = "Decisions"
         self.navigationItem.setRightBarButton(addButton, animated: true)
     }
     
@@ -69,7 +69,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
             
             tableView.reloadData()
         } catch {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print(error.localizedDescription)
         }
@@ -110,7 +110,7 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
                     self.recuperaDecisao()
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
+                    self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Try again"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)
                     print(error.localizedDescription)
                 }
