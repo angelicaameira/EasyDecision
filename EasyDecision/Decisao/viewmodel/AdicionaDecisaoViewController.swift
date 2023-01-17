@@ -77,6 +77,7 @@ class AdicionaDecisaoViewController: UIViewController {
     @objc func salvaDecisao(_ sender: Any) {
         guard var descricaoDecisao = descricaoTextField.text
         else { return }
+        var insert = false
         
         let alert = UIAlertController(title: "Atenção", message: "Insira a descrição da decissão para continuar", preferredStyle: .alert)
         
@@ -88,7 +89,6 @@ class AdicionaDecisaoViewController: UIViewController {
             return
         }
         
-        var insert = false
         if decisao == nil {
             decisao = Decisao(descricao: descricaoDecisao)
             insert = true

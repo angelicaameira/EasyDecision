@@ -66,6 +66,13 @@ class Decisao: NSObject, Salvavel {
     
     func apagaNoBanco() throws {
         let decisao = Decisao.tabela.filter(rowid == self.id)
+        let criterio = Criterio.tabela.filter(Criterio.idDecisaoExpression == self.id)
+        let opcao = Opcao.tabela.filter(Opcao.idDecisaoExpression == self.id)
+        let avaliacao = Avaliacao.tabela.filter(Avaliacao.idDecisaoExpression == self.id)
+        
+        try DatabaseManager.db.run(avaliacao.delete())
+        try DatabaseManager.db.run(criterio.delete())
+        try DatabaseManager.db.run(opcao.delete())
         try DatabaseManager.db.run(decisao.delete())
     }
     

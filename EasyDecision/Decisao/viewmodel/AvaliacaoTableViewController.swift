@@ -164,12 +164,12 @@ class AvaliacaoTableViewController: UITableViewController, AvaliacaoTableViewCon
         
         celula.title.text = avaliacao.criterio.descricao
         celula.peso.text = "\(avaliacao.nota)"
-        celula.accessoryType = .disclosureIndicator
         
         return celula
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let posicaoDaOpcaoNaTableView = indexPath.section
         let posicaoDaCriterioNaTableView = indexPath.row
         let opcao = listaOpcoes?[posicaoDaOpcaoNaTableView]
