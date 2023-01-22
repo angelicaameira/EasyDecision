@@ -18,16 +18,16 @@ struct Feature: Identifiable {
 }
 
 let welcomeFeatures = [
-  Feature(title: "About Easy Decision", featureDescription: "Easy Decision is a app that was created to help people choose any decisions.", icon: "questionmark"),
-  Feature(title: "How can I use?", featureDescription: "With Easy Decision You can register your personals decisions, and the app will ask to you register some important points about each decision, like options and criterias. After, it calculate and returns with the best decision.", icon: "shuffle"),
-  Feature(title: "Privacy policy", featureDescription: "We do not collect any data whatsoever. App crash and analytics is provided by Apple only if you allow when asked by your Apple device, and is bound by Apple's privacy policy. Analytics data does not contain personal information and will only be used for fixing bugs, crashes and improving the app.", icon: "shuffle"),
-  Feature(title: "Feature 4", featureDescription: "TANTO FAZ O QUE ESCREVE AQUI, NÃO GASTE TEMPO COM ISSO.", icon: "shuffle")
+  Feature(title: "Take better decisions", featureDescription: "Easy Decision helps you take decisions based on real data", icon: "questionmark"),
+  Feature(title: "Easy to use", featureDescription: "Set the parameters, tell the app how important each option is to you, and Easy Decision will give you the best decision", icon: "shuffle"),
+  Feature(title: "Respects your privacy", featureDescription: "Your decisions are your business and we want nothing to do with it, so we don't collect any data you type into the app", icon: "shuffle"),
+  Feature(title: "No advertisements", featureDescription: "No distractions while trying to take important decisions! No annoying full page popups!", icon: "shuffle"),
 ]
 
 #if DEBUG
 @available(iOS 15.0, *)
 private struct ViewControllerRepresentable: UIViewControllerRepresentable {
-  let viewController = UINavigationController(rootViewController: OnboardingViewController())
+  let viewController = OnboardingViewController()
   func makeUIViewController(context: Context) -> some UIViewController {
     return viewController
   }
@@ -59,51 +59,50 @@ struct ViewControllerPreview: PreviewProvider {
 #endif
 
 class FeatureRow: UIView {
-  var feature: Feature?
-  
-  let featuresViewArray: [FeatureRow] = []
-  
-  
-  func arrumaCampos(){
-    for feature in welcomeFeatures {
-      let featureRow = FeatureRow()
-      featureRow.feature = feature
-
-      var viewTitulo: UILabel {
-        let view = UILabel()
-        view.text = feature.title ?? "Title test"
-        view.numberOfLines = .max
-        view.textColor = .label
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-      }
-      var viewDescricao: UILabel {
-        let view = UILabel()
-        view.text = feature.featureDescription ?? "Description test"
-        view.numberOfLines = .max
-        view.textColor = .secondaryLabel
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-      }
-       var viewIcon: UIImageView {
-        let view = UIImageView()
-        view.image = UIImage(systemName: feature.icon ?? "questionmark")
-        view.tintColor = .systemPurple
-        view.contentMode = .scaleAspectFill
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-      }
-
-      
-
+  private var _feature: Feature?
+  var feature: Feature? {
+    get {
+      return _feature
+    }
+    set {
+      _feature = newValue
+      viewTitulo.text = newValue?.title
+      viewDescricao.text = newValue?.featureDescription
+      viewIcon.image = UIImage(systemName: newValue?.icon ?? "questionmark")
     }
   }
   
+  private lazy var viewTitulo: UILabel = {
+    let view = UILabel()
+    view.text = "Uninitialized title"
+    view.numberOfLines = .max
+    view.textColor = .label
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var viewDescricao: UILabel = {
+    let view = UILabel()
+    view.text = "Uninitialized description"
+    view.numberOfLines = .max
+    view.textColor = .secondaryLabel
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private lazy var viewIcon: UIImageView = {
+    let view = UIImageView()
+    view.image = UIImage(systemName: "questionmark")
+    view.tintColor = .systemPurple
+    view.contentMode = .scaleAspectFill
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   private lazy var vStack: UIStackView = { [self] in
     var view = UIStackView(arrangedSubviews: [
-     // viewTitulo,
-     // viewDescricao
+      viewTitulo,
+      viewDescricao
     ])
     view.alignment = .leading
     view.distribution = .fillProportionally
@@ -111,37 +110,34 @@ class FeatureRow: UIView {
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
+  
   private lazy var hStack: UIStackView = { [self] in
     var view = UIStackView(arrangedSubviews: [
-     // viewIcon,
+      viewIcon,
       vStack
     ])
     view.alignment = .center
-    view.distribution = .fill
+    view.distribution = .equalCentering
     view.spacing = 15
     view.axis = .horizontal
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
-  //  let featuresViewArray: [FeatureRow] = []
-  //
-  //  for feature in welcomeFeatures {
-  //    let featureRow = FeatureRow()
-  //    featureRow.feature = feature
-  //  }
-  
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    //arrumaCampos()
-    //self.translatesAutoresizingMaskIntoConstraints = false
+    
+    self.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(hStack)
     NSLayoutConstraint.activate([
       hStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       hStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       hStack.topAnchor.constraint(equalTo: self.topAnchor),
-      hStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+      hStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      
+      viewTitulo.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.85),
+      viewDescricao.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.85),
+      viewIcon.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.11),
     ])
   }
   
@@ -155,12 +151,17 @@ class OnboardingViewController: UIViewController {
   //MARK: tela
   
   private lazy var vStack: UIStackView = {
-    let view = UIStackView(arrangedSubviews: [
-      saudacaoBoasVindas,
-      FeatureRow()
-    ])
-    view.alignment = .leading
+    let view = UIStackView(arrangedSubviews: [saudacaoBoasVindas])
+    
+    for feature in welcomeFeatures {
+      let featureRow = FeatureRow()
+      featureRow.feature = feature
+      view.addArrangedSubview(featureRow)
+    }
+    
+    view.alignment = .center
     view.distribution = .fillProportionally
+    view.spacing = 25
     view.axis = .vertical
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -179,6 +180,7 @@ class OnboardingViewController: UIViewController {
   private lazy var scrollView: UIScrollView = {
     var view = UIScrollView()
     view.translatesAutoresizingMaskIntoConstraints = false
+    view.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 200, right: -60)
     return view
   }()
   
@@ -201,22 +203,27 @@ class OnboardingViewController: UIViewController {
   
   override func loadView() {
     super.loadView()
-    view.backgroundColor = .white
+    
+    view.backgroundColor = .systemBackground
+    
+//    self.title = "Welcome to Easy Decision"
+//    self.navigationController?.navigationBar.prefersLargeTitles = true
+//    self.navigationItem.largeTitleDisplayMode = .always
     
     view.addSubview(scrollView)
+    scrollView.addSubview(vStack)
     view.addSubview(blurredView)
     view.addSubview(continuarButton)
-    scrollView.addSubview(vStack)
-    
-    
     
     NSLayoutConstraint.activate([
+      saudacaoBoasVindas.heightAnchor.constraint(equalToConstant: 120),
       
       //vStack
       vStack.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
       vStack.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
       vStack.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
       vStack.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0),
+      vStack.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -60),
       
       // ScrollView
       scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
@@ -228,20 +235,14 @@ class OnboardingViewController: UIViewController {
       blurredView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
       blurredView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
       blurredView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -30),
+      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -20),
       
       // ContinuarButton
       continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
       continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
       continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
       continuarButton.heightAnchor.constraint(equalToConstant: 50)
-      
-      //      // saudacao
-      //      saudacaoBoasVindas.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-      //      saudacaoBoasVindas.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-      //      saudacaoBoasVindas.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20)
     ])
-    
   }
   
   override func viewDidLoad() {
