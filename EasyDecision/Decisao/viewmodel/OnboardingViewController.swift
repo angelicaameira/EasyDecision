@@ -18,10 +18,10 @@ struct Feature: Identifiable {
 }
 
 let welcomeFeatures = [
-  Feature(title: "Take better decisions", featureDescription: "Easy Decision helps you take decisions based on real data", icon: "questionmark"),
+  Feature(title: "Take better decisions", featureDescription: "Easy Decision helps you take decisions based on real data", icon: "checkmark.circle"),
   Feature(title: "Easy to use", featureDescription: "Set the parameters, tell the app how important each option is to you, and Easy Decision will give you the best decision", icon: "shuffle"),
-  Feature(title: "Respects your privacy", featureDescription: "Your decisions are your business and we want nothing to do with it, so we don't collect any data you type into the app", icon: "shuffle"),
-  Feature(title: "No advertisements", featureDescription: "No distractions while trying to take important decisions! No annoying full page popups!", icon: "shuffle"),
+  Feature(title: "Respects your privacy", featureDescription: "Your decisions are your business and we want nothing to do with it, so we don't collect any data you type into the app", icon: "lock"),
+  Feature(title: "No ads, no tracking", featureDescription: "No distractions while trying to take important decisions! No annoying full page popups!", icon: "eye.slash"),
 ]
 
 #if DEBUG
@@ -134,7 +134,6 @@ class FeatureRow: UIView {
       hStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       hStack.topAnchor.constraint(equalTo: self.topAnchor),
       hStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-      
       viewTitulo.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.85),
       viewDescricao.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.85),
       viewIcon.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.11),
@@ -145,7 +144,6 @@ class FeatureRow: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 }
-
 
 class OnboardingViewController: UIViewController {
   //MARK: tela
@@ -184,9 +182,11 @@ class OnboardingViewController: UIViewController {
     return view
   }()
   
-  var continuarButton: UIButton = {
+  private lazy var continuarButton: UIButton = {
     let view = UIButton()
-    view.addTarget(OnboardingViewController.self, action: #selector(goToContinuar), for: .touchUpInside)
+    
+    view.addTarget(self, action: #selector(goToContinuar(sender:)), for: .touchUpInside)
+    
     view.setTitle("Continue", for: .normal)
     view.backgroundColor = .systemPurple
     view.layer.cornerRadius = 10
@@ -194,7 +194,7 @@ class OnboardingViewController: UIViewController {
     return view
   }()
   
-  var blurredView = {
+  private lazy var blurredView = {
     var view = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
     view.insetsLayoutMarginsFromSafeArea = false
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -205,11 +205,6 @@ class OnboardingViewController: UIViewController {
     super.loadView()
     
     view.backgroundColor = .systemBackground
-    
-//    self.title = "Welcome to Easy Decision"
-//    self.navigationController?.navigationBar.prefersLargeTitles = true
-//    self.navigationItem.largeTitleDisplayMode = .always
-    
     view.addSubview(scrollView)
     scrollView.addSubview(vStack)
     view.addSubview(blurredView)
@@ -231,14 +226,14 @@ class OnboardingViewController: UIViewController {
       scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
       scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
       
-      // BlurredView
+       //BlurredView
       blurredView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
       blurredView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
       blurredView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-      blurredView.topAnchor.constraint(equalTo: self.continuarButton.topAnchor, constant: -20),
+      blurredView.heightAnchor.constraint(equalToConstant: 130),
       
       // ContinuarButton
-      continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+      continuarButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40),
       continuarButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
       continuarButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
       continuarButton.heightAnchor.constraint(equalToConstant: 50)
@@ -250,19 +245,10 @@ class OnboardingViewController: UIViewController {
     isModalInPresentation = true
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
-    super.loadView()
-    self.dismiss(animated: true)
-    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
-  }
-  
   @objc func goToContinuar(sender: Any) {
     self.dismiss(animated: true)
-    UserDefaults.standard.set(true, forKey: "didShowOnboarding")
   }
 }
-
-
 
 //Onboarding { // 182
 //  ScrollView {// 181
