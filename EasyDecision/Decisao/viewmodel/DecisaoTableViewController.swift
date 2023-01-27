@@ -12,6 +12,8 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as decisões", preferredStyle: .alert)
     var decisaoSelecionada: Decisao?
     var listaDecisoes: [Decisao]?
+    var showOnboardingView = !UserDefaults.standard.bool(forKey: "didShowOnboarding")
+
   
     // MARK: tela
     private lazy var addButton: UIBarButtonItem = {
@@ -34,10 +36,13 @@ class DecisaoTableViewController: UITableViewController, DecisaoTableViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      if showOnboardingView == true {
         
-        if true { //!UserDefaults.standard.bool(forKey: "didShowOnboarding") {
-            self.present(OnboardingViewController(), animated: true)
-        }
+        self.present(OnboardingViewController(), animated: true)
+        UserDefaults.standard.set(true, forKey: "didShowOnboarding")
+        
+      }
     }
     
     @objc func goToAdicionarDecisao(sender: UIBarButtonItem) {

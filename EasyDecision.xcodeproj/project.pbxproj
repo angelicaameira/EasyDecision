@@ -45,12 +45,10 @@
 		BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaCriterioViewController.swift; sourceTree = "<group>"; };
 		BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliacaoTableViewController.swift; sourceTree = "<group>"; };
 		BF47D559294F3E7200B514CE /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		BF599390295F830700C21CCE /* Camadas pseudocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Camadas pseudocode.swift"; sourceTree = "<group>"; };
 		BF6A803726A487030057614A /* Aplicativo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aplicativo.swift; sourceTree = "<group>"; };
 		BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyDecision.xcdatamodel; sourceTree = "<group>"; };
 		BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoTVCell.swift; sourceTree = "<group>"; };
 		BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaDecisaoViewController.swift; sourceTree = "<group>"; };
-		BFA76ADE295DE0CC00A5F625 /* Pseudocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pseudocode.swift; sourceTree = "<group>"; };
 		BFBBEC82265EFF7600C5FA10 /* EasyDecision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyDecision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFBBEC85265EFF7600C5FA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFBBEC87265EFF7600C5FA10 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,8 +114,6 @@
 				BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */,
 				BFCD9C8826A0F02F0037C550 /* EditaAvaliacaoViewController.swift */,
 				BF021BAC26B6D9CA00253789 /* ResultadoTableViewController.swift */,
-				BF599390295F830700C21CCE /* Camadas pseudocode.swift */,
-				BFA76ADE295DE0CC00A5F625 /* Pseudocode.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
