@@ -14,7 +14,7 @@ class ResultadoTableViewController: UITableViewController {
     var decisao: Decisao?
     var listaAvaliacoes: [Avaliacao]?
     var listaResultados: [Resultado] = []
-    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter as opções", preferredStyle: .alert)
+    var alert = UIAlertController(title: "Atenção!", message: "Ocorreu um erro ao obter o resultado", preferredStyle: .alert)
     
     //MARK: tela
     
@@ -118,4 +118,3 @@ class ResultadoTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-

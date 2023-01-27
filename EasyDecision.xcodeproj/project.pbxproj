@@ -14,6 +14,7 @@
 		BF15E1DF268633BD002DB26A /* AdicionaOpcaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */; };
 		BF17A3DC269660DF0099CDA3 /* AdicionaCriterioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */; };
 		BF427B74269F62E400C77DF8 /* AvaliacaoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */; };
+		BF47D55A294F3E7200B514CE /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF47D559294F3E7200B514CE /* OnboardingViewController.swift */; };
 		BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5BDA266C1BDA000133BF /* EasyDecision.xcdatamodeld */; };
 		BF6F7095274D90FA004DF3E1 /* ResultadoTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */; };
 		BF926CC526659F0400B09305 /* AdicionaDecisaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */; };
@@ -43,6 +44,7 @@
 		BF15E1DE268633BD002DB26A /* AdicionaOpcaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaOpcaoViewController.swift; sourceTree = "<group>"; };
 		BF17A3DB269660DF0099CDA3 /* AdicionaCriterioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionaCriterioViewController.swift; sourceTree = "<group>"; };
 		BF427B73269F62E400C77DF8 /* AvaliacaoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliacaoTableViewController.swift; sourceTree = "<group>"; };
+		BF47D559294F3E7200B514CE /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BF6A803726A487030057614A /* Aplicativo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aplicativo.swift; sourceTree = "<group>"; };
 		BF6E5BDB266C1BDA000133BF /* EasyDecision.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyDecision.xcdatamodel; sourceTree = "<group>"; };
 		BF6F7094274D90F9004DF3E1 /* ResultadoTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoTVCell.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		BF0DD6C02662AEF200DC7AB5 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
+				BF47D559294F3E7200B514CE /* OnboardingViewController.swift */,
 				BF0DD6BB2662ADBD00DC7AB5 /* DecisaoTableViewController.swift */,
 				BF926CC426659F0400B09305 /* AdicionaDecisaoViewController.swift */,
 				BF15E1DB268534A8002DB26A /* OpcoesTableViewControler.swift */,
@@ -261,6 +264,7 @@
 				BFFD5BD026ADDE3D007D9786 /* Opcao.swift in Sources */,
 				BFFD5BD426AF2086007D9786 /* Avaliacao.swift in Sources */,
 				BFBBEC88265EFF7600C5FA10 /* SceneDelegate.swift in Sources */,
+				BF47D55A294F3E7200B514CE /* OnboardingViewController.swift in Sources */,
 				BF17A3DC269660DF0099CDA3 /* AdicionaCriterioViewController.swift in Sources */,
 				BF6E5BDC266C1BDA000133BF /* EasyDecision.xcdatamodeld in Sources */,
 				BF021BAD26B6D9CA00253789 /* ResultadoTableViewController.swift in Sources */,
@@ -415,6 +419,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RGUPB9UU3P;
 				INFOPLIST_FILE = EasyDecision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,6 +439,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RGUPB9UU3P;
 				INFOPLIST_FILE = EasyDecision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -17,11 +17,11 @@ class Criterio: NSObject, Salvavel {
     var decisao: Decisao
     
     // MARK: propriedades do banco
-    private static let tabela = Table("Criterio")
+    static let tabela = Table("Criterio")
     private static let idExpression = Expression<Int64>("id")
     private static let descricaoExpression = Expression<String>("descricao")
     private static let pesoExpression = Expression<Int>("peso")
-    private static let idDecisaoExpression = Expression<Int64>("idDecisao")
+    static let idDecisaoExpression = Expression<Int64>("idDecisao")
     
     init(descricao: String, peso: Int, decisao: Decisao) {
         self.id = -1
@@ -79,6 +79,8 @@ class Criterio: NSObject, Salvavel {
     
     func apagaNoBanco() throws {
         let criterio = Criterio.tabela.filter(rowid == self.id)
+        let avaliacoes = Avaliacao.tabela.filter(Avaliacao.idCriterioExpression == self.id)
+        try DatabaseManager.db.run(avaliacoes.delete())
         try DatabaseManager.db.run(criterio.delete())
     }
     

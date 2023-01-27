@@ -65,7 +65,6 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recuperaOpcao()
-        self.tableView.reloadData()
     }
     
     // MARK: metodos que não são da table view
@@ -120,7 +119,6 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
                 do {
                     try opcao.apagaNoBanco()
                     self.recuperaOpcao()
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     self.alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "tente novamente"), style: .default, handler: nil))
                     self.present(self.alert, animated: true, completion: nil)
@@ -138,6 +136,7 @@ class OpcoesTableViewController: UITableViewController, OpcaoTableViewController
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let opcaoSendoEditada = self.listaOpcoes?[indexPath.row]
         else { return }
         self.opcaoSendoEditada = opcaoSendoEditada
