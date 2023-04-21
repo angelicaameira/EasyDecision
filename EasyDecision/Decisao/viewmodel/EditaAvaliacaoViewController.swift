@@ -116,6 +116,7 @@ class EditaAvaliacaoViewController: UIViewController {
         else { return }
         
         self.pesoTextField.text = "\(avaliacaoSendoEditada.nota)"
+        self.stepper.value = Double(avaliacaoSendoEditada.nota)
         stepper.addTarget(self, action: #selector(getter: stepper), for: .touchDown)
     }
 }
